@@ -1,1 +1,91 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+:root {
+  --primary-color: #172939;
+  --sidebar-color: #434ce6;
+  --sidebar-color-content: #293249;
+  --sidebar-color-hover: #313ae4;
+  --circle-color: #7de8ff;
+  --white-color: #ffffff;
+  --black-color: #1e1e1e;
+  --grey-color: #6f6f6f;
+  --form-color: #b9b6b6;
+  --previous-color-btn: #dadada;
+  --text-color-btn: #7a7a7a;
+  --text-color: #727788;
+  --pass-color: #6d6d6d;
+  --table-color: #f8f9fc;
+  --bg-color: #e3e6f0;
+  /* TYPOGRAPHY */
+  --font-primary: Poppins, sans-serif;
+}
+
+.dark-mode {
+  --primary-color: #5e7b8c;
+  --sidebar-color: #232b42;
+  --sidebar-color-content: #3e4a60;
+  --sidebar-color-hover: #394a6d;
+  --circle-color: #93c5d8;
+  --white-color: #ffffff;
+  --black-color: #ffffff;
+  --grey-color: #a8a8a8;
+  --form-color: #6c757d;
+  --previous-color-btn: #363636;
+  --text-color-btn: #d9d9d9;
+  --text-color: #727788;
+  --pass-color: #8c8c8c;
+  --table-color: #333c4f;
+  --second-table-color: #3c455c;
+  /* --font-primary:  */
+}
+
+html,body {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  font-family: var(--font-primary);
+  background-color: var(--bg-color);
+  line-height: normal;
+  overflow-x: hidden;
+  height: 100vh;
+}
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+p {
+  margin: 0;
+  line-height: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--sidebar-color);
+  border-radius: 1rem;
+  transition: background-color 0.8s ease-in-out;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sidebar-color-hover);
+}
+body::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.p-inputtext:focus {
+  border-color: initial; /* Establece el color del borde al valor inicial para deshabilitar el efecto de hover */
+  box-shadow: none; /* Establece la sombra al valor "none" para deshabilitar cualquier sombra de hover */
+  /* Otros estilos que desees anular o modificar */
+}

@@ -1,0 +1,112 @@
+<div class="mb-5">
+    <p class="font-bold text-xl mb-2">¡Bienvenido!</p>
+    <p class="text-500">Ingresa la información de tú cuenta.</p>
+</div>
+<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="register()">
+    <div class="formgrid grid row-gap-5 md:row-gap-4">
+        <div class="col-12 p-0">
+            <div class="field mb-1 p-float-label">
+                <input pInputText id="nombre" type="text" class="text-color p-1 border-none border-bottom-1 w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': isValidField('nombre')}" formControlName="nombre">
+                <label htmlFor="nombre">Nombre</label>
+            </div>
+            <small class="text-red-600" *ngIf="isValidField('nombre')" id="nombre-help">
+                {{ getFieldError('nombre') }}
+            </small>
+        </div>
+        <div class="grid p-0 m-0 w-full row-gap-5">
+            <div class="col-12 p-0 md:col-6 md:pl-0 md:pr-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="apellidoPa" type="text"
+                        class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('apellidoPa')}" formControlName="apellidoPa">
+                    <label htmlFor="apellidoPa">Apellido Paterno</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('apellidoPa')" id="apellidoPa-help">
+                    {{ getFieldError('apellidoPa') }}
+                </small>
+            </div>
+            <div class="col-12 p-0 md:col-6 md:pr-0 md:pl-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="apellidoMa" type="text"
+                        class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('apellidoMa')}" formControlName="apellidoMa">
+                    <label htmlFor="apellidoMa">Apellido Materno</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('apellidoMa')" id="apellidoMa-help">
+                    {{ getFieldError('apellidoMa') }}
+                </small>
+            </div>
+        </div>
+        <div class="grid p-0 m-0 w-full row-gap-5">
+            <div class="col-12 p-0 md:col-6 md:pl-0 md:pr-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="telefono" type="number"
+                        class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('telefono')}" formControlName="telefono">
+                    <label htmlFor="telefono">Telefono</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('telefono')" id="telefono-help">
+                    {{ getFieldError('telefono') }}
+                </small>
+            </div>
+            <div class="col-12 p-0 md:col-6 md:pr-0 md:pl-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="dni" type="number" class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('dni')}" formControlName="dni">
+                    <label htmlFor="dni">DNI</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('dni')" id="dni-help">
+                    {{ getFieldError('dni') }}
+                </small>
+            </div>
+        </div>
+        <div class="col-12 p-0">
+            <div class="field mb-1 p-float-label">
+                <input pInputText id="correo" type="text" class="text-color p-1 border-none border-bottom-1 w-full"
+                    [ngClass]="{'ng-invalid ng-dirty': isValidField('correo')}" formControlName="correo">
+                <label htmlFor="correo">Correo</label>
+            </div>
+            <small class="text-red-600" *ngIf="isValidField('correo')" id="correo-help">
+                {{ getFieldError('correo') }}
+            </small>
+        </div>
+        <div class="grid p-0 m-0 w-full row-gap-5">
+            <div class="col-12 p-0 md:col-6 md:pl-0 md:pr-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="username" type="text"
+                        class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('username')}" formControlName="username">
+                    <label htmlFor="username">Nombre de usuario</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('username')" id="username-help">
+                    {{ getFieldError('username') }}
+                </small>
+            </div>
+            <div class="col-12 p-0 md:col-6 md:pr-0 md:pl-2">
+                <div class="field mb-1 p-float-label">
+                    <input pInputText id="password" type="text"
+                        class="text-color p-1 border-none border-bottom-1 w-full"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('password')}" formControlName="password">
+                    <label htmlFor="password">Contraseña</label>
+                </div>
+                <small class="text-red-600" *ngIf="isValidField('password')" id="password-help">
+                    {{ getFieldError('password') }}
+                </small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <p class="text-xs">
+                <i class="pi pi-exclamation-triangle"></i> Por su seguridad , tú contraseña debe
+                contener al menos una mayúscula,
+                una minúscula, un número y un carácter especial.
+            </p>
+        </div>
+    </div>
+    <div class="flex justify-content-between">
+        <p-button [routerLink]="'/auth/login'" severity="secondary">
+            <i class=" pi pi-arrow-left mr-2"></i>
+            Volver</p-button>
+        <p-button [disabled]="!myForm.valid" type="submit">Registrarse</p-button>
+    </div>
+</form>

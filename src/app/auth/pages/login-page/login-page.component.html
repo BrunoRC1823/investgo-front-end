@@ -1,0 +1,29 @@
+<div class="mb-6">
+    <h2 class="text-xl sm:text-2xl">Bienvenido, Inicia sesión</h2>
+</div>
+<form autocomplete="off" class="formgrid grid gap-5 align-items-center justify-content-center" [formGroup]="myForm" (ngSubmit)="login()">
+    <div class="col-12">
+        <div class="field p-float-label mb-1">
+            <input pInputText id="username" type="text" class="text-color p-1 border-none border-bottom-1  w-full"
+                formControlName="username" [ngClass]="{'ng-invalid ng-dirty': isValidField('username')}">
+            <label htmlFor="username">Usuario</label>
+        </div>
+        <small class="text-red-600" *ngIf="isValidField('username')" id="username-help"> {{ getFieldError('username')
+            }}</small>
+    </div>
+    <div class="col-12">
+        <div class="field p-float-label mb-1">
+            <input pInputText id="password" type="text" class="text-color p-1 border-none border-bottom-1 w-full"
+                formControlName="password" [ngClass]="{'ng-invalid ng-dirty': isValidField('password')}">
+            <label htmlFor="password">Contraseña</label>
+        </div>
+        <small class="text-red-600" *ngIf="isValidField('password')" id="password-help"> 
+            {{ getFieldError('password') }}</small>
+    </div>
+    <div>
+        <p-button type="submit" color="primary">Iniciar sesión</p-button>
+    </div>
+</form>
+<p class="text-sm mt-3 text-center">
+    ¿No tienes cuenta? <a routerLink="/auth/register">Regístrate ahora.</a>
+</p>
