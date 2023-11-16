@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
+import { authInterceptorProviders } from './interceptors/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,10 +20,12 @@ import { PrimeNgModule } from './prime-ng/prime-ng.module';
     AuthModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CommonModule,
     HttpClientModule,
     PrimeNgModule,
+    ReactiveFormsModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

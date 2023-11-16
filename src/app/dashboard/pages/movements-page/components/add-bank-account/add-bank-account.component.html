@@ -1,0 +1,16 @@
+<div class="grid grid-nogutter gap-3">
+    <div class="flex justify-content-center h-full col-12 sm:col-fixed sm:w-18rem">
+        <a class="bg-white transition-all transition-duration-300 text-500 shadow-1 
+        border-round-sm border-1 border-200 flex w-18rem  w-full align-items-center 
+        flex-wrap px-5 py-7 hover:text-blue-600 hover:border-blue-600"
+            [routerLink]="['/dashboard/movements/add-account']">
+            <p class="w-full text-center text-lg">Agregar Cuenta Bancaria</p>
+            <i class="pi pi-plus w-full text-center"></i>
+        </a>
+    </div>
+    <div class="col">
+        <p-card class="custom-card-bank-account">
+            <movements-card-bank-account class="w-full"/>
+        </p-card>
+    </div>
+</div>

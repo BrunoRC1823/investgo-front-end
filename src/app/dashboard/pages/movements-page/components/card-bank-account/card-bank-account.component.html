@@ -1,0 +1,34 @@
+<div class="w-full grid grid-nogutter p-0">
+    <div class="p-1 h-9rem col-12 lg:col-6 xl:col-4 sm:h-11rem card-bank">
+        <div class="relative overflow-hidden h-full p-2 sm:px-3 sm:py-0">
+            <svg id="visual" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" preserveAspectRatio="none"
+                class=" border-round absolute left-0 top-0 h-full w-full z-1">
+                <rect x="0" y="0" width="900" height="600" fill="var(--color-header-card)"></rect>
+                <path
+                    d="M0 400L30 386.5C60 373 120 346 180 334.8C240 323.7 300 328.3 360 345.2C420 362 480 391 540 392C600 393 660 366 720 355.2C780 344.3 840 349.7 870 352.3L900 355L900 601L870 601C840 601 780 601 720 601C660 601 600 601 540 601C480 601 420 601 360 601C300 601 240 601 180 601C120 601 60 601 30 601L0 601Z"
+                    fill="url(#degradado)" stroke-linecap="round" stroke-linejoin="miter"></path>
+                <defs>
+                    <linearGradient id="degradado" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color: var(--color-bottom-start-card); stop-opacity: 1" />
+                        <stop offset="100%" style="stop-color: var(--color-bottom-end-card); stop-opacity: 1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="z-2 relative">
+                <div class="flex align-items-center justify-content-between mb-0 sm:mb-3">
+                    <div class="text-200 text-lg sm:text-lg font-semibold">Cta. Bancaria</div>
+                    <img [src]="(bankAccount?.banco?.nombre ?? '') | logoBank" style="width: 55px; height: 45px;">
+                </div>
+                <div class="text-200 mb-1 font-semibold sm:text-sm mb-1 sm:mb-2">Saldo</div>
+                <div class="text-200 text-lg sm:text-xl mb-2 sm:mb-3 font-bold">{{ bankAccount?.saldo ?? '2500' }}
+                    {{ bankAccount?.moneda?.valor ?? 'PEN' }}</div>
+                <div class="text-200 flex align-items-center justify-content-between ">
+                    <span class="text-xs sm:text-sm">{{bankAccount?.nroCuenta ?? 'PE00-0000-0000-00-0000000000'}}</span>
+                    <span class="font-medium text-xs sm:text-sm">{{ bankAccount!.mes! | stringToDateFormatter:'MM' }}/
+                        {{ bankAccount!.year! | stringToDateFormatter:'YY' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,5 @@
-<p>dashboard works!</p>
-<router-outlet />
+<dashboard-header [collapse]="collapse" (toggleCollapse)="toggleCollapse($event)" />
+<dashboard-side-bar [collapse]="collapse" (toggleCollapse)="toggleCollapse($event)" />
+<main class="main " [ngClass]="collapse ? 'main-collapse' : ''">
+    <router-outlet />
+</main>

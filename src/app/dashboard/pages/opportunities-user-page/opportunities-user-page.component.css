@@ -1,0 +1,10 @@
+.message__button {
+    color: var(--sidebar-color);
+    transition: all 0.3s ease;
+    border: 1px solid var(--sidebar-color);
+  }
+  
+  .message__button:hover {
+    background-color: var(--sidebar-color);
+    color: var(--white-color);
+  }

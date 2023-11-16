@@ -1,0 +1,32 @@
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between pb-2">
+            <div class="inversion__header">
+                <h1 class="text-2xl">Estado de Cuenta</h1>
+            </div>
+        </div>
+        <p-tabView>
+            <p-tabPanel header="Depósitos/retiros">
+                <p-card class="custom-card-dashboard">
+                    <div class="flex justify-content-center sm:justify-content-between">
+                        <p class="hidden align-items-center sm:flex gap-1">Saldo: <span class="font-bold"> {{
+                                balance().saldo|
+                                currency:'S/.&nbsp;':'symbol-narrow'}}</span></p>
+                        <div class="flex gap-5 sm:gap-2">
+                            <p-button label="Deposito" size="small"
+                                [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+                            <p-button label="Retiro" size="small" [outlined]="true"
+                                [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+                        </div>
+                    </div>
+                </p-card>
+                <div class="mt-4">
+                    <shared-table class="mt-2" [headers]="headers" [data]="customers"></shared-table>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Ctas. bancarias">
+                <movements-add-bank-account />
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</section>

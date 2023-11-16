@@ -1,0 +1,64 @@
+<div class="sidebar" [ngClass]="collapse ? 'sidebar-collapse' : ''">
+  <nav class="side">
+    <div>
+      <div class="sidebar__logo" (click)="emitEvent()">
+        <i class="pi pi-dollar text-3xl icon"></i>
+        <div class="sidebar__title">
+          <span class="name">Invest </span>
+          <span class="name_go">GO!</span>
+        </div>
+      </div>
+      <div class="side_menu">
+        <div>
+          <a [routerLink]="['/dashboard/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            class="sidebar__links" title="dashboard">
+            <i class="pi pi-th-large text-xl"></i>
+            Dashboard
+          </a>
+          <a [routerLink]="['/dashboard/opportunities']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Oportunidades de inversión">
+            <i class="pi pi-chart-bar text-xl"></i>
+            Oportunidad de Inversiones
+          </a>
+          <a [routerLink]="['/dashboard/investments']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Mis inversiones">
+            <i class="pi pi-wallet  text-xl"></i>
+            Mis Inversiones
+          </a>
+          <a [routerLink]="['/dashboard/movements']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Estado de cuenta">
+            <i class="pi pi-money-bill text-xl"></i>
+            Estado de cuenta
+          </a>
+          <ng-container>
+            <ng-container>
+              <a [routerLink]="['/dashboard/companies']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Empresa">
+                <i class="pi pi-building text-xl"></i>
+                Empresa
+              </a>
+              <a [routerLink]="['/dashboard/bills']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Registrar Facturas">
+                <i class="pi pi-file text-xl"></i>
+                Facturas
+              </a>
+              <a [routerLink]="['/dashboard/opportunities-admin']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links"
+                title="Registrar oportunidades de inversión">
+                <i class="pi pi-chart-line text-xl"></i>
+                Oportunidad de Inversiones
+              </a>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar__bottom">
+      <a class=" sidebar__links sidebar__logout" (click)="logout()">
+        <i class="pi pi-sign-out text-xl"></i>
+        Cerrar Sesión
+      </a>
+    </div>
+  </nav>
+</div>

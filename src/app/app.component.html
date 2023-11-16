@@ -1,4 +1,5 @@
-<div class="p-2">
-    <router-outlet />
+<h1 *ngIf="!finishedAuthCheck()">Loading</h1>
+<div class="p-2" >
+    <router-outlet *ngIf="finishedAuthCheck()"/>
 </div>
 <p-toast [life]="3000"></p-toast>

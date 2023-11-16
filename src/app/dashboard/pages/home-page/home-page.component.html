@@ -1,1 +1,98 @@
-<p>home-page works!</p>
+<section class="pt-2 pb-3 layout-content">
+    <div class="col-12">
+        <span class="text-2xl font-bold">Bienvenido {{ username }} </span>
+        <p class="text-color-secondary ">Este es tú panel de inversión, úsalo con sabiduría.</p>
+    </div>
+    <div class="grid">
+        <div class="flex col-12 flex-wrap">
+            <div class="col-12 md:col-8">
+                <p-card class="h-full custom-card-dashboard block">
+                    <div class="flex flex-column mb-3 align-items-center sm:flex-row sm:justify-content-between">
+                        <h5 class="font-bold text-xl text-center">
+                            <p-avatar icon="pi pi-calculator text-xl" styleClass="mr-2"
+                                [style]="{'background-color': 'var(--bg-color-icon)', 'color': 'var(--sidebar-color)'}"
+                                shape="circle"></p-avatar>Resumen financiero
+                        </h5>
+                        <span class="font-normal flex text-center align-items-center">{{currentMonth}},
+                            {{currentYear}}</span>
+                    </div>
+                    <div
+                        class="flex justify-content-between md:justify-content-around flex-column gap-4  flex-wrap sm:flex-row sm:gap-0">
+                        <div
+                            class="h-3rem flex flex-column align-content-center align-items-center justify-content-between">
+                            <span class="text-sm">
+                                <i class="pi pi-arrow-right-arrow-left text-xs mr-1"></i>
+                                Inversiones hechas
+                            </span>
+                            <p class="text-xl font-bold">{{ transactionsCount }}</p>
+                        </div>
+                        <p-divider layout="vertical" class="hidden sm:block"></p-divider>
+                        <div
+                            class="h-3rem flex flex-column align-content-center align-items-center justify-content-between">
+                            <span class="text-sm">
+                                <i class="pi pi-arrow-up text-xs mr-1"></i>
+                                Depósitos hechos
+                            </span>
+                            <p class="text-xl font-bold">{{ withdrawal }}</p>
+                        </div>
+                        <p-divider layout="vertical" class="hidden sm:block"></p-divider>
+                        <div
+                            class="h-3rem flex flex-column align-content-center align-items-center justify-content-between">
+                            <span class="text-sm">
+                                <i class="pi pi-arrow-down text-xs mr-1"></i>
+                                Retiros hechos
+                            </span>
+                            <p class="text-xl font-bold">{{ deposit }}</p>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+            <div class="col-12 md:col-4">
+                <p-card class="custom-card-dashboard">
+                    <div class="flex flex-column justify-content-center align-items-center gap-1 md:gap-3 ">
+                        <div>
+                            <h5 class="font-bold text-xl text-center">
+                                <p-avatar icon="pi pi-wallet text-xl" styleClass="mr-2"
+                                    [style]="{'background-color': 'var(--bg-color-icon)', 'color': 'var(--sidebar-color)'}"
+                                    shape="circle"></p-avatar>Este es tú saldo
+                            </h5>
+                        </div>
+                        <div>
+                            <span class="font-bold text-2xl lg:text-3xl">{{ balance().saldo|
+                                currency:'S/.&nbsp;':'symbol-narrow'}}</span>
+                        </div>
+                        <div>
+                            <span>Depósitos totales: </span>
+                            <span class="font-bold">{{ 30 | currency:'S/.&nbsp;':'symbol-narrow' }}</span>
+                        </div>
+                        <div>
+                            <span>Inversiones totales: </span>
+                            <span class="font-bold">{{ 30 | currency:'S/.&nbsp;':'symbol-narrow' }}</span>
+                        </div>
+                        <div>
+                            <p-button label="Deposite" [rounded]="true" icon="pi pi-credit-card" size="small"
+                                [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"
+                                [routerLink]="['/dashboard/account-status']"></p-button>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+        </div>
+        <div class="px-3 py-0    col-12">
+            <p-card class="custom-card-dashboard">
+                <div class="flex flex-column mb-3  gap-2 align-items-center
+                sm:flex-row sm:justify-content-between">
+                    <h5 class="font-bold text-xl text-center">
+                        <p-avatar icon="pi 
+                        pi-arrow-right-arrow-left text-xl" styleClass="mr-2"
+                            [style]="{'background-color': 'var(--bg-color-icon)', 'color': 'var(--sidebar-color)'}"
+                            shape="circle"></p-avatar>Mis Transacciones
+                    </h5>
+                </div>
+                <div>
+                    <shared-table [headers]="headers" [data]="customers"></shared-table>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</section>

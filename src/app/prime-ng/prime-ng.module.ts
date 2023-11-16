@@ -1,18 +1,46 @@
 import { NgModule } from '@angular/core';
 
+import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
+import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { SidebarModule } from 'primeng/sidebar';
+import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
+import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   exports: [
+    AvatarModule,
     ButtonModule,
+    CalendarModule,
+    CardModule,
     CarouselModule,
+    DividerModule,
+    DropdownModule,
     InputTextModule,
+    KeyFilterModule,
+    MultiSelectModule,
+    OverlayPanelModule,
+    PanelMenuModule,
+    SidebarModule,
+    TableModule,
+    TabViewModule,
     TagModule,
+    TieredMenuModule,
     ToastModule,
+    InputMaskModule,
   ],
 })
 export class PrimeNgModule {}

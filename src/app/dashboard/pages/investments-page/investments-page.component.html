@@ -1,0 +1,21 @@
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between pb-2">
+            <div class="inversion__header">
+                <h1>Mis inversiones realizadas</h1>
+            </div>
+            <div class="inversion__group">
+                <p-button label="Agregar Inversión" [rounded]="true" size="small"
+                    [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+            </div>
+        </div>
+        <p-tabView>
+            <p-tabPanel header="A tiempo">
+                <shared-table [headers]="headers" [data]="customers"></shared-table>
+            </p-tabPanel>
+            <p-tabPanel header="Pagadas">
+                <shared-table [headers]="headers" [data]="customers"></shared-table>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</section>

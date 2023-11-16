@@ -1,0 +1,27 @@
+.main {
+  position: relative;
+  width: 100%;
+  left: 0;
+  height: 100%;
+  top: 64px;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-collapse {
+  width: calc(100% - 78px);
+  left: 78px;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    width: calc(100% - 78px);
+    left: 78px;
+  }
+
+  .main-collapse {
+    width: calc(100% - 295px);
+    left: 295px;
+  }
+}
+

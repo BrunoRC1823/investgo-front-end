@@ -107,6 +107,7 @@
         <p-button [routerLink]="'/auth/login'" severity="secondary">
             <i class=" pi pi-arrow-left mr-2"></i>
             Volver</p-button>
-        <p-button [disabled]="!myForm.valid" type="submit">Registrarse</p-button>
+        <p-button [disabled]="!myForm.valid" type="submit"
+            [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}">Registrarse</p-button>
     </div>
 </form>

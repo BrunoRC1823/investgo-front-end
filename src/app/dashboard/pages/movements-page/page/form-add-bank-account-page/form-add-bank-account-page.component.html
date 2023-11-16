@@ -1,0 +1,131 @@
+<section class="pt-2 pb-3 layout-content ">
+    <div class="p-2 flex flex-column pr-4 row-gap-3 sm:flex-row sm:justify-content-between ">
+        <div>
+            <h1 class="text-2xl">Agregar cuenta bancaria.</h1>
+            <span class="text-sm mt-1" class="text-color-secondary">Datos de la tarjeta.</span>
+        </div>
+        <p-button size="small" label="volver" [outlined]="true" severity="secondary" icon="pi pi-arrow-left"
+            [routerLink]="['/dashboard/movements']"></p-button>
+    </div>
+    <div class="p-2">
+        <p-card>
+            <form [formGroup]="myForm" (ngSubmit)="register()">
+                <div class="formgrid grid grid-nogutter row-gap-5 md:row-gap-4">
+                    <div class="col-12">
+                        <div class="grid grid-nogutter col-12 mb-2">
+                            <div class="grid grid-nogutter col-12 sm:col-6 sm:pr-3 gap-2">
+                                <div class="col-12 p-0">
+                                    <label for="banco" class="font-medium block mb-2"> Bancos </label>
+                                    <div class="flex flex-column">
+                                        <p-dropdown id="banco" formControlName="banco" [options]="banks"
+                                            optionLabel="nombre"
+                                            styleClass="{{isValidField('banco') ? 'custom-dropdown': ''}}"
+                                            [autoDisplayFirst]="false" placeholder="Seleccione un banco"
+                                            [style]="{'width': '100%'}"></p-dropdown>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('banco')">{{
+                                            getFieldError('banco')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="name" class="font-medium block mb-2"> Nombre completo </label>
+                                    <div class="flex flex-column">
+                                        <input id="name" type="text" pInputText value="Bruno Rios Cosser"
+                                            disabled="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2 sm:col-6">
+                                <movements-card-bank-account [bankAccount]="getFormValue()" />
+                            </div>
+                        </div>
+                        <div class="grid grid-nogutter col-12 mb-2 row-gap-2">
+                            <div class="col-12">
+                                <label for="nroCuenta" class="font-medium block mb-2"> Número </label>
+                                <div class="flex flex-column">
+                                    <p-inputMask id="nroCuenta" mask="PE99-9999-9999-99-9999999999"
+                                        formControlName="nroCuenta" placeholder="e.j PE12-2222-2222-22-2222222222"
+                                        [ngClass]="{'ng-invalid ng-dirty': isValidField('nroCuenta')}"
+                                        [style]="{'width': '100%'}" />
+                                    <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('nroCuenta')">{{
+                                        getFieldError('nroCuenta') }}</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="nroCuentaCci" class="font-medium block mb-2">Número cci</label>
+                                <div class="flex flex-column">
+                                    <p-inputMask id="nroCuentaCci" mask="999-999-999999999999-99"
+                                        formControlName="nroCuentaCci" [style]="{'width': '100%'}"
+                                        [ngClass]="{'ng-invalid ng-dirty': isValidField('nroCuentaCci')}"
+                                        placeholder="e.j 333-333-333333333333-33" />
+                                    <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('nroCuentaCci')">{{
+                                        getFieldError('nroCuentaCci')
+                                        }}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-nogutter col-12 row-gap-2">
+                                <div class="col-12 sm:col-6 sm:pr-2 lg:col-3 lg:pr-2">
+                                    <label for="moneda" class="font-medium block mb-2"> Tipo de Moneda </label>
+                                    <div class="flex flex-column">
+                                        <p-dropdown id="moneda" formControlName="moneda" [options]="currencies"
+                                            [autoDisplayFirst]="false" optionLabel="nombre"
+                                            placeholder="Seleccione una Moneda" [style]="{'width': '100%'}"
+                                            styleClass="{{isValidField('moneda') ? 'custom-dropdown': ''}}"></p-dropdown>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('moneda')">{{
+                                            getFieldError('moneda')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-3 lg:pr-2 ">
+                                    <label for="cvv" class="font-medium block mb-2">Código de Seguridad</label>
+                                    <div>
+                                        <div class="flex flex-column">
+                                            <p-inputMask id="cvv" mask="999" placeholder="CVV"
+                                                [style]="{'width': '100%'}" formControlName="cvv"
+                                                [ngClass]="{'ng-invalid ng-dirty': isValidField('cvv')}" />
+                                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('cvv')">{{
+                                                getFieldError('cvv')
+                                                }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 sm:col-6 sm:pr-2 lg:col-3 lg:pr-2">
+                                    <label for="mes" class="font-medium block mb-2">Mes</label>
+                                    <div class="flex flex-column">
+                                        <p-calendar formControlName="mes" view="month" dateFormat="mm" inputId="mes"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('mes')}"
+                                            [style]="{'width': '100%'}" [minDate]="minMonth"
+                                            [maxDate]="maxMonth"></p-calendar>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('mes')">{{
+                                            getFieldError('mes')
+                                            }}</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 sm:col-6 lg:col-3 ">
+                                    <label for="year" class="font-medium block mb-2">Año</label>
+                                    <div class="flex flex-column">
+                                        <p-calendar formControlName="year" view="year" dateFormat="yy" inputId="year"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('year')}"
+                                            [style]="{'width': '100%'}" [minDate]="minYear"
+                                            [maxDate]="maxYear"></p-calendar>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('year')">{{
+                                            getFieldError('year')
+                                            }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="col-12 mt-3 grid grid-nogutter gap-3 justify-content-between sm:justify-content-start">
+                                <p-button size="small" type="submit" label="Guardar" [outlined]="true" icon="pi pi-save"
+                                    [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+                                <p-button size="small" label="limpiar" [outlined]="true" severity="help"
+                                    icon="pi pi-eraser" (onClick)="clear()"></p-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</section>

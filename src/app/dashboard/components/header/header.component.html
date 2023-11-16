@@ -1,0 +1,22 @@
+<header class="header" [ngClass]="collapse ? 'collapse-header' : ''">
+    <div class="header__menu">
+        <i class="pi pi-bars header__menu-toggle" (click)="emitEvent()"></i>
+    </div>
+    <div class="header__data">
+        <div class="header__data-user">
+            <a class="header__data-user-info" (click)="op.toggle($event)">B</a>
+        </div>
+        <div class="card flex justify-content-center">
+            <p-overlayPanel #op [dismissable]="false">
+                <p-card class="custom-card" [style]="style">
+                    {{ fullName }}
+                    <div class="header__data-user">
+                        <a class="header__data-user-info">B</a>
+                    </div>
+                </p-card>
+                <p-panelMenu [model]="items" [style]="{'width':'200px'}">
+                </p-panelMenu>
+            </p-overlayPanel>
+        </div>
+    </div>
+</header>

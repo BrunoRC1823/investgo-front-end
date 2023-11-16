@@ -11,7 +11,7 @@ import * as myPatterns from 'src/app/shared/helpers/index';
   selector: 'auth-register',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
@@ -70,7 +70,6 @@ export class RegisterComponent {
     const user = this.myForm.value;
     this.authService.register(user).subscribe({
       next: ({ mensaje }) => {
-        console.log(mensaje);
         this.myMessageService.toastBuilder(
           Severity.success,
           'Registro exitoso',
