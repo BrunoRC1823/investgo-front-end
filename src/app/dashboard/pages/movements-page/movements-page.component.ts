@@ -9,11 +9,15 @@ import { UserService } from '../../services/user.service';
 })
 export class MovementsPageComponent {
   private userService: UserService = inject(UserService);
+
+  public activeIndexTab = 0;
   public balance = computed(() => this.userService.currentBalance());
   public customers!: any[];
   public loading: boolean = true;
   public headers = ['Codigo', 'Fecha', 'Transacción', 'Monto'];
+
   ngOnInit(): void {
+    this.setTabIndex();
     this.httpCallObservable.subscribe(
       pipe((data) => {
         this.customers = data;
@@ -23,6 +27,14 @@ export class MovementsPageComponent {
         );
       })
     );
+  }
+  onTabChange(event: any): void {
+    localStorage.setItem('tabIndexMovements', event.index);
+  }
+  setTabIndex() {
+    const tabIndexMovements = localStorage.getItem('tabIndexMovements');
+    if (!tabIndexMovements) return;
+    this.activeIndexTab = parseInt(tabIndexMovements);
   }
   httpCallObservable = new Observable<any[]>((subscriber) => {
     subscriber.next([

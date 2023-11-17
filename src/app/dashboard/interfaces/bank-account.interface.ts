@@ -2,7 +2,7 @@ import { Bank, Currency } from '.';
 
 export interface BankAccount {
   codigo?: string;
-  nroCuenta: string;
+  nroCuenta?: string;
   nroCuentaCci: string;
   cvv: string;
   mes: string;

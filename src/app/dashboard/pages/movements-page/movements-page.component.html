@@ -5,7 +5,7 @@
                 <h1 class="text-2xl">Estado de Cuenta</h1>
             </div>
         </div>
-        <p-tabView>
+        <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
             <p-tabPanel header="Depósitos/retiros">
                 <p-card class="custom-card-dashboard">
                     <div class="flex justify-content-center sm:justify-content-between">
@@ -21,7 +21,7 @@
                     </div>
                 </p-card>
                 <div class="mt-4">
-                    <shared-table class="mt-2" [headers]="headers" [data]="customers"></shared-table>
+                    <shared-table class="mt-2" [headers]="headers" [data]="customers" ></shared-table>
                 </div>
             </p-tabPanel>
             <p-tabPanel header="Ctas. bancarias">

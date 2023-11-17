@@ -21,6 +21,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StringToDateFormatterPipe } from './pipes/string-to-date-formatter.pipe';
 import { LogoBankPipe } from './pipes/logo-bank.pipe';
+import { CustomCurrencyPipe } from './pipes/customCurrency.pipe';
 
 @NgModule({
   declarations: [
@@ -39,8 +40,9 @@ import { LogoBankPipe } from './pipes/logo-bank.pipe';
     SideBarComponent,
     StringToDateFormatterPipe,
     LogoBankPipe,
+    CustomCurrencyPipe,
   ],
-  exports: [StringToDateFormatterPipe],
+  exports: [StringToDateFormatterPipe, CustomCurrencyPipe, LogoBankPipe],
   imports: [
     CommonModule,
     DashboardRoutingModule,

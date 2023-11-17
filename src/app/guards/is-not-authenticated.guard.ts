@@ -15,5 +15,6 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
     router.navigate([lastUrl]);
     return false;
   }
+  authService.logout();
   return true;
 };

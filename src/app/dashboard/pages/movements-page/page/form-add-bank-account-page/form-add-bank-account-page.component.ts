@@ -41,10 +41,10 @@ export class FormAddBankAccountPageComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   public myForm: FormGroup = this.fb.group({
-    banco: [null, [Validators.required]],
+    banco: [{banco: null}, [Validators.required]],
     cvv: [null, [Validators.required]],
     mes: [null, [Validators.required]],
-    moneda: [null, [Validators.required]],
+    moneda: [{moneda: null}, [Validators.required]],
     nroCuenta: [null, [Validators.required]],
     nroCuentaCci: [null, [Validators.required]],
     year: [null, [Validators.required]],

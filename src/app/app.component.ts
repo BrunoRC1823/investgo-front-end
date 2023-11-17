@@ -32,17 +32,19 @@ export class AppComponent implements OnInit {
   }
   public finishedAuthCheck = computed<boolean>(() => {
     if (this.authService.authStatus() === AuthStatus.checking) return false;
-    this.userService.getCurrentWallet().subscribe({
-      next: () => {},
-      error: ({ error }) => {
-        const { mensaje } = error;
-        return this.myMessageService.toastBuilder(
-          Severity.error,
-          'Atención',
-          mensaje
-        );
-      },
-    });
+    if (this.authService.authStatus() === AuthStatus.authenticated) {
+      this.userService.getCurrentWallet().subscribe({
+        next: () => {},
+        error: ({ error }) => {
+          const { mensaje } = error;
+          return this.myMessageService.toastBuilder(
+            Severity.error,
+            'Atención',
+            mensaje
+          );
+        },
+      });
+    }
     return true;
   });
 

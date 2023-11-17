@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 
 import { Injectable, inject } from '@angular/core';
 import { map, catchError, throwError, Observable } from 'rxjs';
-import { Bank, BankAccount, Currency } from 'src/app/dashboard/interfaces';
+import {
+  Bank,
+  BankAccount,
+  Currency,
+  ListResponse,
+} from 'src/app/dashboard/interfaces';
 
 import { environments } from 'src/environments/environments';
 
@@ -32,6 +37,17 @@ export class BankAccountService {
       catchError((err) => throwError(() => err))
     );
   }
+
+  listCardsAccounts(): Observable<ListResponse<BankAccount | null>> {
+    const url = `${this.baseUrl}/api/v1/cuentas-bancarias`;
+    return this.http.get<ListResponse<BankAccount>>(url).pipe(
+      map((list) => {
+        return list;
+      }),
+      catchError((err) => throwError(() => err))
+    );
+  }
+
   register(account: BankAccount): Observable<{ mensaje: string }> {
     const url = `${this.baseUrl}/api/v1/cuentas-bancarias`;
     return this.http.post<{ mensaje: string }>(url, account);
