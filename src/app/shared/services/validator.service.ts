@@ -43,7 +43,7 @@ export class ValidatorService {
 
   public telefonoIsValid = (control: FormControl): ValidationErrors | null => {
     if (control.value) {
-      const value: string = control.value.toString().trim();
+      const value: string = control.value.toString().replace(/-/g, '');
       const regex = new RegExp(myPatterns.PATTERN_PHONE);
       if (!regex.test(value)) return { phoneNoValid: true };
     }
@@ -73,6 +73,33 @@ export class ValidatorService {
       const value: string = control.value;
       const regex = new RegExp(myPatterns.PATTERN_PASSWORD);
       if (!regex.test(value)) return { passwordNoValid: true };
+    }
+    return null;
+  };
+
+  public rucIsValid = (control: FormControl): ValidationErrors | null => {
+    const startsWith: string[] = ['10', '20', '17', '15'];
+    if (control.value) {
+      const value: string = control.value.toString();
+      const startsWithMatch = startsWith.some((prefix) =>
+        value.startsWith(prefix)
+      );
+      if (!startsWithMatch) {
+        return { rucNoStartWith: true };
+      }
+      const regex = new RegExp(myPatterns.PATTERN_RUC);
+      if (!regex.test(value)) return { rucNoValid: true };
+    }
+    return null;
+  };
+
+  public razonSocialIsValid = (
+    control: FormControl
+  ): ValidationErrors | null => {
+    if (control.value) {
+      const value: string = control.value.toString();
+      const regex = new RegExp(myPatterns.PATTERN_RAZON_SOCIAL);
+      if (!regex.test(value)) return { razSocialNoValid: true };
     }
     return null;
   };

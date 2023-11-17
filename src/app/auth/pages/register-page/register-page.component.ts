@@ -41,7 +41,7 @@ export class RegisterComponent {
     dni: ['', [Validators.required, this.validatorsService.dniIsValid]],
     correo: [
       '',
-      [Validators.required, Validators.pattern(myPatterns.PATTERN_EMAIL)],
+      [Validators.required, this.validatorsService.correoIsValid],
     ],
     telefono: [
       '',

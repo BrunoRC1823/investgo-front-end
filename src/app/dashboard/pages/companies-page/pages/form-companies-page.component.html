@@ -1,0 +1,180 @@
+<section class="pt-2 pb-3 layout-content ">
+    <div class="p-2 flex flex-column pr-4 row-gap-3 sm:flex-row sm:justify-content-between ">
+        <div>
+            <h1 class="text-2xl">Agregar empresa.</h1>
+            <span class="text-sm mt-1" class="text-color-secondary">Datos de la empresa.</span>
+        </div>
+        <p-button size="small" label="volver" [outlined]="true" severity="secondary" icon="pi pi-arrow-left"
+            [routerLink]="['/dashboard/companies']"></p-button>
+    </div>
+    <div class="p-2">
+        <div class="mb-3">
+            <p-card class="card">
+                <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" #steps></p-steps>
+            </p-card>
+        </div>
+        <p-card>
+            <form [formGroup]="myForm" (ngSubmit)="register()">
+                <div class="formgrid grid grid-nogutter row-gap-5 md:row-gap-4">
+                    <div class="col-12">
+                        <div class="grid grid-nogutter col-12 mb-2" [ngSwitch]="activeIndex">
+                            <div class="grid grid-nogutter col-12 sm:col-6 sm:pr-3 gap-2" *ngSwitchCase="0">
+                                <div class="col-12 p-0">
+                                    <label for="banco" class="font-medium block mb-2">Nombre Rep. Legal </label>
+                                    <div class="flex flex-column">
+                                        <input id="nomRepLegal" pInputText formControlName="nomRepLegal"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('nomRepLegal')}"
+                                            placeholder="Ingrese un nombre">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('nomRepLegal')">{{
+                                            getFieldError('nomRepLegal')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="banco" class="font-medium block mb-2">Apellido Rep. Legal </label>
+                                    <div class="flex flex-column">
+                                        <input id="apeRepLegal" pInputText formControlName="apeRepLegal"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('apeRepLegal')}"
+                                            placeholder="Ingrese apellido">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('apeRepLegal')">{{
+                                            getFieldError('apeRepLegal')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="nombre" class="font-medium block mb-2"> Nombre de la empresa </label>
+                                    <div class="flex flex-column">
+                                        <input id="nombre" pInputText formControlName="nombre"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('nombre')}"
+                                            placeholder="Ingrese nombre de la empresa">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('nombre')">{{
+                                            getFieldError('nombre')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="nroCuentaBancaria" class="font-medium block mb-2">Cuenta
+                                        Bancaria</label>
+                                    <div class="flex flex-column">
+                                        <p-inputMask id="nroCuenta" mask="PE99-9999-9999-99-9999999999"
+                                            placeholder="e.j PE12-2222-2222-22-2222222222" id="nroCuentaBancaria"
+                                            formControlName="nroCuentaBancaria"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('nroCuentaBancaria')}"
+                                            [style]="{'width': '100%'}"></p-inputMask>
+                                        <span class="text-sm mt-1 text-red-500"
+                                            *ngIf="isValidField('nroCuentaBancaria')">{{
+                                            getFieldError('nroCuentaBancaria')
+                                            }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="grid grid-nogutter col-12 sm:col-6 sm:pr-3 gap-2" *ngSwitchCase="1">
+                                <div class="col-12">
+                                    <label for="ruc" class="font-medium block mb-2"> RUC </label>
+                                    <div class="flex flex-column">
+                                        <p-inputMask id="ruc" formControlName="ruc" mask="99999999999"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('ruc')}"
+                                            [style]="{'width': '100%'}" placeholder="Ingrese el teléfono">
+                                        </p-inputMask>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('ruc')">{{
+                                            getFieldError('ruc')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="razonSocial" class="font-medium block mb-2"> Razon social </label>
+                                    <div class="flex flex-column">
+                                        <input id="razonSocial" pInputText formControlName="razonSocial"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('razonSocial')}"
+                                            placeholder="Ingrese la razon social">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('razonSocial')">{{
+                                            getFieldError('razonSocial')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="sector" class="font-medium block mb-2">Sector económico</label>
+                                    <div class="flex flex-column">
+                                        <input id="sector" pInputText formControlName="sector"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('sector')}"
+                                            placeholder="Ingrese el sector">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('sector')">{{
+                                            getFieldError('sector')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="fecIniActv" class="font-medium block mb-2">Inicio Actividades</label>
+                                    <div class="flex flex-column">
+                                        <p-calendar formControlName="fecIniActv" dateFormat="dd/mm/yy"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('fecIniActv')}"
+                                            [showIcon]="true" [style]="{'width': '100%'}"
+                                            [maxDate]="maxDate"></p-calendar>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('fecIniActv')">{{
+                                            getFieldError('fecIniActv')
+                                            }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="grid grid-nogutter col-12 sm:col-6 sm:pr-3 gap-2" *ngSwitchCase="2">
+                                <div class="col-12">
+                                    <label for="direccion" class="font-medium block mb-2">Dirección</label>
+                                    <div class="flex flex-column">
+                                        <input id="direccion" pInputText formControlName="direccion"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('direccion')}"
+                                            placeholder="Ingrese la dirección">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('direccion')">{{
+                                            getFieldError('direccion')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="telefono" class="font-medium block mb-2">Teléfono</label>
+                                    <div class="flex flex-column">
+                                        <p-inputMask id="telefono" formControlName="telefono" mask="999-999-999"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('telefono')}"
+                                            [style]="{'width': '100%'}" placeholder="Ingrese el teléfono">
+                                        </p-inputMask>
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('telefono')">{{
+                                            getFieldError('telefono')
+                                            }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="correo" class="font-medium block mb-2">Correo</label>
+                                    <div class="flex flex-column">
+                                        <input id="correo" pInputText formControlName="correo"
+                                            [ngClass]="{'ng-invalid ng-dirty': isValidField('correo')}"
+                                            placeholder="Ingrese el correo">
+                                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('correo')">{{
+                                            getFieldError('correo')
+                                            }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="col-12 sm:col-6 flex flex-column gap-4 justify-content-center align-content-center">
+                                <img class="w-full h-11rem" src="/assets/img/svg/company.svg" alt="company.svg">
+                                <div class="col-12 grid grid-nogutter gap-3 justify-content-center">
+                                    <p-button size="small" label="anterior" [outlined]="true" severity="primary" icon="pi pi-angle-left
+                                    " (onClick)="previousStep()" *ngIf="activeIndex > 0"></p-button>
+                                    <p-button size="small" type="submit" label="Guardar" [outlined]="true"
+                                        icon="pi pi-save"
+                                        [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"
+                                        *ngSwitchCase="2">
+                                    </p-button>
+                                    <p-button size="small" label="siguiente" [outlined]="true" severity="primary" icon="pi pi-angle-right
+                                        " iconPos="right" (onClick)="nextStep()"
+                                        *ngIf="!(activeIndex >= 2)"></p-button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</section>

@@ -8,6 +8,7 @@ import {
   Currency,
   ListResponse,
 } from 'src/app/dashboard/interfaces';
+import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 
 import { environments } from 'src/environments/environments';
 
@@ -48,8 +49,8 @@ export class BankAccountService {
     );
   }
 
-  register(account: BankAccount): Observable<{ mensaje: string }> {
+  register(account: BankAccount): Observable<ConfirmResponse> {
     const url = `${this.baseUrl}/api/v1/cuentas-bancarias`;
-    return this.http.post<{ mensaje: string }>(url, account);
+    return this.http.post<ConfirmResponse>(url, account);
   }
 }

@@ -11,15 +11,16 @@ import { OpportunitiesUserPageComponent } from './pages/opportunities-user-page/
 import { OpportunitiesAdminPageComponent } from './pages/opportunities-admin-page/opportunities-admin-page.component';
 import { FormAddBankAccountPageComponent } from './pages/movements-page/page/form-add-bank-account-page/form-add-bank-account-page.component';
 import { urlStorageGuard } from '../guards';
+import { FormCompaniesPageComponent } from './pages/companies-page/pages/form-companies-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    
+
     component: DashboardComponent,
     children: [
-      { path: 'home', component: HomePageComponent,},
-      { path: 'opportunities', component: OpportunitiesUserPageComponent, },
+      { path: 'home', component: HomePageComponent },
+      { path: 'opportunities', component: OpportunitiesUserPageComponent },
       { path: 'investments', component: InvestmentsPageComponent },
       { path: 'movements', component: MovementsPageComponent },
       {
@@ -27,6 +28,7 @@ const routes: Routes = [
         component: FormAddBankAccountPageComponent,
       },
       { path: 'companies', component: CompaniesPageComponent },
+      { path: 'companies/add-company', component: FormCompaniesPageComponent },
       { path: 'bills', component: BillsComponent },
       {
         path: 'opportunities-admin',

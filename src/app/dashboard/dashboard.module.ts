@@ -22,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StringToDateFormatterPipe } from './pipes/string-to-date-formatter.pipe';
 import { LogoBankPipe } from './pipes/logo-bank.pipe';
 import { CustomCurrencyPipe } from './pipes/customCurrency.pipe';
+import { FormCompaniesPageComponent } from './pages/companies-page/pages/form-companies-page.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CustomCurrencyPipe } from './pipes/customCurrency.pipe';
     StringToDateFormatterPipe,
     LogoBankPipe,
     CustomCurrencyPipe,
+    FormCompaniesPageComponent,
   ],
   exports: [StringToDateFormatterPipe, CustomCurrencyPipe, LogoBankPipe],
   imports: [

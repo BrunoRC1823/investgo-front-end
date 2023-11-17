@@ -125,7 +125,6 @@ export class FormAddBankAccountPageComponent implements OnInit {
     }
     this.assignDateValues();
     const account = this.myForm.value;
-    console.log(account);
     this.bankAccountService.register(account).subscribe({
       next: ({ mensaje }) => {
         this.myMessageService.toastBuilder(

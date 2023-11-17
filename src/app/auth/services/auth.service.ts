@@ -9,6 +9,7 @@ import { environments } from 'src/environments/environments';
 import { LoginRequest } from '../interfaces/login-request.interface';
 import { LoginResponse } from '../interfaces/login-response.interface';
 import { User } from '../interfaces/user.interface';
+import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -74,9 +75,9 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  register(user: User): Observable<{ mensaje: string }> {
+  register(user: User): Observable<ConfirmResponse> {
     const url = `${this.baseUrl}/api/v1/sing-up`;
-    return this.http.post<{ mensaje: string }>(url, user);
+    return this.http.post<ConfirmResponse>(url, user);
   }
 
   checkAuthStatus(): Observable<boolean> {

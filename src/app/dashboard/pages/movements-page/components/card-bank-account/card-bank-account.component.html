@@ -52,7 +52,7 @@
                 <div class="z-2 relative">
                     <div class="flex align-items-center justify-content-between mt-2 mb-0 sm:mb-2">
                         <div class="text-200 text-lg sm:text-lg font-semibold">Cta. Bancaria</div>
-                        <img [src]="(account?.banco?.nombre ?? '') | logoBank" style="width: 55px; height: 45px;">
+                        <img [src]="(account?.banco?.nombre ?? '') | logoBank" [alt]="(account?.banco?.nombre ?? 'bank-logo.png')" style="width: 55px; height: 45px;">
                     </div>
                     <div class="text-200 mb-1 font-semibold sm:text-sm mb-1 sm:mb-2">Saldo</div>
                     <div class="text-200 text-lg sm:text-xl mb-2 sm:mb-3 font-bold">{{ (account?.saldo ?? 2500) |

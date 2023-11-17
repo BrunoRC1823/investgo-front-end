@@ -41,9 +41,11 @@
         <div class="grid p-0 m-0 w-full row-gap-5">
             <div class="col-12 p-0 md:col-6 md:pl-0 md:pr-2">
                 <div class="field mb-1 p-float-label">
-                    <input pInputText id="telefono" type="number"
-                        class="text-color p-1 border-none border-bottom-1 w-full"
-                        [ngClass]="{'ng-invalid ng-dirty': isValidField('telefono')}" formControlName="telefono">
+                    <p-inputMask id="telefono" formControlName="telefono" mask="999-999-999" class="input"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('telefono')}" [style]="{'width': '100%'}"
+                        placeholder="Ingrese el teléfono">
+                    </p-inputMask>
+
                     <label htmlFor="telefono">Telefono</label>
                 </div>
                 <small class="text-red-600" *ngIf="isValidField('telefono')" id="telefono-help">
@@ -52,8 +54,10 @@
             </div>
             <div class="col-12 p-0 md:col-6 md:pr-0 md:pl-2">
                 <div class="field mb-1 p-float-label">
-                    <input pInputText id="dni" type="number" class="text-color p-1 border-none border-bottom-1 w-full"
-                        [ngClass]="{'ng-invalid ng-dirty': isValidField('dni')}" formControlName="dni">
+                    <p-inputMask id="dni" formControlName="dni" mask="99999999" class="input"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('dni')}" [style]="{'width': '100%'}"
+                        placeholder="Ingrese el teléfono">
+                    </p-inputMask>
                     <label htmlFor="dni">DNI</label>
                 </div>
                 <small class="text-red-600" *ngIf="isValidField('dni')" id="dni-help">

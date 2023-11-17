@@ -14,8 +14,11 @@ export const mensajesDeError: { [key: string]: string | Function } = {
   },
   pattern: 'Formato incorrecto',
   namesNoValid:
-    'El campo debe empezar con mayúscula, si tiene espacios también y no debe tener caracteres especiales',
-  phoneNoValid:
-    'El numero de telefono debe comenzar con 9  y tener 9 caracteres',
+    'El campo debe empezar con mayúscula, si tiene espacios también, y no debe tener caracteres especiales',
+  phoneNoValid: 'El numero de telefono debe comenzar con 9',
+  correoNoValid: 'Formato de correo electronico incorrecto',
   dniNoValid: 'El dni debe tener 8 caracteres',
+  rucNoValid: 'Ingrese un ruc valido',
+  rucNoStartWith: 'El ruc debe iniciar con 10, 20, 17 o 15',
+  razSocialNoValid: 'Ingrese una razon social valida',
 };

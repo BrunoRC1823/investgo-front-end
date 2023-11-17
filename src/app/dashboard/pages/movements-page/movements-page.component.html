@@ -1,9 +1,7 @@
 <section class="pt-2 pb-3 layout-content">
     <div class="p-2">
         <div class="flex justify-content-between pb-2">
-            <div class="inversion__header">
-                <h1 class="text-2xl">Estado de Cuenta</h1>
-            </div>
+            <h1 class="text-2xl">Estado de Cuenta</h1>
         </div>
         <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
             <p-tabPanel header="Depósitos/retiros">
@@ -21,7 +19,7 @@
                     </div>
                 </p-card>
                 <div class="mt-4">
-                    <shared-table class="mt-2" [headers]="headers" [data]="customers" ></shared-table>
+                    <shared-table class="mt-2" [headers]="headers" [data]="customers"></shared-table>
                 </div>
             </p-tabPanel>
             <p-tabPanel header="Ctas. bancarias">

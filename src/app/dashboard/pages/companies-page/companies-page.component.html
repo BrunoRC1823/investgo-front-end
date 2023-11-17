@@ -1,1 +1,19 @@
-<p>company works!</p>
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between pb-2">
+            <h1 class="text-2xl">Listado de empresas</h1>
+            <p-button label="Agregar" size="small" [rounded]="true" icon="pi pi-plus"
+                [style]="{'border-color': 'var(--sidebar-color)','background-color':'var(--sidebar-color)'}"
+                [routerLink]="['/dashboard/companies/add-company']">
+            </p-button>
+        </div>
+        <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
+            <p-tabPanel header="Todos">
+                <shared-table [headers]="headers" [data]="customers"></shared-table>
+            </p-tabPanel>
+            <p-tabPanel header="Activos">
+                <shared-table [headers]="headers" [data]="customers"></shared-table>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</section>

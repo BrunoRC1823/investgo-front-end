@@ -7,19 +7,19 @@ import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
+import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
-import { InputMaskModule } from 'primeng/inputmask';
-
 @NgModule({
   exports: [
     AvatarModule,
@@ -29,18 +29,19 @@ import { InputMaskModule } from 'primeng/inputmask';
     CarouselModule,
     DividerModule,
     DropdownModule,
+    InputMaskModule,
     InputTextModule,
     KeyFilterModule,
     MultiSelectModule,
     OverlayPanelModule,
     PanelMenuModule,
     SidebarModule,
+    StepsModule,
     TableModule,
     TabViewModule,
     TagModule,
     TieredMenuModule,
     ToastModule,
-    InputMaskModule,
   ],
 })
 export class PrimeNgModule {}

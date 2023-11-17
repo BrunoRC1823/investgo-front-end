@@ -1,0 +1,19 @@
+:host ::ng-deep .card > :first-child > :first-child {
+  padding: 0 1rem;
+}
+:host
+  ::ng-deep
+  p-steps
+  > nav
+  > ul
+  > li
+  > a[aria-expanded="true"]
+  > :nth-child(2) {
+  font-weight: 700;
+  color: var(--sidebar-color);
+}
+
+:host ::ng-deep p-calendar > span > :nth-child(2) {
+  background: var(--sidebar-color);
+  border-color: var(--sidebar-color);
+}
