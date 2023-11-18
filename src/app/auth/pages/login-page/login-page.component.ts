@@ -9,7 +9,6 @@ import { LoginRequest } from '../../interfaces/login-request.interface';
 import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
 import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { UserService } from 'src/app/dashboard/services/user.service';
 
 @Component({
   selector: 'auth-login',

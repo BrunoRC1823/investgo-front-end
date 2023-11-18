@@ -19,7 +19,7 @@ import { Bank, BankAccount, Currency } from 'src/app/dashboard/interfaces';
 import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 
 @Component({
-  selector: 'movements-form-add-bank-account',
+  selector: 'movements-form-add-bank-account-page',
   templateUrl: './form-add-bank-account-page.component.html',
   styleUrls: ['./form-add-bank-account-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
