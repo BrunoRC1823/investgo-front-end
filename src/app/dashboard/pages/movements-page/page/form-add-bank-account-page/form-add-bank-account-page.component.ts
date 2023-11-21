@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { BankAccountService } from '../../services/bank-account.service';
+import { BankAccountService } from '../../../../services/bank-account.service';
 import { Bank, BankAccount, Currency } from 'src/app/dashboard/interfaces';
 import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 

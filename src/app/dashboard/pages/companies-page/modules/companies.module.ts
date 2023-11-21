@@ -4,7 +4,7 @@ import { CompaniesPageComponent } from '../pages/companies-page/companies-page.c
 import { PageModule } from '../pages/modules/page.module';
 import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
-import { CompaniesRoutingModule } from './companiess-routing.module';
+import { CompaniesRoutingModule } from './companies-routing.module';
 
 @NgModule({
   declarations: [],

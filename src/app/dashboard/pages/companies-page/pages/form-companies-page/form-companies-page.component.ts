@@ -15,7 +15,7 @@ import { MyMessageService } from 'src/app/shared/services/my-message-service.ser
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 import * as myPatterns from 'src/app/shared/helpers/index';
 import { DatePipe } from '@angular/common';
-import { CompaniesService } from '../../services/companies.service';
+import { CompaniesService } from '../../../../services/companies.service';
 import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 
 @Component({

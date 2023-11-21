@@ -20,6 +20,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   exports: [
     AvatarModule,
@@ -42,6 +43,7 @@ import { ToastModule } from 'primeng/toast';
     TagModule,
     TieredMenuModule,
     ToastModule,
+    PaginatorModule,
   ],
 })
 export class PrimeNgModule {}

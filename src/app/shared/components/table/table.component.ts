@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Table } from 'primeng/table';
-import { Observable, pipe } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PaginatorState } from 'primeng/paginator';
+import { TableLazyLoadEvent } from 'primeng/table';
+import { TableConfig } from '../../interfaces/table-config.interface';
 
 @Component({
   selector: 'shared-table',
@@ -8,60 +9,19 @@ import { Observable, pipe } from 'rxjs';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
-  @Input() headers: string[] = [];
-  @Input() data: any[] = [];
-  
-  // customers!: any[];
+  @Input() config: TableConfig = { data: [], totalElements: 0 };
 
-  // representatives!: any[];
+  @Output() lazyLoadEmitter = new EventEmitter<TableLazyLoadEvent>();
+  @Output() currentPagePaginator = new EventEmitter<PaginatorState>();
 
-  // statuses!: any[];
+  public rows: number = 5;
 
-  // loading: boolean = true;
+  lazyLoadEmit($event: TableLazyLoadEvent) {
+    this.lazyLoadEmitter.emit($event);
+  }
 
-  // activityValues: number[] = [0, 100];
-
-  // httpCallObservable = new Observable<any[]>((subscriber) => {
-  //   subscriber.next([
-  //     { name: 'Ga' ,country: 'Chile', company:'Ga',representative:'Ga'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //     { name: 'Bruno' ,country: 'Peru', company:'Bruno',representative:'Bruno'},
-  //   ]);
-  //   subscriber.complete();
-  // });
-  // ngOnInit() {
-  //   this.httpCallObservable.subscribe(
-  //     pipe((data) => {
-  //       this.customers = data;
-  //       this.loading = false;
-
-  //       this.customers.forEach(
-  //         (customer) => (customer.date = new Date(<Date>customer.date))
-  //       );
-  //     })
-  //   );
-  // }
-
-  // clear(table: Table) {
-  //   table.clear();
-  // }
-
-
+  onPageChange($event: PaginatorState) {
+    this.currentPagePaginator.emit($event);
+  }
+ 
 }

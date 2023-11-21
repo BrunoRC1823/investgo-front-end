@@ -5,3 +5,5 @@ export * from './currency.interface';
 export * from './list-response.interface';
 export * from './transaction.interface';
 export * from './type-transaction.interface';
+export * from './audit.interface';
+export * from './paginator-request.interface';

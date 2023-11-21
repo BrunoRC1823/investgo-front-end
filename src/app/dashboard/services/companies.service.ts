@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environments } from 'src/environments/environments';
-import { Company } from '../interfaces/company.interface';
+import { Company } from '../pages/companies-page/interfaces/company.interface';
 import { Observable } from 'rxjs';
 import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 

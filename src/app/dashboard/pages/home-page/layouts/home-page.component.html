@@ -24,7 +24,7 @@
                                 <i class="pi pi-arrow-right-arrow-left text-xs mr-1"></i>
                                 Inversiones hechas
                             </span>
-                            <p class="text-xl font-bold">{{ transactionsCount }}</p>
+                            <p class="text-xl font-bold">{{ investmentsCount }}</p>
                         </div>
                         <p-divider layout="vertical" class="hidden sm:block"></p-divider>
                         <div
@@ -59,15 +59,15 @@
                         </div>
                         <div>
                             <span class="font-bold text-2xl lg:text-3xl">{{ balance().saldo|
-                                currency:'S/.&nbsp;':'symbol-narrow'}}</span>
+                                currency:'S/.':'symbol-narrow'}}</span>
                         </div>
                         <div>
                             <span>Depósitos totales: </span>
-                            <span class="font-bold">{{ 30 | currency:'S/.&nbsp;':'symbol-narrow' }}</span>
+                            <span class="font-bold">{{ totalDeposits | currency:'S/.':'symbol-narrow' }}</span>
                         </div>
                         <div>
                             <span>Inversiones totales: </span>
-                            <span class="font-bold">{{ 30 | currency:'S/.&nbsp;':'symbol-narrow' }}</span>
+                            <span class="font-bold">{{ 30 | currency:'S/.':'symbol-narrow' }}</span>
                         </div>
                         <div>
                             <p-button label="Deposite" [rounded]="true" icon="pi pi-credit-card" size="small"
@@ -78,10 +78,10 @@
                 </p-card>
             </div>
         </div>
-        <div class="px-3 py-0    col-12">
-            <p-card class="custom-card-dashboard">
-                <div class="flex flex-column mb-3  gap-2 align-items-center
-                sm:flex-row sm:justify-content-between">
+        <div class="px-3 py-0 col-12">
+            <p-card class="custom-card-dashboard card-table">
+                <div class="flex flex-column  gap-2 align-items-center
+                pt-4 px-4 sm:flex-row sm:justify-content-between">
                     <h5 class="font-bold text-xl text-center">
                         <p-avatar icon="pi 
                         pi-arrow-right-arrow-left text-xl" styleClass="mr-2"
@@ -90,7 +90,8 @@
                     </h5>
                 </div>
                 <div>
-                    <shared-table [headers]="headers" [data]="customers"></shared-table>
+                    <shared-table [config]="configTable" (lazyLoadEmitter)="getTransactions($event)"
+                        (currentPagePaginator)="getTransactions($event)"></shared-table>
                 </div>
             </p-card>
         </div>

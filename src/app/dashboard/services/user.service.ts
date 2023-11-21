@@ -5,7 +5,6 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 
 import { environments } from 'src/environments/environments';
 import { Balance } from '../interfaces/balance.interface';
-import { ListResponse, Transaction } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -26,14 +25,5 @@ export class UserService {
     );
   }
 
-  getTransactions(type:Number): Observable<ListResponse<Transaction | null>> {
-    const url = `${this.baseUrl}/api/v1/transacciones/listar-tipo/${type}`;
-    return this.http.get<ListResponse<Transaction>>(url).pipe(
-      map((list) => {
-        // console.log(list);
-        return list;
-      }),
-      catchError((err) => throwError(() => err))
-    );
-  }
+
 }

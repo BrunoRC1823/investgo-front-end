@@ -9,10 +9,10 @@
         </div>
         <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
             <p-tabPanel header="Todos">
-                <shared-table [headers]="headers" [data]="customers"></shared-table>
+                <shared-table ></shared-table>
             </p-tabPanel>
             <p-tabPanel header="Activos">
-                <shared-table [headers]="headers" [data]="customers"></shared-table>
+                <shared-table></shared-table>
             </p-tabPanel>
         </p-tabView>
     </div>

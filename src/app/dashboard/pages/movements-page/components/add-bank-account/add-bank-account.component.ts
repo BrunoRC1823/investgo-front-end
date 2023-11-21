@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BankAccount } from 'src/app/dashboard/interfaces';
-import { BankAccountService } from '../../services/bank-account.service';
+import { BankAccountService } from '../../../../services/bank-account.service';
 
 @Component({
   selector: 'movements-add-bank-account',

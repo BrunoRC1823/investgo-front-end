@@ -9,7 +9,7 @@ export class CustomCurrencyPipe implements PipeTransform {
       value = 2500;
     }
     if (!currencyCode || currencyCode === 'PEN') {
-      return `S/. ${value.toFixed(2)}`;
+      return `S/.${value.toFixed(2)}`;
     } else {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
