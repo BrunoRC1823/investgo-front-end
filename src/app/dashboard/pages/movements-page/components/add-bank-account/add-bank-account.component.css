@@ -1,0 +1,4 @@
+:host ::ng-deep .custom-p-card > div {
+  height: auto;
+  min-height: 11rem;
+}

@@ -11,6 +11,9 @@ import { UserService } from '../../../services/user.service';
 import { TransactionService } from 'src/app/dashboard/services/transaction.service';
 import { DatePipe } from '@angular/common';
 import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
+import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
+import { InvestmentService } from 'src/app/dashboard/services/investment.service';
+import { TableHelpersService } from 'src/app/dashboard/services/tableHelpers.service';
 
 const monthNames: String[] = [
   'Enero',
@@ -35,14 +38,18 @@ export class HomePageComponent implements OnInit {
   private userService = inject(UserService);
   private authService = inject(AuthService);
   private transactionService = inject(TransactionService);
+  private investmentService = inject(InvestmentService);
+  private tableHelpers = inject(TableHelpersService);
 
   public currentMonth?: String;
   public currentYear?: Number;
-  public withdrawal: Number = 0;
-  public deposit: Number = 0;
+  public withdrawalCounts: Number = 0;
+  public depositsCounts: Number = 0;
   public investmentsCount: number = 0;
   public balance = computed(() => this.userService.currentBalance());
   public totalDeposits: number = 0;
+  public totalInvestments: number = 0;
+  public tableNoData: boolean = true;
   public configTable: TableConfig = {
     totalElements: 0,
     data: [],
@@ -51,7 +58,12 @@ export class HomePageComponent implements OnInit {
       { head: 'Codigo', name: 'codigo', value: '' },
       { head: 'Fecha', name: 'auditoria', value: 'fecha' },
       { head: 'Hora', name: 'hora', value: '' },
-      { head: 'Transacción', name: 'tipoTransaccion', value: 'nombre' },
+      {
+        head: 'Transacción',
+        name: 'tipoTransaccion',
+        value: 'nombre',
+        highligh: 'true',
+      },
       { head: 'Monto', name: 'monto', value: '' },
     ],
   };
@@ -60,6 +72,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDate();
+    this.getInvestments(EnableValue.enable);
+    this.getInvestments(EnableValue.notEnable);
     this.getTransactionsByType(TransactionTypeEnum.deposit);
     this.getTransactionsByType(TransactionTypeEnum.withdrawal);
   }
@@ -71,17 +85,18 @@ export class HomePageComponent implements OnInit {
     this.currentYear = currentDate.getFullYear();
   }
 
-  setTransactionsCounts(
-    content: (Transaction | null)[],
-    type: TransactionTypeEnum
-  ) {
-    if (content === null) return;
-    const count = content.length;
-    if (type == TransactionTypeEnum.deposit) {
-      this.deposit = count;
-    } else {
-      this.withdrawal = count;
-    }
+  getInvestments(enable: EnableValue) {
+    this.investmentService
+      .getInvestmentsByCurrentUser(enable)
+      .subscribe((investment) => {
+        const { content } = investment;
+        const count = content.length;
+        this.investmentsCount += count;
+        content.forEach((investment) => {
+          const { montoInvertido } = investment;
+          this.totalInvestments += montoInvertido;
+        });
+      });
   }
 
   getTransactionsByType(type: TransactionTypeEnum) {
@@ -93,36 +108,35 @@ export class HomePageComponent implements OnInit {
       });
   }
 
-  getTransactions($event?: any) {
-    let paginator: PaginatorRequest = new PaginatorRequest();
-    if ($event) {
-      this.assignPaginatorValues($event, paginator);
+  setTransactionsCounts(
+    content: (Transaction | null)[],
+    type: TransactionTypeEnum
+  ) {
+    if (content === null) return;
+
+    const count = content.length;
+    if (count > 0) this.tableNoData = false;
+    if (type === TransactionTypeEnum.deposit) {
+      this.depositsCounts = count;
+      content.forEach(
+        (transaction) => (this.totalDeposits += transaction!.monto)
+      );
+    } else {
+      this.withdrawalCounts = count;
     }
-    setTimeout(() => {
-      this.transactionService
-        .getTransactions(paginator)
-        .subscribe((transactions) => {
-          this.assignTransactionValue(transactions);
-        });
-    }, 300);
   }
-  assignPaginatorValues($event: any, paginator: PaginatorRequest) {
-    if ($event.page) {
-      paginator.pagina = $event?.page!;
+
+  getTransactions($event?: any) {
+    let paginator: any;
+    if ($event) {
+      paginator = new PaginatorRequest();
+      paginator = this.tableHelpers.assignPaginatorValues($event, paginator);
     }
-    if ($event.sortField) {
-      paginator.ordenadoPor = $event.sortField;
-    }
-    if (paginator.ordenadoPor === 'hora') {
-      paginator.ordenadoPor = 'auditoria.fecha';
-    }
-    if ($event.sortOrder === 1) {
-      paginator.enOrden = 'ASC';
-    } else if ($event.sortOrder === -1){
-      paginator.enOrden = 'DESC';
-    }
-    paginator.elementosPagina = $event?.rows!;
-    return paginator;
+    this.transactionService
+      .getTransactions(paginator)
+      .subscribe((transactions) => {
+        this.assignTransactionValue(transactions);
+      });
   }
 
   assignTransactionValue(transactions: ListResponse<Transaction>) {
@@ -133,9 +147,6 @@ export class HomePageComponent implements OnInit {
       const hora = new DatePipe('es-PE').transform(fecha, 'HH:mm a');
       transaction!.hora = hora!;
       transaction!.auditoria.fecha = fechaFormant!;
-      if(transaction.tipoTransaccion.id === 1){
-        this.totalDeposits += transaction.monto;
-      }
     });
     this.configTable.loading = false;
     this.configTable.data = content;

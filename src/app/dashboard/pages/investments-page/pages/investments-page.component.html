@@ -6,15 +6,38 @@
             </div>
             <div class="inversion__group">
                 <p-button label="Agregar Inversión" [rounded]="true" size="small"
+                    [routerLink]="['/dashboard/opportunities/auction']"
                     [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
             </div>
         </div>
-        <p-tabView>
+        <p-tabView (activeIndexChange)="onTabChange($event)" [activeIndex]="activeIndexTab">
             <p-tabPanel header="A tiempo">
-                <shared-table ></shared-table>
+                <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"
+                    (lazyLoadEmitter)="getInvestmentsByCurrentUser(enableValue,$event)"
+                    (currentPagePaginator)="getInvestmentsByCurrentUser(enableValue,$event)"></shared-table>
+                <ng-template #noData>
+                    <div class="p-2">
+                        <p-panel header="Oops...">
+                            <p>
+                                Lo sentimos, no tiene ninguna inversion aún. :(
+                            </p>
+                        </p-panel>
+                    </div>
+                </ng-template>
             </p-tabPanel>
             <p-tabPanel header="Pagadas">
-                <shared-table ></shared-table>
+                <shared-table *ngIf="!(tableNoData);else noData2" [config]="configTable"
+                    (lazyLoadEmitter)="getInvestmentsByCurrentUser(enableValue,$event)"
+                    (currentPagePaginator)="getInvestmentsByCurrentUser(enableValue,$event)"></shared-table>
+                <ng-template #noData2>
+                    <div class=" p-2">
+                        <p-panel header="Oops...">
+                            <p>
+                                Lo sentimos, no tiene ninguna inversion pagada aún. :(
+                            </p>
+                        </p-panel>
+                    </div>
+                </ng-template>
             </p-tabPanel>
         </p-tabView>
     </div>

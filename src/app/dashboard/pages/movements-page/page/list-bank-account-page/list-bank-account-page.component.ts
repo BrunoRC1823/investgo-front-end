@@ -1,7 +1,19 @@
+import { DatePipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { pipe, Observable } from 'rxjs';
+import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { TransactionTypeEnum } from 'src/app/dashboard/enums/transaction-type.enum';
+import {
+  Transaction,
+  PaginatorRequest,
+  ListResponse,
+} from 'src/app/dashboard/interfaces';
+import { InvestmentService } from 'src/app/dashboard/services/investment.service';
+import { TableHelpersService } from 'src/app/dashboard/services/tableHelpers.service';
+import { TransactionService } from 'src/app/dashboard/services/transaction.service';
 import { UserService } from 'src/app/dashboard/services/user.service';
-
+import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
 
 @Component({
   selector: 'movements-list-bank-account-page',
@@ -10,24 +22,67 @@ import { UserService } from 'src/app/dashboard/services/user.service';
 })
 export class ListBankAccountPageComponent {
   private userService: UserService = inject(UserService);
+  private authService = inject(AuthService);
+  private transactionService = inject(TransactionService);
+  private tableHelpers = inject(TableHelpersService);
 
   public activeIndexTab = 0;
   public balance = computed(() => this.userService.currentBalance());
-  public customers!: any[];
-  public loading: boolean = true;
-  public headers = ['Codigo', 'Fecha', 'Transacción', 'Monto'];
+  public totalDeposits: number = 0;
+  public totalInvestments: number = 0;
+  public tableNoData: boolean = true;
+  public configTable: TableConfig = {
+    totalElements: 0,
+    data: [],
+    loading: true,
+    columns: [
+      { head: 'Codigo', name: 'codigo', value: '' },
+      { head: 'Fecha', name: 'auditoria', value: 'fecha' },
+      { head: 'Hora', name: 'hora', value: '' },
+      {
+        head: 'Transacción',
+        name: 'tipoTransaccion',
+        value: 'nombre',
+        highligh: 'true',
+      },
+      { head: 'Cuenta destino', name: 'cuentaBancaria', value: 'codigo' },
+      { head: 'Monto', name: 'monto', value: '' },
+    ],
+  };
+
+  public username = this.authService.getUsername();
 
   ngOnInit(): void {
+    this.getTransactions();
     this.setTabIndex();
-    this.httpCallObservable.subscribe(
-      pipe((data) => {
-        this.customers = data;
-        this.loading = false;
-        this.customers.forEach(
-          (customer) => (customer.date = new Date(<Date>customer.date))
-        );
-      })
-    );
+  }
+
+  getTransactions($event?: any) {
+    let paginator: any;
+    if ($event) {
+      paginator = new PaginatorRequest();
+      paginator = this.tableHelpers.assignPaginatorValues($event, paginator);
+    }
+    this.transactionService
+      .getTransactions(paginator)
+      .subscribe((transactions) => {
+        this.assignTransactionValue(transactions);
+      });
+  }
+
+  assignTransactionValue(transactions: ListResponse<Transaction>) {
+    const { content, totalElements } = transactions;
+    content.forEach((transaction: Transaction) => {
+      let { fecha } = transaction!.auditoria;
+      const fechaFormant = new DatePipe('es-PE').transform(fecha, 'dd/MM/yyyy');
+      const hora = new DatePipe('es-PE').transform(fecha, 'HH:mm a');
+      transaction!.hora = hora!;
+      transaction!.auditoria.fecha = fechaFormant!;
+    });
+    this.tableNoData = false;
+    this.configTable.loading = false;
+    this.configTable.data = content;
+    this.configTable.totalElements = totalElements;
   }
   onTabChange(event: any): void {
     localStorage.setItem('tabIndexMovements', event.index);
@@ -37,29 +92,4 @@ export class ListBankAccountPageComponent {
     if (!tabIndexMovements) return;
     this.activeIndexTab = parseInt(tabIndexMovements);
   }
-  httpCallObservable = new Observable<any[]>((subscriber) => {
-    subscriber.next([
-      { codigo: 'Ga', fecha: 'Chile', transaccion: 'Ga', monto: 'Ga' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-      { codigo: 'Bruno', fecha: 'Peru', transaccion: 'Bruno', monto: 'Bruno' },
-    ]);
-    subscriber.complete();
-  });
 }

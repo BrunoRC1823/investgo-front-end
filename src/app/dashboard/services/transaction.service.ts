@@ -30,8 +30,17 @@ export class TransactionService {
     );
   }
 
-  getTransactionsByType(type: Number): Observable<ListResponse<Transaction>> {
-    const url = `${this.baseUrl}/api/v1/transacciones/listar-tipo/${type}`;
+  getTransactionsByType(
+    type: Number,
+    paginator?: PaginatorRequest
+  ): Observable<ListResponse<Transaction>> {
+    let url;
+    if (paginator) {
+      const { pagina, elementosPagina, ordenadoPor, enOrden } = paginator;
+      url = `${this.baseUrl}/api/v1/transacciones/listar-tipo?pagina=${pagina}&elementosPagina=${elementosPagina}&ordenadoPor=${ordenadoPor}&enOrden=${enOrden}`;
+    } else {
+      url = `${this.baseUrl}/api/v1/transacciones/listar-tipo/${type}`;
+    }
     return this.http.get<ListResponse<Transaction>>(url).pipe(
       map((list) => {
         return list;

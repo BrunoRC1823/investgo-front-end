@@ -33,7 +33,7 @@
                                 <i class="pi pi-arrow-up text-xs mr-1"></i>
                                 Depósitos hechos
                             </span>
-                            <p class="text-xl font-bold">{{ withdrawal }}</p>
+                            <p class="text-xl font-bold">{{ depositsCounts }}</p>
                         </div>
                         <p-divider layout="vertical" class="hidden sm:block"></p-divider>
                         <div
@@ -42,7 +42,7 @@
                                 <i class="pi pi-arrow-down text-xs mr-1"></i>
                                 Retiros hechos
                             </span>
-                            <p class="text-xl font-bold">{{ deposit }}</p>
+                            <p class="text-xl font-bold">{{ withdrawalCounts }}</p>
                         </div>
                     </div>
                 </p-card>
@@ -67,7 +67,7 @@
                         </div>
                         <div>
                             <span>Inversiones totales: </span>
-                            <span class="font-bold">{{ 30 | currency:'S/.':'symbol-narrow' }}</span>
+                            <span class="font-bold">{{ totalInvestments | currency:'S/.':'symbol-narrow' }}</span>
                         </div>
                         <div>
                             <p-button label="Deposite" [rounded]="true" icon="pi pi-credit-card" size="small"
@@ -90,8 +90,19 @@
                     </h5>
                 </div>
                 <div>
-                    <shared-table [config]="configTable" (lazyLoadEmitter)="getTransactions($event)"
+                    <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"
+                        (lazyLoadEmitter)="getTransactions($event)"
                         (currentPagePaginator)="getTransactions($event)"></shared-table>
+                    <ng-template #noData>
+                        <div class="p-2">
+                            <p-panel header="Oops...">
+                                <p>
+                                    No tiene ninguna transaccion realizada. Realice sus transacciones <a
+                                        routerLink="/dashboard/movements">aquí</a>
+                                </p>
+                            </p-panel>
+                        </div>
+                    </ng-template>
                 </div>
             </p-card>
         </div>

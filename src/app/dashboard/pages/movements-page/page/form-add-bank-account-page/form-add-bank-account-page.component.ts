@@ -41,10 +41,10 @@ export class FormAddBankAccountPageComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   public myForm: FormGroup = this.fb.group({
-    banco: [{banco: null}, [Validators.required]],
+    banco: [{ banco: null }, [Validators.required]],
     cvv: [null, [Validators.required]],
     mes: [null, [Validators.required]],
-    moneda: [{moneda: null}, [Validators.required]],
+    moneda: [{ moneda: null }, [Validators.required]],
     nroCuenta: [null, [Validators.required]],
     nroCuentaCci: [null, [Validators.required]],
     year: [null, [Validators.required]],
@@ -78,8 +78,10 @@ export class FormAddBankAccountPageComponent implements OnInit {
   private assignDateValues() {
     const mesControl = this.myForm.get('mes');
     const yearControl = this.myForm.get('year');
-    mesControl?.setValue(this.formatMes(mesControl.value));
-    yearControl?.setValue(this.formatYear(yearControl.value));
+    if (mesControl?.value instanceof Date && mesControl?.value instanceof Date) {
+      mesControl?.setValue(this.formatMes(mesControl.value));
+      yearControl?.setValue(this.formatYear(yearControl.value));
+    }
   }
   isValidField(field: string): boolean | null {
     return this.validatorsService.isValidField(this.myForm, field);
@@ -135,7 +137,8 @@ export class FormAddBankAccountPageComponent implements OnInit {
         this.myForm.reset;
         this.router.navigateByUrl('/dashboard/movements');
       },
-      error: (error) => {
+      error: ({ error }) => {
+        console.log(error);
         if (error.mensaje) {
           error.mensaje.forEach((mensaje: string) => {
             this.myMessageService.toastBuilder(

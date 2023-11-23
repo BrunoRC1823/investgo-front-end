@@ -21,6 +21,10 @@ import { TagModule } from 'primeng/tag';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
+import { PanelModule } from 'primeng/panel';
+import { DragDropModule } from 'primeng/dragdrop';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   exports: [
     AvatarModule,
@@ -44,6 +48,9 @@ import { PaginatorModule } from 'primeng/paginator';
     TieredMenuModule,
     ToastModule,
     PaginatorModule,
+    PanelModule,
+    DragDropModule,
+    DialogModule,
   ],
 })
 export class PrimeNgModule {}

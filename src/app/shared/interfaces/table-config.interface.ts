@@ -3,4 +3,5 @@ export interface TableConfig {
   data: any[] ;
   loading?: boolean;
   totalElements: number;
+  percentageList?: (number | undefined)[];
 }

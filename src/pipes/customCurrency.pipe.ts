@@ -4,7 +4,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
   name: 'customCurrency',
 })
 export class CustomCurrencyPipe implements PipeTransform {
-  transform(value: number, currencyCode: string): string {
+  transform(value: number, currencyCode?: string): string {
     if (!value) {
       value = 2500;
     }

@@ -53,4 +53,9 @@ export class BankAccountService {
     const url = `${this.baseUrl}/api/v1/cuentas-bancarias`;
     return this.http.post<ConfirmResponse>(url, account);
   }
+
+  delete(codigo: string): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/cuentas-bancarias/${codigo}`;
+    return this.http.delete<ConfirmResponse>(url);
+  }
 }

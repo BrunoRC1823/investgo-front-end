@@ -1,5 +1,5 @@
 <div class="grid grid-nogutter gap-3">
-    <div class="flex justify-content-center h-full col-12 sm:col-fixed sm:w-18rem">
+    <div class="flex flex-column justify-content-center h-full gap-2 col-12 sm:col-fixed sm:w-18rem ">
         <a class="bg-white transition-all transition-duration-300 text-500 shadow-1 
         border-round-sm border-1 border-200 flex w-18rem  w-full align-items-center 
         flex-wrap px-5 py-7 hover:text-blue-600 hover:border-blue-600"
@@ -7,10 +7,39 @@
             <p class="w-full text-center text-lg">Agregar Cuenta Bancaria</p>
             <i class="pi pi-plus w-full text-center"></i>
         </a>
+        <a *ngIf="displayTrashContainer" pDroppable (onDrop)="toggleDialog()"
+            [ngClass]="displayAnimationTrashContainer? 'fadein animation-duration-500' :'fadeout animation-duration-500'"
+            class="shadow-1 surface-50 border-round-sm border-1 border-500 w-18rem w-full h-10rem flex-wrap  p-2">
+            <p class="text-center text-500 px-5 py-7">Arrastra aquí</p>
+        </a>
+        <a (click)="toggleDisplayTrashContainer()" class="cursor-pointer bg-white transition-all transition-duration-300 text-500 shadow-1 
+        border-round-sm border-1 border-200 flex w-18rem w-full align-items-center 
+        flex-wrap px-5 py-7 hover:text-red-600 hover:border-red-600">
+            <p class="w-full text-center text-lg">Toca para eliminar</p>
+            <i class="pi pi-trash w-full text-center"></i>
+        </a>
     </div>
     <div class="col">
-        <p-card class="custom-card-bank-account">
-            <movements-card-bank-account class="w-full" [banksAccounts]="banksAccounts"/>
+        <p-card class="custom-card-bank-account custom-p-card">
+            <movements-card-bank-account class="w-full " [banksAccounts]="banksAccounts"
+                (draggedAccountEmit)="dropAccount($event)" />
         </p-card>
     </div>
 </div>
+
+<p-dialog header="Seguro que desea eliminar esta cuenta?" [(visible)]="visible" [modal]="true"
+    [style]="{ width: '30vw' ,padding:'auto',minWidth:'300px', maxWidth:'600px'}" [draggable]="false"
+    [resizable]="false">
+    <div class="flex flex-column gap-4">
+        <p class="text-center">
+            <i class="pi pi-exclamation-triangle"></i>
+            Este proceso no tiene retroceso!
+        </p>
+        <div class="flex gap-4 justify-content-center flex-wrap ">
+            <p-button label="Cancelar" [outlined]="true" severity="secondary" (onClick)="toggleDialog()">
+            </p-button>
+            <p-button label="Eliminar" [raised]="true" severity="danger" (onClick)="deleteBankAccount()">
+            </p-button>
+        </div>
+    </div>
+</p-dialog>

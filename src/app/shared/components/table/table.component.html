@@ -4,20 +4,42 @@
     [rowHover]="true" #dt1>
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns" style="width:22%"
-          [pSortableColumn]="col.value ? col.name+'.'+col.value : col.name">{{ col.head }} <p-sortIcon
-          [field]=" col.value ? col.name+'.'+col.value : col.name "></p-sortIcon></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.value ? col.name+'.'+col.value : col.name">
+          <p class="text-center">
+            {{ col.head }}
+            <p-sortIcon [field]=" col.value ? col.name+'.'+col.value : col.name "></p-sortIcon>
+          </p>
+        </th>
 
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-row let-columns="columns">
+    <ng-template pTemplate="body" let-row let-rowIndex="rowIndex" let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">{{ row[col.name] | setAttributeRowTable: col.value }}</td>
+        <td *ngFor="let col of columns">
+          <div class="flex justify-content-center flex-column lg:flex-row">
+            <p *ngIf="!(col.highligh); else highligh" class="text-center" [ngClass]="!(col.boolean) ? '': 'p-boolean'">
+              {{
+              (row[col.name] | setAttributeRowTable:
+              col.value) | booleansTable : col.head
+              }}
+            </p>
+            <div *ngIf="col.plushCurrency " class="text-green-500 ml-1 flex justify-content-center">
+              <span class="text-xs ">+{{ (config.percentageList![rowIndex] ?? 0) |number: '1.2-2' }}%</span><i
+                class="pi pi-arrow-up text-xs ml-1"></i>
+            </div>
+          </div>
+          <ng-template #highligh>
+            <div class="flex justify-content-center">
+              <p-tag severity="{{typeSeverity(row[col.name],col.value)}}"
+                value="{{ (row[col.name] | setAttributeRowTable: col.value)  }}"></p-tag>
+            </div>
+          </ng-template>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
       <p-paginator (onPageChange)="onPageChange($event)" [totalRecords]="config.totalElements"
-        [rowsPerPageOptions]="[5,10,15]"></p-paginator>
+        [rowsPerPageOptions]="[rows,(rows+5),(rows+10)]"></p-paginator>
     </ng-template>
   </p-table>
 </div>
