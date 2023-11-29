@@ -1,6 +1,9 @@
-:host ::ng-deep .card-bank{
-    width: 100%;
+:host ::ng-deep .custom-p-card > .p-card > .p-card-body {
+  padding: 1rem;
 }
-:host ::ng-deep .custom-dropdown:first-child{
-    border-color: #e24c4c;;
+:host ::ng-deep .card-bank {
+  width: 100%;
+}
+:host ::ng-deep .custom-dropdown:first-child {
+  border-color: #e24c4c;
 }

@@ -8,10 +8,13 @@ import * as myPatterns from '../helpers';
 })
 export class ValidatorService {
   public isValidField(form: FormGroup, field: string): boolean | null {
-    return form.controls[field].errors && form.controls[field].touched;
+
+    const valid = form.controls[field].errors && form.controls[field].touched;
+    return valid;
   }
 
   private getMessageError(errors: ValidationErrors): string {
+
     for (const key of Object.keys(errors)) {
       const errorMessage = mensajesDeError[key];
       if (errorMessage) {

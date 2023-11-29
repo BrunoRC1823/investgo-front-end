@@ -8,11 +8,11 @@
             [routerLink]="['/dashboard/movements']"></p-button>
     </div>
     <div class="p-2">
-        <p-card>
+        <p-card class="custom-p-card">
             <form [formGroup]="myForm" (ngSubmit)="register()">
                 <div class="formgrid grid grid-nogutter row-gap-5 md:row-gap-4">
                     <div class="col-12">
-                        <div class="grid grid-nogutter col-12 mb-2">
+                        <div class="grid grid-nogutter col-12 mb-2 p-0">
                             <div class="grid grid-nogutter col-12 sm:col-6 sm:pr-3 gap-2">
                                 <div class="col-12 p-0">
                                     <label for="banco" class="font-medium block mb-2"> Bancos </label>
@@ -27,7 +27,7 @@
                                             }}</span>
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 p-0">
                                     <label for="name" class="font-medium block mb-2"> Nombre completo </label>
                                     <div class="flex flex-column">
                                         <input id="name" type="text" pInputText value="Bruno Rios Cosser"
@@ -35,11 +35,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 mt-2 sm:col-6">
+                            <div class="col-12 mt-2 p-0 sm:col-6">
                                 <movements-card-bank-account [bankAccount]="getFormValue()" />
                             </div>
                         </div>
-                        <div class="grid grid-nogutter col-12 mb-2 row-gap-2">
+                        <div class="grid grid-nogutter col-12 mb-2 row-gap-2 p-0">
                             <div class="col-12">
                                 <label for="nroCuenta" class="font-medium block mb-2"> Número </label>
                                 <div class="flex flex-column">
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             <div
-                                class="col-12 mt-3 grid grid-nogutter gap-3 justify-content-between sm:justify-content-start">
+                                class="col-12 mt-3 grid grid-nogutter row-gap-2 justify-content-between sm:justify-content-start sm:gap-3">
                                 <p-button size="small" type="submit" label="Guardar" [outlined]="true" icon="pi pi-save"
                                     [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
                                 <p-button size="small" label="limpiar" [outlined]="true" severity="help"

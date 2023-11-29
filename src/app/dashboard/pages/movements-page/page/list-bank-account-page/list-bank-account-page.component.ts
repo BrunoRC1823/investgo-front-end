@@ -84,9 +84,11 @@ export class ListBankAccountPageComponent {
     this.configTable.data = content;
     this.configTable.totalElements = totalElements;
   }
+  
   onTabChange(event: any): void {
     localStorage.setItem('tabIndexMovements', event.index);
   }
+
   setTabIndex() {
     const tabIndexMovements = localStorage.getItem('tabIndexMovements');
     if (!tabIndexMovements) return;

@@ -7,7 +7,13 @@ import { FormAddTransactionPageComponent } from '../page/form-add-transaction-pa
 const routes: Routes = [
   { path: '', component: ListBankAccountPageComponent },
   { path: 'add-account', component: FormAddBankAccountPageComponent },
-  { path: 'add-transaction', component: FormAddTransactionPageComponent },
+  {
+    path: 'add-transaction',
+    children: [
+      { path: 'deposit', component: FormAddTransactionPageComponent },
+      { path: 'withdrawal', component: FormAddTransactionPageComponent },
+    ],
+  },
 ];
 
 @NgModule({

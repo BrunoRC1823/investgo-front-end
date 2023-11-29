@@ -1,3 +1,28 @@
-:host {
-  display: block;
+:host ::ng-deep .custom-p-card > .p-card > .p-card-body {
+  padding: 1rem;
+}
+:host ::ng-deep .custom-p-card > .p-card > .p-card-body > .p-card-content {
+  padding: 0;
+}
+:host ::ng-deep .custom-bank-account > div > div {
+  width: 100%;
+}
+:host ::ng-deep .shadow-table {
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+}
+:host ::ng-deep .p-datatable .p-datatable-header {
+  border-radius: 6px 6px 0 0;
+}
+:host ::ng-deep .p-input-icon-left > .p-inputtext {
+  width: 100%;
+}
+:host ::ng-deep .p-input-icon-left,
+.p-input-icon-right {
+  width: 70%;
+}
+:host ::ng-deep .custom-autocomplete > :first-child > button {
+  background-color: var(--sidebar-color);
+  border-color: var(--sidebar-color);
 }

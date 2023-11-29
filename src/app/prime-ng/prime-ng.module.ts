@@ -24,7 +24,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PanelModule } from 'primeng/panel';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DialogModule } from 'primeng/dialog';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
 @NgModule({
   exports: [
     AvatarModule,
@@ -51,6 +51,7 @@ import { DialogModule } from 'primeng/dialog';
     PanelModule,
     DragDropModule,
     DialogModule,
+    AutoCompleteModule,
   ],
 })
 export class PrimeNgModule {}
