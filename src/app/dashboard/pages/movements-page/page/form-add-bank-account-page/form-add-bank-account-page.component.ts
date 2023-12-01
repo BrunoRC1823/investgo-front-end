@@ -4,11 +4,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
@@ -62,7 +58,7 @@ export class FormAddBankAccountPageComponent implements OnInit {
   clear() {
     this.myForm.reset();
   }
-  
+
   getFormValue(): BankAccount {
     return this.myForm.value;
   }
@@ -78,7 +74,10 @@ export class FormAddBankAccountPageComponent implements OnInit {
   private assignDateValues() {
     const mesControl = this.myForm.get('mes');
     const yearControl = this.myForm.get('year');
-    if (mesControl?.value instanceof Date && mesControl?.value instanceof Date) {
+    if (
+      mesControl?.value instanceof Date &&
+      mesControl?.value instanceof Date
+    ) {
       mesControl?.setValue(this.formatMes(mesControl.value));
       yearControl?.setValue(this.formatYear(yearControl.value));
     }
@@ -141,12 +140,16 @@ export class FormAddBankAccountPageComponent implements OnInit {
       },
       error: ({ error }) => {
         if (error.mensaje) {
-          error.mensaje.forEach((mensaje: string) => {
+          if (typeof error.mensaje === 'string') {
             this.myMessageService.toastBuilder(
               Severity.error,
               'Error',
-              mensaje
+              error.mensaje
             );
+            return;
+          }
+          error.mensaje.forEach((mensaje: string) => {
+            this.myMessageService.toastBuilder(Severity.warn, 'Error', mensaje);
           });
           return;
         }

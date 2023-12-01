@@ -9,8 +9,8 @@
     </div>
     <div class="p-2">
         <p-card class="custom-p-card">
-            <div class="grid grid-nogutter w-full">
-                <div class="col sm:pr-3">
+            <div class="grid grid-nogutter w-full justify-content-center">
+                <div class="col sm:pr-3 mb-3">
                     <p class="text-center text-lg font-bold mb-2">LLenar datos</p>
                     <form [formGroup]="myForm" (ngSubmit)="register()" class="grid grid-nogutter w-full gap-2">
                         <div class="col-12">
@@ -59,14 +59,14 @@
                         </div>
                     </form>
                 </div>
-                <div class="mt-5 w-full  sm:mt-0 sm:col-fixed sm:w-22rem">
+                <div class="mt-5 w-full  sm:mt-0  sm:col-fixed sm:w-22rem ">
                     <p class="text-center text-lg font-bold mb-2">Selecciona una cuenta bancaria</p>
                     <p-table #dt1 [value]="banksAccounts" selectionMode="single" [(selection)]="selectedAccount"
                         (onRowSelect)="onSelect($event.data,dt1)" dataKey="codigo" [styleClass]="'w-full shadow-table'"
                         [scrollable]="true" scrollHeight="380px"
                         [globalFilterFields]="['codigo','nroCuenta','mes','year','banco.nombre']">
                         <ng-template pTemplate="caption">
-                            <div class="flex justify-content-between ">
+                            <div class="flex justify-content-between">
                                 <p-button class="p-button-outlined" icon="pi pi-eraser" [disabled]="disableButton"
                                     [outlined]="true" severity="help" (click)="clear(dt1)"></p-button>
                                 <span class="p-input-icon-left">
@@ -91,7 +91,6 @@
                     </p-table>
                 </div>
             </div>
-
         </p-card>
     </div>
 

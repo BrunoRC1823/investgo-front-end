@@ -1,5 +1,9 @@
-:host ::ng-deep .card > :first-child > :first-child {
-  padding: 0 1rem;
+
+:host ::ng-deep .card-table>:first-child>:first-child{
+padding: 0;
+}
+:host ::ng-deep .tap-custom >:first-child{
+  padding: 0 1.5rem;
 }
 :host
   ::ng-deep

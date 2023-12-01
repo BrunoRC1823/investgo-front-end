@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { PaginatorState } from 'primeng/paginator';
-import { TableConfig } from '../../interfaces/table-config.interface';
 import { ConfirmationService } from 'primeng/api';
-import { MyMessageService } from '../../services/my-message-service.service';
-import { Severity } from '../../enums/severity-toast.enum';
+import { PaginatorState } from 'primeng/paginator';
+import { Severity } from 'src/app/shared/enums/severity-toast.enum';
+import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
+import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
 
 @Component({
-  selector: 'shared-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: 'pages-table-opportunities-page',
+  templateUrl: './table-opportunities-page.component.html',
+  styleUrls: ['./table-opportunities-page.component.css']
 })
-export class TableComponent {
+export class TableOpportunitiesPageComponent {
   @Input() config: TableConfig = { data: [], totalElements: 0, rows: 5 };
   @Output() currentPagePaginator = new EventEmitter<PaginatorState>();
 

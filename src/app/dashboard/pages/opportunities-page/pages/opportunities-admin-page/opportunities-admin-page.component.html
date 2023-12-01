@@ -1,1 +1,39 @@
-<p>opportunities-admin-pagew works!</p>
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between ">
+            <div>
+                <h1 class="text-2xl">Lista de oportunidades de inversión.</h1>
+            </div>
+            <p-button label="Agregar oportunidad" size="small" [rounded]="true" icon="pi pi-plus"
+                [style]="{'border-color': 'var(--sidebar-color)','background-color':'var(--sidebar-color)'}"
+                [routerLink]="['/dashboard/companies/add-company']">
+            </p-button>
+        </div>
+        <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
+            <p-tabPanel header="Activos">
+                
+                <ng-template #noData2>
+                    <div>
+                        <p-panel header="Oops...">
+                            <p>
+                                No se encontraron empresas inactivas.
+                            </p>
+                        </p-panel>
+                    </div>
+                </ng-template>
+            </p-tabPanel>
+            <p-tabPanel header="No Activos">
+                
+                <ng-template #noData2>
+                    <div>
+                        <p-panel header="Oops...">
+                            <p>
+                                No se encontraron empresas inactivas.
+                            </p>
+                        </p-panel>
+                    </div>
+                </ng-template>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</section>

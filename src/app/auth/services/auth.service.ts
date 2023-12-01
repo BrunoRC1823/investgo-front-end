@@ -92,8 +92,7 @@ export class AuthService {
         this.setAuthentication(user, token);
         return true;
       }),
-      catchError((err) => {
-        console.log(err);
+      catchError(() => {
         this._authStatus.set(AuthStatus.notAuthenticated);
         return of(false);
       })

@@ -14,6 +14,7 @@ import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
 import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
 import { InvestmentService } from 'src/app/dashboard/services/investment.service';
 import { TableHelpersService } from 'src/app/dashboard/services/tableHelpers.service';
+import { Table } from 'primeng/table';
 
 const monthNames: String[] = [
   'Enero',
@@ -66,6 +67,7 @@ export class HomePageComponent implements OnInit {
       },
       { head: 'Monto', name: 'monto', value: '' },
     ],
+    rows: 5,
   };
 
   public username = this.authService.getUsername();
@@ -76,6 +78,7 @@ export class HomePageComponent implements OnInit {
     this.getInvestments(EnableValue.notEnable);
     this.getTransactionsByType(TransactionTypeEnum.deposit);
     this.getTransactionsByType(TransactionTypeEnum.withdrawal);
+    this.getTransactions();
   }
 
   getDate() {
@@ -135,8 +138,19 @@ export class HomePageComponent implements OnInit {
     this.transactionService
       .getTransactions(paginator)
       .subscribe((transactions) => {
-        this.assignTransactionValue(transactions);
+        if (transactions.content.length > 0) {
+          this.assignTransactionValue(transactions);
+        } else {
+          this.resetData();
+        }
       });
+  }
+
+  resetData() {
+    this.configTable.data = [];
+    this.configTable.percentageList = [];
+    this.tableNoData = true;
+    this.configTable.percentageList = [];
   }
 
   assignTransactionValue(transactions: ListResponse<Transaction>) {

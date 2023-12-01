@@ -25,11 +25,11 @@ export class ListBankAccountPageComponent {
   private authService = inject(AuthService);
   private transactionService = inject(TransactionService);
   private tableHelpers = inject(TableHelpersService);
+  
+  public username = this.authService.getUsername();
 
   public activeIndexTab = 0;
   public balance = computed(() => this.userService.currentBalance());
-  public totalDeposits: number = 0;
-  public totalInvestments: number = 0;
   public tableNoData: boolean = true;
   public configTable: TableConfig = {
     totalElements: 0,
@@ -48,9 +48,9 @@ export class ListBankAccountPageComponent {
       { head: 'Cuenta destino', name: 'cuentaBancaria', value: 'codigo' },
       { head: 'Monto', name: 'monto', value: '' },
     ],
+    rows: 5,
   };
 
-  public username = this.authService.getUsername();
 
   ngOnInit(): void {
     this.getTransactions();
@@ -66,8 +66,19 @@ export class ListBankAccountPageComponent {
     this.transactionService
       .getTransactions(paginator)
       .subscribe((transactions) => {
-        this.assignTransactionValue(transactions);
+        if (transactions.content.length > 0) {
+          this.assignTransactionValue(transactions);
+        } else {
+          this.resetData();
+        }
       });
+  }
+
+  resetData() {
+    this.configTable.data = [];
+    this.configTable.percentageList = [];
+    this.tableNoData = true;
+    this.configTable.percentageList = [];
   }
 
   assignTransactionValue(transactions: ListResponse<Transaction>) {
@@ -84,7 +95,7 @@ export class ListBankAccountPageComponent {
     this.configTable.data = content;
     this.configTable.totalElements = totalElements;
   }
-  
+
   onTabChange(event: any): void {
     localStorage.setItem('tabIndexMovements', event.index);
   }

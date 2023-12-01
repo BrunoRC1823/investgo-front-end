@@ -11,7 +11,6 @@ import * as myPatterns from 'src/app/shared/helpers/index';
   selector: 'auth-register',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css'],
-
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
@@ -39,10 +38,7 @@ export class RegisterComponent {
       [...this.namesValidations, this.validatorsService.namesIsValid],
     ],
     dni: ['', [Validators.required, this.validatorsService.dniIsValid]],
-    correo: [
-      '',
-      [Validators.required, this.validatorsService.correoIsValid],
-    ],
+    correo: ['', [Validators.required, this.validatorsService.correoIsValid]],
     telefono: [
       '',
       [Validators.required, this.validatorsService.telefonoIsValid],
@@ -80,12 +76,16 @@ export class RegisterComponent {
       },
       error: ({ error }) => {
         if (error.mensaje) {
-          error.mensaje.forEach((mensaje: string) => {
+          if (typeof error.mensaje === 'string') {
             this.myMessageService.toastBuilder(
               Severity.error,
               'Error',
-              mensaje
+              error.mensaje
             );
+            return;
+          }
+          error.mensaje.forEach((mensaje: string) => {
+            this.myMessageService.toastBuilder(Severity.warn, 'Error', mensaje);
           });
           return;
         }

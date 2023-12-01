@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
@@ -47,7 +47,7 @@ export class FormAddTransactionPageComponent implements OnInit {
   public banksAccounts: (BankAccount | null)[] = [];
   public selectedAccount: BankAccount | undefined;
   public disableButton: boolean = true;
-  constructor(private cdRef: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     const currentUrl = this.router.url;
     let tipoTransaccionCtrl = this.myForm.get('tipoTransaccion');
@@ -158,5 +158,7 @@ export class FormAddTransactionPageComponent implements OnInit {
 
   clearForm() {
     this.myForm.reset();
+    const tipoCtrl = this.myForm.controls['tipoTransaccion'];
+    tipoCtrl.markAsPristine();
   }
 }

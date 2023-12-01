@@ -1,6 +1,6 @@
 
-export interface Risk {
-    id:          number;
-    rango:       string;
-    descripcion: string;
+export class Risk {
+    id!:          number;
+    rango!:       string;
+    descripcion!: string;
 }

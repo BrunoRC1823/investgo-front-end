@@ -7,6 +7,7 @@ import { FormCompaniesPageComponent } from '../pages/form-companies-page/form-co
 const routes: Routes = [
   { path: '', component: CompaniesPageComponent },
   { path: 'add-company', component: FormCompaniesPageComponent },
+  { path: 'show-company/:codigo', component: FormCompaniesPageComponent },
 ];
 
 @NgModule({

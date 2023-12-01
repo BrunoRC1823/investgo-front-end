@@ -9,7 +9,10 @@ export class BooleansTablePipe implements PipeTransform {
   transform(value: any, head: any): unknown {
     if (typeof value === 'boolean') {
       if (head === 'Estado') {
-        return value ? 'A tiempo' : 'Pagado';
+        return value ? 'Activo' : 'No Activo';
+      }
+      if (head === 'Deuda') {
+        return value ? 'A tiempo' : 'Pagada';
       }
     }
     return value;

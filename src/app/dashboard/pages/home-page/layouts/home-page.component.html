@@ -90,8 +90,7 @@
                     </h5>
                 </div>
                 <div>
-                    <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"
-                        (lazyLoadEmitter)="getTransactions($event)"
+                    <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"                   
                         (currentPagePaginator)="getTransactions($event)"></shared-table>
                     <ng-template #noData>
                         <div class="p-2">

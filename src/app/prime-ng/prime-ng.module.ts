@@ -25,6 +25,9 @@ import { PanelModule } from 'primeng/panel';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DialogModule } from 'primeng/dialog';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+
 @NgModule({
   exports: [
     AvatarModule,
@@ -52,6 +55,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     DragDropModule,
     DialogModule,
     AutoCompleteModule,
+    InputTextareaModule,
+    ConfirmPopupModule,
   ],
 })
 export class PrimeNgModule {}

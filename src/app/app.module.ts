@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import localeEsPE from '@angular/common/locales/es-PE';
 import { LOCALE_ID, NgModule } from '@angular/core';
 
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +24,7 @@ registerLocaleData(localeEsPE);
     PrimeNgModule,
   ],
   providers: [
+    ConfirmationService,
     MessageService,
     authInterceptorProviders,
     {

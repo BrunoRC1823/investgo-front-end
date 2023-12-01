@@ -1,1 +1,78 @@
-<p>bill works!</p>
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between pb-2 ">
+            <div>
+                <h1 class="text-2xl">{{ title }}</h1>
+                <span class="text-sm mt-1" class="text-color-secondary">Datos de la factura.</span>
+            </div>
+            <p-button size="small" [ngClass]="selectedCompany? '':'hidden' " type="submit" label="Ver empresa"
+                [outlined]="true" icon="pi pi-eye"
+                [routerLink]="'/dashboard/companies/show-company/'+selectedCompany?.codigo" severity="info"></p-button>
+        </div>
+        <p-card class="custom-p-card">
+            <form [formGroup]="myForm" (ngSubmit)="register()" class="formgrid grid grid-nogutter gap-2">
+                <div class="col-12">
+                    <label for="empresa" class="font-medium block mb-2">Empresa</label>
+                    <div class="flex flex-column">
+                        <p-autoComplete formControlName="empresa" class="custom-autocomplete" field="razonSocial"
+                            placeholder="Ingresar nombre de la empresa" [style]="{width : '100%'}"
+                            [forceSelection]="true" [suggestions]="filteredCompanies"
+                            (completeMethod)="filterCompanies($event)" (onSelect)="onSelect($event)"
+                            [ngClass]="{'ng-invalid ng-dirty': isValidField('empresa')}" #auto></p-autoComplete>
+                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('empresa')">{{
+                            getFieldError('empresa')
+                            }}</span>
+                    </div>
+                </div>
+                <div class="grid grid-nogutter col-12">
+                    <div class="col-6 pr-2">
+                        <label for="monto" class="font-medium block mb-2">Monto</label>
+                        <div class="flex flex-column">
+                            <p-inputNumber [style]="{width : '100%'}" formControlName="monto" mode="decimal"
+                                [minFractionDigits]="2" [maxFractionDigits]="2" mode="currency" currency="PEN"
+                                [max]="999999.99" placeholder="Ingresar monto a invertir"
+                                [ngClass]="{'ng-invalid ng-dirty': isValidField('monto')}">
+                            </p-inputNumber>
+                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('monto')">{{
+                                getFieldError('monto')
+                                }}</span>
+                        </div>
+                    </div>
+                    <div class="col-6 pl-2">
+                        <label for="fechaEmision" class="font-medium block mb-2">Fecha emisión</label>
+                        <div class="flex flex-column">
+                            <p-calendar formControlName="fechaEmision" dateFormat="dd/mm/yy"
+                                placeholder="Ingresar fecha"
+                                [ngClass]="{'ng-invalid ng-dirty': isValidField('fechaEmision')}" [showIcon]="true"
+                                [style]="{'width': '100%'}" [maxDate]="maxDate"></p-calendar>
+                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('fechaEmision')">{{
+                                getFieldError('fechaEmision')
+                                }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="descripcion" class="font-medium block mb-2">Descripcion</label>
+                    <div class="flex flex-column">
+                        <textarea pInputTextarea formControlName="descripcion" class="custom-textarea"
+                            [ngClass]="{'ng-invalid ng-dirty': isValidField('descripcion')}"></textarea>
+                        <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('descripcion')">{{
+                            getFieldError('descripcion')
+                            }}</span>
+                    </div>
+                </div>
+                <div class="col-12 mt-3 grid grid-nogutter justify-content-between">
+                    <div class="grid gap-3 grid-nogutter sm:justify-content-start">
+                        <p-button size="small" [disabled]="enableButtonSave" type="submit" label="Guardar"
+                            [outlined]="true" icon="pi pi-save"
+                            [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+                        <p-button size="small" [disabled]="enableButtonSave" label="limpiar" [outlined]="true"
+                            severity="help" icon="pi pi-eraser" (onClick)="clear(auto)"></p-button>
+                    </div>
+                    <p-button size="small" *ngIf="isEdit" [label]="labelDisabledButton" [outlined]="true"
+                        severity="warning" icon="pi pi-eraser" (onClick)="toggleForm()"></p-button>
+                </div>
+            </form>
+        </p-card>
+    </div>
+</section>

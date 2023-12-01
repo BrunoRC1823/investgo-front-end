@@ -1,0 +1,27 @@
+.custom-textarea{
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 400px;
+  min-height: 55px;
+}
+:host ::ng-deep .custom-p-card > .p-card > .p-card-body {
+  padding: 1rem;
+}
+:host ::ng-deep .custom-p-card > .p-card > .p-card-body > .p-card-content {
+  padding: 0;
+}
+:host ::ng-deep .card-bank {
+  width: 100%;
+}
+:host ::ng-deep .custom-dropdown:first-child {
+  border-color: #e24c4c;
+}
+
+:host ::ng-deep p-calendar > span > :nth-child(2) {
+  background: var(--sidebar-color);
+  border-color: var(--sidebar-color);
+}
+:host ::ng-deep .custom-autocomplete > :first-child > :first-child {
+  width: 100%;
+}

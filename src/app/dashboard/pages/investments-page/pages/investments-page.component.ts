@@ -31,10 +31,10 @@ export class InvestmentsPageComponent {
       },
       { head: 'Inversión', name: 'montoInvertido', value: '' },
       { head: 'Ganancia', name: 'ganancia', value: '', plushCurrency: true },
-      { head: 'Estado', name: 'auditoria', value: 'enable', boolean: true },
+      { head: 'Deuda', name: 'auditoria', value: 'enable', boolean: true },
       { head: 'Fecha Pago', name: 'oportunidadInversion', value: 'fechaPago' },
     ],
-    percentageList: [],
+    rows: 5,
   };
 
   ngOnInit(): void {
