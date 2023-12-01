@@ -8,7 +8,7 @@ import { MyMessageService } from 'src/app/shared/services/my-message-service.ser
 @Component({
   selector: 'pages-table-opportunities-page',
   templateUrl: './table-opportunities-page.component.html',
-  styleUrls: ['./table-opportunities-page.component.css']
+  styleUrls: ['./table-opportunities-page.component.css'],
 })
 export class TableOpportunitiesPageComponent {
   @Input() config: TableConfig = { data: [], totalElements: 0, rows: 5 };
@@ -22,34 +22,18 @@ export class TableOpportunitiesPageComponent {
   onPageChange($event: PaginatorState) {
     this.currentPagePaginator.emit($event);
   }
-
-  typeSeverity(value: string, searchAttribute: string | undefined) {
-    if (
-      typeof value === 'object' &&
-      value !== null &&
-      searchAttribute !== undefined
-    ) {
-      if (searchAttribute in value) {
-        let newValue = value[searchAttribute];
-        switch (searchAttribute in value) {
-          case newValue === 'Deposito':
-            return 'success';
-          case newValue === 'Retiro':
-            return 'danger';
-          case newValue === 'A':
-            return 'success';
-          case newValue === 'B':
-            return 'warning';
-          case newValue === 'C':
-            return 'danger';
-          default:
-            return 'primary';
-        }
-      } else {
-        return value;
-      }
+  setValueTag(value: boolean) {
+    if (value) {
+      return 'En proceso';
     } else {
-      return value;
+      return 'Terminado';
+    }
+  }
+  typeSeverity(value: boolean) {
+    if (value) {
+      return 'success';
+    } else {
+      return 'danger';
     }
   }
   confirm(event: Event, funcion: any, code: string) {

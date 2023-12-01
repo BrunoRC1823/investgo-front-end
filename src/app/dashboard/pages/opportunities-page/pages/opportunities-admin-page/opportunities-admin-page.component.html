@@ -6,29 +6,33 @@
             </div>
             <p-button label="Agregar oportunidad" size="small" [rounded]="true" icon="pi pi-plus"
                 [style]="{'border-color': 'var(--sidebar-color)','background-color':'var(--sidebar-color)'}"
-                [routerLink]="['/dashboard/companies/add-company']">
+                [routerLink]="['/dashboard/opportunities/add-opportunity']">
             </p-button>
         </div>
         <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
-            <p-tabPanel header="Activos">
-                
-                <ng-template #noData2>
+            <p-tabPanel header="En proceso">
+                <pages-table-opportunities-page *ngIf="!(tableNoData);else noData" [config]="configTable"
+                    (lazyLoadEmitter)="getOpportunitiesEnable($event)"
+                    (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
+                <ng-template #noData>
                     <div>
                         <p-panel header="Oops...">
                             <p>
-                                No se encontraron empresas inactivas.
+                                No se encontraron oportunidades de inversion.
                             </p>
                         </p-panel>
                     </div>
                 </ng-template>
             </p-tabPanel>
-            <p-tabPanel header="No Activos">
-                
+            <p-tabPanel header="Terminados">
+                <pages-table-opportunities-page *ngIf="!(tableNoData);else noData2" [config]="configTable"
+                    (lazyLoadEmitter)="getOpportunitiesEnable($event)"
+                    (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
                 <ng-template #noData2>
                     <div>
                         <p-panel header="Oops...">
                             <p>
-                                No se encontraron empresas inactivas.
+                                No se encontraron oportunidades de inversion inactivas.
                             </p>
                         </p-panel>
                     </div>

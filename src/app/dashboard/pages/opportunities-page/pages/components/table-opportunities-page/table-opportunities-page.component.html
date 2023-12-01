@@ -9,7 +9,7 @@
             <p-sortIcon [field]=" col.value ? col.name+'.'+col.value : col.name "></p-sortIcon>
           </p>
           <ng-template #noActions>
-            <p *ngIf="col.head === 'Acciones'" class="text-center">
+            <p class="text-center">
               {{ col.head }}
             </p>
           </ng-template>
@@ -21,12 +21,11 @@
       <tr>
         <td *ngFor="let col of columns">
           <div class="flex justify-content-center flex-column lg:flex-row">
-            <p *ngIf="!(col.highligh); else highligh" class="text-center" [ngClass]="!(col.boolean) ? '': 'p-boolean'">
-
-            </p>
-            <div *ngIf="col.plushCurrency " class="text-green-500 ml-1 flex justify-content-center">
-              <span class="text-xs">+{{ (config.percentageList![rowIndex] ?? 0) |number: '1.2-2' }}%</span><i
-                class="pi pi-arrow-up text-xs ml-1"></i>
+            <div *ngIf="!(col.highligh); else highligh" [ngClass]="col.percentage ? 'text-green-500': 'text-center'">
+              <p *ngIf="!(col.percentage);else isPercentage">{{ row[col.name] | setAttributeRowTable:col.value }}</p>
+              <ng-template #isPercentage>
+                <p><i class="pi pi-arrow-up text-sm"></i> {{ row[col.name] | percentagePipe }}</p>
+              </ng-template>
             </div>
             <div *ngIf="col.buttons" class="flex justify-content-center gap-2">
               <p-confirmPopup></p-confirmPopup>
@@ -37,7 +36,7 @@
           </div>
           <ng-template #highligh>
             <div class="flex justify-content-center">
-              <p-tag severity="{{typeSeverity(row[col.name],col.value)}}" value="{{ (row[col.name] )  }}"></p-tag>
+              <p-tag severity="{{typeSeverity(row[col.name])}}" [value]=" setValueTag(row[col.name])"></p-tag>
             </div>
           </ng-template>
         </td>
