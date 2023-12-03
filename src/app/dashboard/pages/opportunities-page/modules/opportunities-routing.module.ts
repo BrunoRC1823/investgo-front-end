@@ -8,6 +8,10 @@ import { OpportunitiesFormPageComponent } from '../pages/opportunities-form-page
 const routes: Routes = [
   { path: '', component: OpportunitiesAdminPageComponent },
   { path: 'add-opportunity', component: OpportunitiesFormPageComponent },
+  {
+    path: 'show-opportunity/:codigo',
+    component: OpportunitiesFormPageComponent,
+  },
   { path: 'auction', component: OpportunitiesUserPageComponent },
 ];
 

@@ -3,11 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 import { environments } from 'src/environments/environments';
-import {
-  PaginatorRequest,
-  ListResponse,
-  Opportunity,
-} from '../interfaces';
+import { PaginatorRequest, ListResponse, Opportunity } from '../interfaces';
 import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
 
 @Injectable({
@@ -26,6 +22,26 @@ export class OpportunityService {
     } else {
       return this.http.post<ConfirmResponse>(url, opportunity);
     }
+  }
+  
+  deleteOpportunity(code: string): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/oportunidades-inversion/${code}`;
+    return this.http.delete<ConfirmResponse>(url);
+  }
+
+  addBillToList(addRequest: any): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/add-factura`;
+    return this.http.post<ConfirmResponse>(url, addRequest);
+  }
+
+  deleteBillToList(code: string): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/delete-factura/${code}`;
+    return this.http.delete<ConfirmResponse>(url);
+  }
+
+  cleanListBills(): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/clear-lista`;
+    return this.http.delete<ConfirmResponse>(url);
   }
 
   getOpportunitiesActive(
@@ -64,5 +80,4 @@ export class OpportunityService {
       catchError((err) => throwError(() => err))
     );
   }
-
 }

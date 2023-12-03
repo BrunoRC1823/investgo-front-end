@@ -6,9 +6,10 @@ import { TableOpportunitiesPageComponent } from '../table-opportunities-page/tab
 import { BooleansTablePipe } from 'src/pipes/booleansTable.pipe';
 import { SetAttributeRowTablePipe } from 'src/pipes/setAttributeRowTable.pipe';
 import { PercentagePipe } from 'src/pipes/percentagePipe.pipe';
+import { TableAddOpportunityComponent } from '../table-add-opportunity/table-add-opportunity.component';
 
 @NgModule({
-  declarations: [TableOpportunitiesPageComponent],
+  declarations: [TableOpportunitiesPageComponent, TableAddOpportunityComponent],
   imports: [
     CommonModule,
     PrimeNgModule,
@@ -16,6 +17,6 @@ import { PercentagePipe } from 'src/pipes/percentagePipe.pipe';
     BooleansTablePipe,
     PercentagePipe,
   ],
-  exports: [TableOpportunitiesPageComponent],
+  exports: [TableOpportunitiesPageComponent, TableAddOpportunityComponent],
 })
 export class ComponentsModule {}

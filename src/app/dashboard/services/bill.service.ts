@@ -37,6 +37,24 @@ export class BillService {
       catchError((err) => throwError(() => err))
     );
   }
+  getBillsByCompanyActive(
+    code: string,
+    paginator?: PaginatorRequest
+  ): Observable<ListResponse<Bill>> {
+    let url;
+    if (paginator) {
+      const { pagina, elementosPagina, ordenadoPor, enOrden } = paginator;
+      url = `${this.baseUrl}/api/v1/facturas/buscar-activos/${code}?pagina=${pagina}&elementosPagina=${elementosPagina}&ordenadoPor=${ordenadoPor}&enOrden=${enOrden}`;
+    } else {
+      url = `${this.baseUrl}/api/v1/facturas/buscar-activos/${code}`;
+    }
+    return this.http.get<ListResponse<Bill>>(url).pipe(
+      map((list) => {
+        return list;
+      }),
+      catchError((err) => throwError(() => err))
+    );
+  }
 
   getBillsByCompany(
     code: string,

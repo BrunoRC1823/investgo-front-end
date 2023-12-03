@@ -7,4 +7,5 @@ export interface Bill {
   fechaEmision: string;
   empresa: Company;
   auditoria: Audit;
+  activeButton: boolean;
 }

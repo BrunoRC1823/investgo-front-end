@@ -6,7 +6,6 @@ import { Pipe, type PipeTransform } from '@angular/core';
 })
 export class PercentagePipe implements PipeTransform {
   transform(value: number): string {
-    debugger;
     const newValue = value * 100;
     return `${newValue}%`;
   }

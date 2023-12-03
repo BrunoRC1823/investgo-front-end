@@ -52,7 +52,6 @@ export class BillsPageComponent {
 
   ngOnInit(): void {
     if (this.router.url.includes('company')) {
-      // this.showBills = true;
       this.activatedRoute.params
         .pipe(
           tap(({ codigo }) => codigo),
@@ -176,7 +175,6 @@ export class BillsPageComponent {
       return;
     }
     const bill = this.formatData();
-    debugger;
     const { codigo, empresa } = bill;
     let messageSuccess: any;
     if (codigo) {

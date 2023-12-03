@@ -9,13 +9,9 @@ import { HomeModule } from './home-page/modules/home.module';
 import { InvestmentsModule } from './investments-page/modules/investments.module';
 import { MovementsModule } from './movements-page/modules/movements.module';
 import { OpportunitiesModule } from './opportunities-page/modules/opportunities.module';
-import { TableOpportunitiesPageComponent } from './opportunities-page/pages/components/table-opportunities-page/table-opportunities-page.component';
-import { OpportunitiesFormPageComponent } from './opportunities-page/pages/opportunities-form-page/opportunities-form-page.component';
 
 @NgModule({
   declarations: [
-  
-    OpportunitiesFormPageComponent
   ],
   imports: [
     CommonModule,

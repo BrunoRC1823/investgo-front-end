@@ -1,0 +1,45 @@
+<div class="card">
+  <p-table [value]="config.data" [columns]="config.columns" [loading]="config.loading" [rows]="config.rows"
+    styleClass="p-datatable-striped " [tableStyle]="{ 'min-width': '50rem' }" [rowHover]="true" #dt>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.value ? col.name+'.'+col.value : col.name">
+          <p *ngIf="!(col.head === 'Acciones'); else noActions" class="text-center">
+            {{ col.head }}
+            <p-sortIcon [field]=" col.value ? col.name+'.'+col.value : col.name "></p-sortIcon>
+          </p>
+          <ng-template #noActions>
+            <p class="text-center">
+              {{ col.head }}
+            </p>
+          </ng-template>
+        </th>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row let-rowIndex="rowIndex" let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          <div class="flex justify-content-center flex-column lg:flex-row">
+            <div class="text-center">
+              <p>{{ row[col.name] | setAttributeRowTable:col.value }}</p>
+            </div>
+            <div *ngIf="col.head === 'Acciones'" class="flex justify-content-center gap-2">
+              <div class="flex justify-content-center gap-2">
+                <p-confirmPopup></p-confirmPopup>
+                <p-button icon="pi pi-plus" [ngClass]="row.activeButton ? '' : 'hidden'" [outlined]="true" size="small"
+                  severity="success" (onClick)="toggleSelectBill(row,col,bPlus)" #bPlus> </p-button>
+                <p-button icon="pi pi-trash" [ngClass]="!(row.activeButton) ? '' : 'hidden'" [outlined]="true"
+                  size="small" severity="danger" (onClick)="toggleSelectBill(row,col,bTrash)" #bTrash></p-button>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <p-paginator (onPageChange)="onPageChange($event)" [totalRecords]="config.totalElements"
+        [rowsPerPageOptions]="[config.rows,(config.rows!+5),(config.rows!+10)]"></p-paginator>
+    </ng-template>
+  </p-table>
+</div>

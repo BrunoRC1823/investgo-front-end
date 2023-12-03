@@ -1,1 +1,128 @@
-<p>opportunities-form-page works!</p>
+<section class="pt-2 pb-3 layout-content">
+    <div class="p-2">
+        <div class="flex justify-content-between pb-2 ">
+            <div>
+                <h1 class="text-2xl">{{ title }}</h1>
+                <span class="text-sm mt-1" class="text-color-secondary">Datos de la oportunidad.</span>
+            </div>
+            <p-button size="small" type="submit" label="volver" [outlined]="true" icon="pi pi-arrow-left"
+                [routerLink]="'/dashboard/opportunities'" severity="secondary"></p-button>
+        </div>
+
+        <form [formGroup]="myForm" (ngSubmit)="register()" class="formgrid grid grid-nogutter gap-2">
+            <div class="col-12 p-0">
+                <p-card class="custom-p-card">
+                    <div class="formgrid grid grid-nogutter gap-2">
+                        <div class="col-12">
+                            <label for="empresa" class="font-medium block mb-2">Empresa</label>
+                            <div class="flex flex-column">
+                                <p-autoComplete formControlName="empresa" class="custom-autocomplete"
+                                    field="razonSocial" placeholder="Ingresar nombre de la empresa"
+                                    [style]="{width : '100%'}" [forceSelection]="true" [suggestions]="filteredCompanies"
+                                    (completeMethod)="filterCompanies($event)" (onSelect)="onSelect($event)"
+                                    (onBlur)="onBlur($event)"
+                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('empresa')}" #auto></p-autoComplete>
+                                <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('empresa')">{{
+                                    getFieldError('empresa')
+                                    }}</span>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <div class="flex justify-content-between pb-3 ">
+                                <div>
+                                    <h1 class="text-1xl">Lista de facturas</h1>
+                                </div>
+                                <div class="flex gap-2">
+                                    <p-confirmPopup></p-confirmPopup>
+                                    <p-button [disabled]="!(myForm.controls['empresa'].disabled)" (click)="activeAuto()"
+                                        [rounded]="true" severity="help" label="Buscar" size="small"></p-button>
+                                    <p-button [disabled]="configTable.data.length === 0" (click)="clearList()"
+                                        [rounded]="true" icon="pi pi-eraser" label="Limpiar tabla"
+                                        size="small"></p-button>
+                                </div>
+                            </div>
+                            <pages-table-add-opportunity *ngIf="!(tableNoData);else noData" [config]="configTable"
+                                (lazyLoadEmitter)="getBillsByCompany($event)"
+                                (currentPagePaginator)="getBillsByCompany($event)">
+                            </pages-table-add-opportunity>
+                            <ng-template #noData>
+                                <div>
+                                    <p-panel header="Ver facturas">
+                                        <p>
+                                            Busca un empresa para poder ver sus facturas.
+                                        </p>
+                                    </p-panel>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </p-card>
+            </div>
+            <div class="col-12 mt-2 p-0">
+                <p-card class="custom-p-card">
+                    <div class="formgrid grid grid-nogutter row-gap-2">
+                        <div class="col-6 pr-2">
+                            <label for="rendimiento" class="font-medium block mb-2">Rendimiento</label>
+                            <div class="flex flex-column">
+                                <p-inputNumber [style]="{width : '100%'}" formControlName="rendimiento" mode="decimal"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [max]="0.99"
+                                    placeholder="Ingresar el rendimiento (%)"
+                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('rendimiento')}">
+                                </p-inputNumber>
+                                <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('rendimiento')">{{
+                                    getFieldError('rendimiento')
+                                    }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 pl-2">
+                            <label for="tir" class="font-medium block mb-2">Tasa Interna de Retorno</label>
+                            <div class="flex flex-column">
+                                <p-inputNumber [style]="{width : '100%'}" formControlName="tir" mode="decimal"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [max]="0.99"
+                                    placeholder="Ingresar el TIR (%)"
+                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('tir')}">
+                                </p-inputNumber>
+                                <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('tir')">{{
+                                    getFieldError('tir')
+                                    }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form [formGroup]="formValueAuto">
+                        <div class="formgrid grid grid-nogutter row-gap-2">
+                            <div class="col-6 p-0 mt-2 pr-2">
+                                <label for="monto" class="font-medium block mb-2">Monto</label>
+                                <div class="flex flex-column">
+                                    <p-inputNumber formControlName="monto" [style]="{width : '100%'}" mode="decimal"
+                                        [minFractionDigits]="2" [maxFractionDigits]="2" mode="currency" currency="PEN"
+                                        [max]="999999.99" placeholder="Monto a invertir">
+                                    </p-inputNumber>
+
+                                </div>
+                            </div>
+                            <div class="col-6 p-0 mt-2 pl-2">
+                                <label for="fecIniActv" class="font-medium block mb-2">Fecha de pago</label>
+                                <div class="flex flex-column">
+                                    <p-calendar placeholder="Fecha de pago" formControlName="fecha"
+                                        dateFormat="dd/mm/yy" [showIcon]="true"
+                                        [style]="{'width': '100%'}"></p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-12 mt-3 grid grid-nogutter justify-content-between p-0">
+                        <div class="grid gap-3 grid-nogutter sm:justify-content-start">
+                            <p-button size="small" [disabled]="enableButtonSave" type="submit" label="Guardar"
+                                [outlined]="true" icon="pi pi-save"
+                                [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
+                            <p-button size="small" [disabled]="enableButtonSave" label="limpiar" [outlined]="true"
+                                severity="help" icon="pi pi-eraser" (onClick)="clear(auto)"></p-button>
+                        </div>
+                        <p-button size="small" *ngIf="isEdit" [label]="labelDisabledButton" [outlined]="true"
+                            severity="warning" icon="pi pi-eraser" (onClick)="toggleForm()"></p-button>
+                    </div>
+                </p-card>
+            </div>
+        </form>
+    </div>
+</section>

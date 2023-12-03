@@ -8,6 +8,7 @@ import {
 } from 'src/app/dashboard/interfaces';
 import { OpportunityService } from 'src/app/dashboard/services/opportunity.service';
 import { TableHelpersService } from 'src/app/dashboard/services/tableHelpers.service';
+import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
 import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
 
@@ -35,7 +36,7 @@ export class OpportunitiesAdminPageComponent {
         percentage: true,
       },
       { head: 'TIR', name: 'tir', value: '', percentage: true },
-      { head: 'Estado', name: 'enProceso', value: '', highligh: 'true' },
+      { head: 'Estado', name: 'terminado', value: '', highligh: 'true' },
       { head: 'Monto', name: 'monto', value: '' },
       { head: 'Fecha caducidad', name: 'fechaCaducidad', value: '' },
       { head: 'Empresa', name: 'empresa', value: 'razonSocial' },
@@ -45,12 +46,12 @@ export class OpportunitiesAdminPageComponent {
           {
             icon: 'pi pi-eye',
             severity: 'help',
-            routerLink: '/dashboard/opportunities/add-opportunity',
+            routerLink: '/dashboard/opportunities/show-opportunity/',
           },
           {
             icon: 'pi pi-trash',
             severity: 'danger',
-            // onClick: (code: string) => this.disableCompany(code),
+            onClick: (code: string) => this.deleteOpportunity(code),
           },
         ],
       },
@@ -75,36 +76,12 @@ export class OpportunitiesAdminPageComponent {
     if (!tabIndexMovements) return;
     this.activeIndexTab = parseInt(tabIndexMovements);
   }
+
   getTabIndex() {
     const tabIndexMovements = localStorage.getItem(
       'tabIndexOpportunitiesAdmin'
     );
     return tabIndexMovements;
-  }
-
-  getOpportunitiesEnable($event?: any) {
-    let paginator: any;
-    if ($event) {
-      paginator = new PaginatorRequest();
-      paginator = this.tableHelpers.assignPaginatorValues($event, paginator);
-    }
-    const tabIndex = this.getTabIndex();
-    let enable;
-    if (tabIndex === '0' || !tabIndex) {
-      enable = EnableValue.enable;
-    } else {
-      enable = EnableValue.notEnable;
-    }
-
-    this.opportunityService
-      .getOpportunitiesEnable(enable, paginator)
-      .subscribe((opportunities) => {
-        if (opportunities.content.length > 0) {
-          this.assignCompaniesValue(opportunities);
-        } else {
-          this.resetData();
-        }
-      });
   }
 
   resetData() {
@@ -114,7 +91,7 @@ export class OpportunitiesAdminPageComponent {
     this.configTable.percentageList = [];
   }
 
-  assignCompaniesValue(opportunities: ListResponse<Opportunity>) {
+  assignOpportunitiesValue(opportunities: ListResponse<Opportunity>) {
     const { content, totalElements } = opportunities;
     content.forEach((opportunity: Opportunity) => {
       const { fechaCaducidad } = opportunity;
@@ -130,38 +107,62 @@ export class OpportunitiesAdminPageComponent {
     });
   }
 
-  // disableCompany(code: string) {
-  //   this.companiesService.disableCompany(code).subscribe({
-  //     next: ({ mensaje }) => {
-  //       this.myMessageService.toastBuilder(
-  //         Severity.success,
-  //         'Eliminación exitosa!',
-  //         mensaje
-  //       );
-  //       this.getCompanies();
-  //     },
-  //     error: (err) => {
-  //       const { error } = err;
-  //       if (error.mensaje) {
-  //         if (typeof error.mensaje === 'string') {
-  //           this.myMessageService.toastBuilder(
-  //             Severity.error,
-  //             'Error',
-  //             error.mensaje
-  //           );
-  //           return;
-  //         }
-  //         error.mensaje.forEach((mensaje: string) => {
-  //           this.myMessageService.toastBuilder(Severity.warn, 'Error', mensaje);
-  //         });
-  //         return;
-  //       }
-  //       this.myMessageService.toastBuilder(
-  //         Severity.warn,
-  //         'Ocurrio un error!',
-  //         'Algo salio mal, inténtelo más tarde'
-  //       );
-  //     },
-  //   });
-  // }
+  getOpportunitiesEnable($event?: any) {
+    let paginator: any;
+    if ($event) {
+      paginator = new PaginatorRequest();
+      paginator = this.tableHelpers.assignPaginatorValues($event, paginator);
+    }
+    const tabIndex = this.getTabIndex();
+    let enable;
+    if (tabIndex === '0' || !tabIndex) {
+      enable = EnableValue.notEnable;
+    } else {
+      enable = EnableValue.enable;
+    }
+    this.opportunityService
+      .getOpportunitiesEnable(enable, paginator)
+      .subscribe((opportunities) => {
+        if (opportunities.content.length > 0) {
+          this.assignOpportunitiesValue(opportunities);
+        } else {
+          this.resetData();
+        }
+      });
+  }
+
+  deleteOpportunity(code: string) {
+    this.opportunityService.deleteOpportunity(code).subscribe({
+      next: ({ mensaje }) => {
+        this.myMessageService.toastBuilder(
+          Severity.success,
+          'Eliminación exitosa!',
+          mensaje
+        );
+        this.getOpportunitiesEnable();
+      },
+      error: (err) => {
+        const { error } = err;
+        if (error.mensaje) {
+          if (typeof error.mensaje === 'string') {
+            this.myMessageService.toastBuilder(
+              Severity.error,
+              'Error',
+              error.mensaje
+            );
+            return;
+          }
+          error.mensaje.forEach((mensaje: string) => {
+            this.myMessageService.toastBuilder(Severity.warn, 'Error', mensaje);
+          });
+          return;
+        }
+        this.myMessageService.toastBuilder(
+          Severity.warn,
+          'Ocurrio un error!',
+          'Algo salio mal, inténtelo más tarde'
+        );
+      },
+    });
+  }
 }
