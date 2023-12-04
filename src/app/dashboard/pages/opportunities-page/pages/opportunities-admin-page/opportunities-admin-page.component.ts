@@ -44,11 +44,6 @@ export class OpportunitiesAdminPageComponent {
         head: 'Acciones',
         buttons: [
           {
-            icon: 'pi pi-eye',
-            severity: 'help',
-            routerLink: '/dashboard/opportunities/show-opportunity/',
-          },
-          {
             icon: 'pi pi-trash',
             severity: 'danger',
             onClick: (code: string) => this.deleteOpportunity(code),
@@ -116,9 +111,9 @@ export class OpportunitiesAdminPageComponent {
     const tabIndex = this.getTabIndex();
     let enable;
     if (tabIndex === '0' || !tabIndex) {
-      enable = EnableValue.notEnable;
-    } else {
       enable = EnableValue.enable;
+    } else {
+      enable = EnableValue.notEnable;
     }
     this.opportunityService
       .getOpportunitiesEnable(enable, paginator)

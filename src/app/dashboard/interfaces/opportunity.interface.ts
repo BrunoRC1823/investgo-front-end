@@ -5,6 +5,7 @@ export interface Opportunity {
   rendimiento: number;
   tir: number;
   enProceso: boolean;
+  terminado: boolean;
   monto: number;
   montoRecaudado: number;
   fechaCaducidad: string;

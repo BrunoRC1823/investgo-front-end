@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+
 import { Observable, map, catchError, throwError } from 'rxjs';
+
 import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
+import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
 import { environments } from 'src/environments/environments';
 import { PaginatorRequest, ListResponse, Opportunity } from '../interfaces';
-import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +25,7 @@ export class OpportunityService {
       return this.http.post<ConfirmResponse>(url, opportunity);
     }
   }
-  
+
   deleteOpportunity(code: string): Observable<ConfirmResponse> {
     const url = `${this.baseUrl}/api/v1/oportunidades-inversion/${code}`;
     return this.http.delete<ConfirmResponse>(url);

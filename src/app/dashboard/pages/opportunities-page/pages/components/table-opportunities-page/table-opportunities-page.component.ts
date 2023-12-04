@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
+import { Opportunity } from 'src/app/dashboard/interfaces';
 import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
 import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
@@ -22,15 +23,15 @@ export class TableOpportunitiesPageComponent {
   onPageChange($event: PaginatorState) {
     this.currentPagePaginator.emit($event);
   }
-  setValueTag(value: boolean) {
-    if (value) {
+  setValueTag(value: boolean) {    
+    if (!value) {
       return 'En proceso';
     } else {
       return 'Terminado';
     }
   }
   typeSeverity(value: boolean) {
-    if (value) {
+    if (!value) {
       return 'success';
     } else {
       return 'danger';

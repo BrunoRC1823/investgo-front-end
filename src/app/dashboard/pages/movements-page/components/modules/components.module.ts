@@ -12,11 +12,10 @@ import { StringToDateFormatterPipe } from 'src/pipes/string-to-date-formatter.pi
   declarations: [
     AddBankAccountComponent,
     CardBankAccountComponent,
-    CustomCurrencyPipe,
     LogoBankPipe,
     StringToDateFormatterPipe,
   ],
-  imports: [CommonModule, PrimeNgModule],
+  imports: [CommonModule, PrimeNgModule, CustomCurrencyPipe],
   providers: [StringToDateFormatterPipe],
   exports: [AddBankAccountComponent, CardBankAccountComponent],
 })

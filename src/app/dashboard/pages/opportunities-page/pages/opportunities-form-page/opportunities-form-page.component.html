@@ -19,7 +19,7 @@
                                 <p-autoComplete formControlName="empresa" class="custom-autocomplete"
                                     field="razonSocial" placeholder="Ingresar nombre de la empresa"
                                     [style]="{width : '100%'}" [forceSelection]="true" [suggestions]="filteredCompanies"
-                                    (completeMethod)="filterCompanies($event)" (onSelect)="onSelect($event)"
+                                    (completeMethod)="filterCompanies($event)" (onSelect)="onSelect($event.value)"
                                     (onBlur)="onBlur($event)"
                                     [ngClass]="{'ng-invalid ng-dirty': isValidField('empresa')}" #auto></p-autoComplete>
                                 <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('empresa')">{{
@@ -47,9 +47,9 @@
                             </pages-table-add-opportunity>
                             <ng-template #noData>
                                 <div>
-                                    <p-panel header="Ver facturas">
+                                    <p-panel [header]="emptyMessageTable.header">
                                         <p>
-                                            Busca un empresa para poder ver sus facturas.
+                                            {{ emptyMessageTable.body }}
                                         </p>
                                     </p-panel>
                                 </div>
@@ -112,14 +112,11 @@
                     </form>
                     <div class="col-12 mt-3 grid grid-nogutter justify-content-between p-0">
                         <div class="grid gap-3 grid-nogutter sm:justify-content-start">
-                            <p-button size="small" [disabled]="enableButtonSave" type="submit" label="Guardar"
-                                [outlined]="true" icon="pi pi-save"
+                            <p-button size="small" type="submit" label="Guardar" [outlined]="true" icon="pi pi-save"
                                 [style]="{'color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"></p-button>
-                            <p-button size="small" [disabled]="enableButtonSave" label="limpiar" [outlined]="true"
-                                severity="help" icon="pi pi-eraser" (onClick)="clear(auto)"></p-button>
+                            <p-button size="small" label="limpiar" [outlined]="true" severity="help" icon="pi pi-eraser"
+                                (onClick)="clear(auto)"></p-button>
                         </div>
-                        <p-button size="small" *ngIf="isEdit" [label]="labelDisabledButton" [outlined]="true"
-                            severity="warning" icon="pi pi-eraser" (onClick)="toggleForm()"></p-button>
                     </div>
                 </p-card>
             </div>

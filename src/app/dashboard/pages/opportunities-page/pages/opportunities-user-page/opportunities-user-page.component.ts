@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PaginatorState } from 'primeng/paginator';
 import { pipe, Observable } from 'rxjs';
+import { Opportunity } from 'src/app/dashboard/interfaces';
+import { OpportunityService } from 'src/app/dashboard/services/opportunity.service';
 
 @Component({
   selector: 'opportunities-user-page',
@@ -7,141 +10,25 @@ import { pipe, Observable } from 'rxjs';
   styleUrls: ['./opportunities-user-page.component.css'],
 })
 export class OpportunitiesUserPageComponent {
-  public style = { color: 'var(--sidebar-color)' };
-  public customers!: any[];
-  public loading: boolean = true;
-  public headers = ['Nombre', 'Pais', 'Empresa', 'Representante'];
-  ngOnInit(): void {
-    this.httpCallObservable.subscribe(
-      pipe((data) => {
-        this.customers = data;
-        this.loading = false;
+  private opportunityService = inject(OpportunityService);
 
-        this.customers.forEach(
-          (customer) => (customer.date = new Date(<Date>customer.date))
-        );
-      })
-    );
+  public listOpportunities: Opportunity[] = [];
+  public style = { color: 'var(--sidebar-color)' };
+  public loading: boolean = true;
+  public row: number = 10;
+  public totalElements: number | undefined;
+  ngOnInit(): void {
+    this.getOpportunities();
+  }
+  onPageChange($event: PaginatorState) {
+    console.log($event);
   }
 
-  httpCallObservable = new Observable<any[]>((subscriber) => {
-    subscriber.next([
-      { nombre: 'Ga', pais: 'Chile', empresa: 'Ga', representante: 'Ga' },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-      {
-        nombre: 'Bruno',
-        pais: 'Peru',
-        empresa: 'Bruno',
-        representante: 'Bruno',
-      },
-    ]);
-    subscriber.complete();
-  });
+  getOpportunities() {
+    this.opportunityService.getOpportunitiesActive().subscribe((response) => {
+      const { content, totalElements } = response;
+      this.totalElements = totalElements;
+      this.listOpportunities = content;
+    });
+  }
 }

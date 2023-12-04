@@ -7,16 +7,33 @@ import { BooleansTablePipe } from 'src/pipes/booleansTable.pipe';
 import { SetAttributeRowTablePipe } from 'src/pipes/setAttributeRowTable.pipe';
 import { PercentagePipe } from 'src/pipes/percentagePipe.pipe';
 import { TableAddOpportunityComponent } from '../table-add-opportunity/table-add-opportunity.component';
+import { CardOpportunityInvestmentComponent } from '../card-opportunity-investment/card-opportunity-investment.component';
+import { CustomCurrencyPipe } from 'src/pipes/customCurrency.pipe';
+import { ReduceTitlePipe } from 'src/pipes/ReduceTitle.pipe';
+import { SideBarComponent } from '../side-bar/side-bar.component';
 
 @NgModule({
-  declarations: [TableOpportunitiesPageComponent, TableAddOpportunityComponent],
+  declarations: [
+    TableOpportunitiesPageComponent,
+    TableAddOpportunityComponent,
+    CardOpportunityInvestmentComponent,
+    SideBarComponent,
+  ],
   imports: [
     CommonModule,
     PrimeNgModule,
     SetAttributeRowTablePipe,
     BooleansTablePipe,
     PercentagePipe,
+    CustomCurrencyPipe,
+    ReduceTitlePipe,
+    PercentagePipe,
   ],
-  exports: [TableOpportunitiesPageComponent, TableAddOpportunityComponent],
+  exports: [
+    TableOpportunitiesPageComponent,
+    TableAddOpportunityComponent,
+    CardOpportunityInvestmentComponent,
+    SideBarComponent,
+  ],
 })
 export class ComponentsModule {}

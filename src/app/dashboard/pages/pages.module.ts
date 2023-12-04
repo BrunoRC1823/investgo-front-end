@@ -11,8 +11,6 @@ import { MovementsModule } from './movements-page/modules/movements.module';
 import { OpportunitiesModule } from './opportunities-page/modules/opportunities.module';
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -1,0 +1,32 @@
+:host ::ng-deep .p-custom-card .p-card {
+  max-width: 296px;
+  height: 226px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.08), 0px 3px 4px rgba(0, 0, 0, 0.1),
+    0px 1px 4px -1px rgba(0, 0, 0, 0.1);
+}
+:host ::ng-deep .p-custom-card .p-card .p-card-body {
+  padding: 1rem;
+}
+:host ::ng-deep .p-custom-card .p-card .p-card-content {
+  padding: 0;
+}
+:host ::ng-deep .p-bar-custom > :first-child > :first-child {
+  background: var(--sidebar-color);
+}
+:host ::ng-deep .p-bar-custom > :first-child > :first-child > :first-child {
+  display: none !important;
+}
+:host ::ng-deep .side-bar > :first-child {
+  width: 75vw;
+  max-width: 800px;
+}
+.principal-color {
+  color: var(--sidebar-color);
+}
+.days {
+  border-radius: 6px;
+  border: 2px solid #4a5bb1;
+  background-color: rgb(215, 219, 238);
+  color: #4a5bb1;
+  padding: 0.1rem;
+}

@@ -1,0 +1,53 @@
+<div class="flex justify-content-center">
+    <p-card class="p-custom-card">
+        <div class="flex flex-column gap-1">
+            <div class="flex justify-content-end">
+                <span class="font-italic text-xs">PEN</span>
+            </div>
+            <div class="flex justify-content-between">
+                <p class="font-bold">{{opportunity.empresa.razonSocial| reduceTitlePipe}}</p>
+                <span class="font-bold text-lg principal-color"> {{opportunity.monto|currency:'S/.':'symbol-narrow'}}
+                </span>
+            </div>
+            <div class="flex justify-content-between">
+                <p class="font-semibold text-sm text-600">Riesgo: <p-tag
+                        [severity]="getSeverity(opportunity!.empresa!.riesgo.rango)"
+                        [value]="opportunity.empresa.riesgo.rango"
+                        [pTooltip]="opportunity.empresa.riesgo.descripcion"></p-tag>
+                </p>
+            </div>
+            <div class="flex justify-content-between">
+                <p class="font-semibold text-sm text-600">Fecha pago: </p>
+                <p class="font-semibold text-sm text-600">Rendimiento/TIR </p>
+            </div>
+            <div class="flex justify-content-between pt-1">
+                <p class="font-bold text-sm">{{ opportunity.fechaPago | date:'dd MMM yyyy'}} <span
+                        class="font-bold font-italic text-xs ml-1 days">{{
+                        getDays(opportunity.fechaCaducidad,opportunity.auditoria.fecha!) + ' días'}}</span></p>
+                <p class="font-bold text-sm ">{{opportunity.rendimiento| percentagePipe}}/{{opportunity.tir|
+                    percentagePipe}} </p>
+            </div>
+            <div class="flex justify-content-between pt-2">
+                <p class="text-sm">Financiado al <span class="text-base principal-color">{{percentage |
+                        number:'1.2-2'}}%</span></p>
+                <span class="text-sm font-bold principal-color">
+                    <a class="flex align-items-center cursor-pointer" (click)="onToggleSidebar($event)">Ver detalle <i
+                            class="ml-1 pi pi-angle-right"></i></a>
+                </span>
+            </div>
+            <div class="flex justify-content-between pt-2">
+                <p-progressBar [value]="percentage" class="p-bar-custom"
+                    [style]="{width: '264px', height: '12px'}"></p-progressBar>
+            </div>
+            <div class="flex justify-content-between pt-1">
+                <p class="text-xs">La subasta cierra el <span class="font-bold font-italic">{{
+                        opportunity.fechaCaducidad |
+                        date:'dd MMM yyyy' }}</span> a las <span class="font-bold font-italic"> {{
+                        opportunity.fechaCaducidad | date:'HH:mm' }}</span></p>
+
+            </div>
+        </div>
+    </p-card>
+</div>
+<pages-side-bar [sidebarVisible]="sidebarVisible" [opportunity]="opportunity"
+    (onToggleSidebar)="onToggleSidebar($event)"></pages-side-bar>

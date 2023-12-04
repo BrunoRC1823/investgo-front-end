@@ -178,4 +178,8 @@ p-card.custom-card-bank-account:has(> *[data-pc-name="card"])
     margin-left: auto;
     margin-right: auto;
   }
+  .card-layout-ordered {
+    flex: 0 0 auto !important;
+    width: 25% !important;
+  }
 }

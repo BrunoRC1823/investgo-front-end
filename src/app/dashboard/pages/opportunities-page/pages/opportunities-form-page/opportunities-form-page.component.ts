@@ -4,10 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { AutoComplete, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { tap, switchMap } from 'rxjs';
+import { tap, switchMap, config } from 'rxjs';
 import {
   Company,
   ListResponse,
+  Opportunity,
   PaginatorRequest,
 } from 'src/app/dashboard/interfaces';
 import { Bill } from 'src/app/dashboard/interfaces/bill.interface';
@@ -37,11 +38,15 @@ export class OpportunitiesFormPageComponent {
 
   public maxDate = new Date();
   public title: string = 'Registrar oportunidad de inversión.';
+  public emptyMessageTable: any = {
+    header: 'Ver facturas',
+    body: 'Busca un empresa para poder ver sus facturas.',
+  };
 
   public filteredCompanies: Company[] = [];
   public selectedCompany: string | undefined;
   public isEdit: boolean = false;
-  public enableButtonSave: boolean = false;
+
   public labelDisabledButton: string = 'Activar formulario';
   public activeIndexTab = 0;
   public showBills: boolean = false;
@@ -90,48 +95,6 @@ export class OpportunitiesFormPageComponent {
   ngOnInit(): void {
     this.opportunityService.cleanListBills().subscribe();
     this.formValueAuto.disable();
-    if (this.router.url.includes('company')) {
-      this.activatedRoute.params
-        .pipe(
-          tap(({ codigo }) => codigo),
-          switchMap(({ codigo }) =>
-            this.companiesService.getCompanyByCode(codigo)
-          )
-        )
-        .subscribe((company) => {
-          if (!company) return this.router.navigateByUrl('/dashboard/bills');
-          const { codigo } = company;
-          const empresaCtrl = this.myForm.controls['empresa'];
-          empresaCtrl.setValue({ company });
-          this.selectedCompany = codigo;
-          return;
-        });
-    } else if (this.router.url.includes('show')) {
-      this.title = 'Ver factura.';
-      this.isEdit = true;
-      this.activatedRoute.params
-        .pipe(
-          tap(({ codigo }) => codigo),
-          switchMap(({ codigo }) => this.billService.getBillByCode(codigo))
-        )
-        .subscribe((bill) => {
-          if (!bill) return this.router.navigateByUrl('/dashboard/bills');
-          const {
-            fechaEmision,
-            empresa: { codigo },
-          } = bill as Bill;
-          this.selectedCompany = codigo;
-          const fechaFormant = new DatePipe('es-PE').transform(
-            fechaEmision,
-            'dd/MM/yyyy'
-          );
-          bill.fechaEmision = fechaFormant!;
-          this.myForm.reset(bill);
-          this.myForm.disable();
-          this.enableButtonSave = true;
-          return;
-        });
-    }
   }
 
   isValidField(field: string): boolean | null {
@@ -154,10 +117,11 @@ export class OpportunitiesFormPageComponent {
     empCtrl.enable();
   }
 
-  onSelect(event: any) {
+  onSelect(event: Company) {
     const empCtrl = this.myForm.controls['empresa'];
+    empCtrl.setValue(event);
     empCtrl.disable();
-    this.selectedCompany = event.value.codigo;
+    this.selectedCompany = event.codigo;
     this.getBillsByCompany();
     this.opportunityService.cleanListBills().subscribe();
   }
@@ -244,6 +208,8 @@ export class OpportunitiesFormPageComponent {
       },
       error: (err) => {
         const { error } = err;
+        console.log(err);
+
         if (error.mensaje) {
           if (typeof error.mensaje === 'string') {
             this.myMessageService.toastBuilder(
@@ -375,6 +341,9 @@ export class OpportunitiesFormPageComponent {
         if (transactions.content.length > 0) {
           this.assignBillsValue(transactions);
         } else {
+          this.emptyMessageTable.body =
+            'Esta empresa no tiene facturas activas.';
+          this.emptyMessageTable.header = 'Oops.';
           this.resetData();
         }
       });
@@ -393,20 +362,6 @@ export class OpportunitiesFormPageComponent {
         );
       },
     });
-  }
-
-  toggleForm() {
-    if (!this.myForm.disabled) {
-      this.myForm.disable();
-      this.title = 'Ver empresa.';
-      this.labelDisabledButton = 'Activar Formulario';
-      this.enableButtonSave = true;
-    } else {
-      this.myForm.enable();
-      this.title = 'Editar empresa';
-      this.labelDisabledButton = 'Desactivar Formulario';
-      this.enableButtonSave = false;
-    }
   }
 
   clearList() {

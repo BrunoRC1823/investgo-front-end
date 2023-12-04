@@ -2,6 +2,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'customCurrency',
+  standalone: true,
 })
 export class CustomCurrencyPipe implements PipeTransform {
   transform(value: number, currencyCode?: string): string {
