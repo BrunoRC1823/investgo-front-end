@@ -47,8 +47,8 @@ export class CardOpportunityInvestmentComponent {
   public sidebarVisible: boolean = false;
   ngOnInit(): void {
     this.calculateRemainingPercentage(
-      this.opportunity.monto,
-      this.opportunity.montoRecaudado
+      this.opportunity.monto!,
+      this.opportunity.montoRecaudado!
     );
   }
 

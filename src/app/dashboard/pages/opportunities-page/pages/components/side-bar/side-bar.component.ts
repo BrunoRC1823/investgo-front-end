@@ -8,6 +8,7 @@ import {
   inject,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
 import {
   Bill,
@@ -21,7 +22,9 @@ import { InvestmentUserService } from 'src/app/dashboard/services/ investmentUse
 import { OpportunityService } from 'src/app/dashboard/services/opportunity.service';
 import { TableHelpersService } from 'src/app/dashboard/services/tableHelpers.service';
 import { UserService } from 'src/app/dashboard/services/user.service';
+import { Severity } from 'src/app/shared/enums/severity-toast.enum';
 import { TableConfig } from 'src/app/shared/interfaces/table-config.interface';
+import { MyMessageService } from 'src/app/shared/services/my-message-service.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
 
 @Component({
@@ -39,7 +42,9 @@ export class SideBarComponent {
   private opportunityService = inject(OpportunityService);
   private tableHelpers = inject(TableHelpersService);
   private validatorsService = inject(ValidatorService);
-  
+  private confirmationService = inject(ConfirmationService);
+  private myMessageService = inject(MyMessageService);
+
   public balance = computed(() => this.userService.currentBalance());
   public auctionPercentage = 0;
   public percentage: number = 0;
@@ -71,18 +76,43 @@ export class SideBarComponent {
   private fb = inject(FormBuilder);
   public myForm: FormGroup = this.fb.group({
     oportunidadInversion: [null, [Validators.required]],
-    monto: [null, [Validators.required]],
+    montoInvertido: [null, [Validators.required]],
   });
 
   ngOnInit(): void {
     this.myForm.controls['oportunidadInversion'].setValue({
-      oportunidadInversion: { codigo: this.opportunity?.codigo },
+      codigo: this.opportunity?.codigo,
     });
     this.calculateRemainingPercentage(
-      this.opportunity!.monto,
-      this.opportunity!.montoRecaudado
+      this.opportunity!.monto!,
+      this.opportunity!.montoRecaudado!
     );
-    this.maxValueMonto = this.opportunity!.monto;
+    this.maxValueMonto = this.opportunity!.monto!;
+  }
+  confirm() {
+    this.confirmationService.confirm({
+      accept: () => {
+        this.register();
+      },
+      reject: (type: ConfirmEventType) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.myMessageService.toastBuilder(
+              Severity.info,
+              'Ou... :(',
+              'Inversion cancelada'
+            );
+            break;
+          case ConfirmEventType.CANCEL:
+            this.myMessageService.toastBuilder(
+              Severity.success,
+              'Ou... :(',
+              'Inversion cancelada'
+            );
+            break;
+        }
+      },
+    });
   }
   isValidField(field: string): boolean | null {
     return this.validatorsService.isValidField(this.myForm, field);
@@ -96,7 +126,42 @@ export class SideBarComponent {
       this.myForm.markAllAsTouched();
       return;
     }
-    console.log(this.myForm.value);
+    const investment = this.myForm.value;
+    console.log(investment);
+    
+    this.investmentUserService.register(investment).subscribe({
+      next: ({ mensaje }) => {
+        this.myMessageService.toastBuilder(
+          Severity.success,
+          'Registro exitoso',
+          mensaje
+        );
+        this.myForm.reset;
+      },
+      error: (err) => {
+        console.log(err);        
+        const { error } = err;
+        if (error.mensaje) {
+          if (typeof error.mensaje === 'string') {
+            this.myMessageService.toastBuilder(
+              Severity.error,
+              'Error',
+              error.mensaje
+            );
+            return;
+          }
+          error.mensaje.forEach((mensaje: string) => {
+            this.myMessageService.toastBuilder(Severity.warn, 'Error', mensaje);
+          });
+          return;
+        }
+        this.myMessageService.toastBuilder(
+          Severity.warn,
+          'Formulario inválido',
+          'Fallaron las validaciones!'
+        );
+      },
+    });
   }
   getInvestmentsUser($event?: any) {
     let paginator: any;
@@ -172,15 +237,15 @@ export class SideBarComponent {
     if (this.maxValueMonto <= parseInt(value)) {
       value = this.maxValueMonto.toString();
     }
-    const percentage = (parseInt(value) * 100) / monto / 100;
+    const percentage = (parseInt(value) * 100) / monto! / 100;
     this.auctionPercentage = percentage;
     this.revenue = this.calculateRevenue(parseInt(value));
   }
 
   calculateRevenue(value: number) {
     const { tir, rendimiento } = this.opportunity!;
-    const valorFuturo = value * (tir + 1);
-    const valorRendimiento = value + rendimiento;
+    const valorFuturo = value * (tir! + 1);
+    const valorRendimiento = value + rendimiento!;
     const suma = valorRendimiento + valorFuturo;
     const ganancia = suma / 2;
     return ganancia;

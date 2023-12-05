@@ -13,12 +13,12 @@
         <div class="col-12 md:col-7">
             <p-scrollPanel class="scroller">
                 <div class="flex flex-column gap-2">
-                    <p class="text-xl">{{opportunity!.empresa.razonSocial}}</p>
+                    <p class="text-xl">{{opportunity!.empresa!.razonSocial}}</p>
                     <div class="flex justify-content-between">
                         <p class="font-semibold text-sm text-600">Riesgo: <p-tag
                                 [severity]="getSeverity(opportunity!.empresa!.riesgo.rango)"
-                                [value]="opportunity!.empresa.riesgo.rango"
-                                [pTooltip]="opportunity!.empresa.riesgo.descripcion"
+                                [value]="opportunity!.empresa!.riesgo.rango"
+                                [pTooltip]="opportunity!.empresa!.riesgo.descripcion"
                                 tooltipStyleClass="text-xs"></p-tag>
                         </p>
                     </div>
@@ -26,7 +26,7 @@
                         <p class="font-semibold text-sm text-600">Fecha pago: &nbsp;&nbsp;</p>
                         <p class="font-bold text-sm">{{ opportunity!.fechaPago | date:'dd MMM yyyy'}} <span
                                 class="font-bold font-italic text-xs ml-1 days">{{
-                                getDays(opportunity!.fechaCaducidad,opportunity!.auditoria.fecha!) + ' días'}}</span>
+                                getDays(opportunity!.fechaCaducidad!,opportunity!.auditoria!.fecha!) + ' días'}}</span>
                         </p>
                     </div>
                     <div class="flex justify-content-between pt-2">
@@ -166,16 +166,16 @@
                                 <span class="p-inputgroup-addon">
                                     S/.
                                 </span>
-                                <p-inputNumber formControlName="monto" [style]="{width : '100%'}" mode="decimal"
-                                    [minFractionDigits]="2" [maxFractionDigits]="2" [max]="maxValueMonto"
+                                <p-inputNumber formControlName="montoInvertido" [style]="{width : '100%'}"
+                                    mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2" [max]="maxValueMonto"
                                     placeholder="Monto" (onInput)="onInput($event)"
-                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('monto')}">
+                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('montoInvertido')}">
                                 </p-inputNumber>
                                 <span class="p-inputgroup-addon">{{ (auctionPercentage | percentagePipe).slice(0, -1) |
                                     number: '1.2-2' }}%</span>
                             </div>
-                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('monto')">{{
-                                getFieldError('monto')
+                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('montoInvertido')">{{
+                                getFieldError('montoInvertido')
                                 }}</span>
                         </div>
                     </div>
@@ -190,6 +190,49 @@
                     <div class="col-12 p-0 flex flex-column gap-1">
                         <p class="text-sm">Ganancia final(PEN)</p>
                         <span class="font-bold text-lg color">{{ revenue | currency:'S/.':'symbol-narrow' }}</span>
+                    </div>
+                    <div class="col-12 flex justify-content-end">
+                        <p-button icon="pi pi-credit-card" size="small" label="Invertir" severity="success"
+                            [disabled]="!(myForm.valid)" (onClick)="confirm()"></p-button>
+                        <p-confirmDialog #cd [style]="{ width: '50vw' }">
+                            <ng-template pTemplate="header">
+                                <div class="col-12 flex flex-column">
+                                    <h3>Completar la inversión?</h3>
+                                    <p-divider type="dashed"></p-divider>
+                                </div>
+                            </ng-template>
+
+                            <ng-template pTemplate="icon">
+                                <i class="pi pi-exclamation-circle text-4xl text-red-600"></i>
+                            </ng-template>
+                            <ng-template pTemplate="message">
+                                <div class="col py-0 flex flex-column pl-3 justify-content-center">
+                                    <p class="text-700">Se descontaran <span class="font-semibold font-italic">{{(
+                                            myForm.controls['montoInvertido'].value )|
+                                            currency:'S/.':'symbol-narrow'}} </span>
+                                        de su cartera.</p>
+                                    <p class="text-700">Y recibirá una ganancia de <span
+                                            class="font-semibold font-italic">{{ revenue|
+                                            currency:'S/.':'symbol-narrow'}}</span> al
+                                        finalizar la subasta.</p>
+                                    <div class="col-12 p-0 flex justify-content-end">
+                                        <p class="text-sm mt-2 text-right">Desea continuar?</p>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="footer">
+                                <div class="col-12 p-0 flex flex-column">
+                                    <p-divider type="dashed"></p-divider>
+                                    <div>
+                                        <p-button icon="pi pi-times" size="small" label="No" severity="secondary"
+                                            [outlined]="true" (click)="cd.reject()"></p-button>
+                                        <p-button icon="pi pi-check" size="small" label="Si" severity="primary"
+                                            [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}"
+                                            (click)="cd.accept()"></p-button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-confirmDialog>
                     </div>
                 </form>
             </p-scrollPanel>

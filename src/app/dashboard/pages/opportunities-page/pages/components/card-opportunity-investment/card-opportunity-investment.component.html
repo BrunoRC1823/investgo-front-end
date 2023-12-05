@@ -5,15 +5,15 @@
                 <span class="font-italic text-xs">PEN</span>
             </div>
             <div class="flex justify-content-between">
-                <p class="font-bold">{{opportunity.empresa.razonSocial| reduceTitlePipe}}</p>
+                <p class="font-bold">{{opportunity.empresa!.razonSocial| reduceTitlePipe}}</p>
                 <span class="font-bold text-lg principal-color"> {{opportunity.monto|currency:'S/.':'symbol-narrow'}}
                 </span>
             </div>
             <div class="flex justify-content-between">
                 <p class="font-semibold text-sm text-600">Riesgo: <p-tag
                         [severity]="getSeverity(opportunity!.empresa!.riesgo.rango)"
-                        [value]="opportunity.empresa.riesgo.rango"
-                        [pTooltip]="opportunity.empresa.riesgo.descripcion"></p-tag>
+                        [value]="opportunity.empresa!.riesgo.rango"
+                        [pTooltip]="opportunity.empresa!.riesgo.descripcion"></p-tag>
                 </p>
             </div>
             <div class="flex justify-content-between">
@@ -23,8 +23,8 @@
             <div class="flex justify-content-between pt-1">
                 <p class="font-bold text-sm">{{ opportunity.fechaPago | date:'dd MMM yyyy'}} <span
                         class="font-bold font-italic text-xs ml-1 days">{{
-                        getDays(opportunity.fechaCaducidad,opportunity.auditoria.fecha!) + ' días'}}</span></p>
-                <p class="font-bold text-sm ">{{opportunity.rendimiento| percentagePipe}}/{{opportunity.tir|
+                        getDays(opportunity.fechaCaducidad!,opportunity.auditoria!.fecha!) + ' días'}}</span></p>
+                <p class="font-bold text-sm ">{{opportunity.rendimiento!| percentagePipe}}/{{opportunity.tir!|
                     percentagePipe}} </p>
             </div>
             <div class="flex justify-content-between pt-2">

@@ -30,6 +30,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   exports: [
     AutoCompleteModule,
@@ -62,7 +63,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     ToastModule,
     TooltipModule,
     ScrollPanelModule,
-
+    ConfirmDialogModule
   ],
 })
 export class PrimeNgModule {}

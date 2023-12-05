@@ -1,9 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { InvestmentUser } from '../interfaces/investmentUser.interface';
-import { ListResponse, Opportunity, PaginatorRequest } from '../interfaces';
+import {
+  InvestmentUserRequest,
+  ListResponse,
+  Opportunity,
+  PaginatorRequest,
+} from '../interfaces';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { environments } from 'src/environments/environments';
 import { HttpClient } from '@angular/common/http';
+import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +17,11 @@ import { HttpClient } from '@angular/common/http';
 export class InvestmentUserService {
   private readonly baseUrl = environments.baseUrl;
   private http = inject(HttpClient);
+
+  register(investment: InvestmentUserRequest) {
+    const url = `${this.baseUrl}/api/v1/inversiones`;
+    return this.http.post<ConfirmResponse>(url, investment);
+  }
 
   getInvestmentsUser(
     code: string,

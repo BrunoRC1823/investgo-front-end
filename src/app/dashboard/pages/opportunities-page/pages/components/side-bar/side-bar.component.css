@@ -37,6 +37,12 @@
 :host ::ng-deep .p-panel .p-panel-content{
   padding: 0;
 }
+:host ::ng-deep .p-dialog .p-dialog-content{
+  padding-bottom: 0;
+}
+:host ::ng-deep .p-dialog .p-dialog-header{
+  padding-bottom: 0;
+}
 @media screen and (max-width: 768px) {
   :host ::ng-deep .scroller > :first-child {
     height: 50vh;
