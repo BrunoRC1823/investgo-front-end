@@ -6,5 +6,6 @@ export interface TableConfig {
   percentageList?: (number | undefined)[];
   globalFilters?: string[];
   rows: number;
+  size?: string;
   actions?: any;
 }

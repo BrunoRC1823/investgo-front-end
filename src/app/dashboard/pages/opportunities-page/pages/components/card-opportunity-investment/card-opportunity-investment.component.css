@@ -17,8 +17,8 @@
   display: none !important;
 }
 :host ::ng-deep .side-bar > :first-child {
-  width: 75vw;
-  max-width: 800px;
+  width: 80vw;
+  max-width: 1050px;
 }
 .principal-color {
   color: var(--sidebar-color);

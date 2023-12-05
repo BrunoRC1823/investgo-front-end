@@ -11,6 +11,8 @@ import { CardOpportunityInvestmentComponent } from '../card-opportunity-investme
 import { CustomCurrencyPipe } from 'src/pipes/customCurrency.pipe';
 import { ReduceTitlePipe } from 'src/pipes/ReduceTitle.pipe';
 import { SideBarComponent } from '../side-bar/side-bar.component';
+import { SharedModule } from 'src/app/shared/modules/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
     CustomCurrencyPipe,
     ReduceTitlePipe,
     PercentagePipe,
+    SharedModule,
+    ReactiveFormsModule,
   ],
   exports: [
     TableOpportunitiesPageComponent,

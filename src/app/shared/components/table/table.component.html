@@ -1,6 +1,8 @@
 <div class="card">
-  <p-table [value]="config.data" [columns]="config.columns" [loading]="config.loading" [rows]="config.rows"
-    styleClass="p-datatable-striped " [tableStyle]="{ 'min-width': '50rem' }" [rowHover]="true" #dt>
+  <p-table [value]="config.data" [columns]="config.columns" [loading]="config.loading"
+    [styleClass]="config.size === 'small' ? 'p-datatable-striped p-datatable-sm' : 'p-datatable-striped'"
+    [tableStyle]="config.size === 'small' ? ({'min-width': '20rem'}) : ({ 'min-width': '50rem' })" [rowHover]="true"
+    #dt>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [pSortableColumn]="col.value ? col.name+'.'+col.value : col.name">
@@ -49,8 +51,8 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
-      <p-paginator (onPageChange)="onPageChange($event)" [totalRecords]="config.totalElements"
-        [rowsPerPageOptions]="[config.rows,(config.rows!+5),(config.rows!+10)]"></p-paginator>
+      <p-paginator (onPageChange)="onPageChange($event)" [totalRecords]="config.totalElements" [rows]="config.rows"
+        [rowsPerPageOptions]="config.size === 'small' ?undefined:[config.rows,(config.rows!+5),(config.rows!+10)]"></p-paginator>
     </ng-template>
   </p-table>
 </div>

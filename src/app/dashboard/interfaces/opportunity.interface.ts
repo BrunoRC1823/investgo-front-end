@@ -1,4 +1,4 @@
-import { Audit, Company } from './';
+import { Audit, Bill, Company } from './';
 
 export interface Opportunity {
   codigo: string;
@@ -12,4 +12,5 @@ export interface Opportunity {
   auditoria: Audit;
   fechaPago: string;
   empresa: Company;
+  facturas?: Bill[];
 }

@@ -149,12 +149,7 @@ export class BillsPageComponent {
   formatDate() {
     const fechaEmision = this.myForm.get('fechaEmision');
     const dateValue = new Date(fechaEmision!.value);
-    if (!isNaN(dateValue.getTime())) {
-      const formattedDate = this.datePipe.transform(dateValue, 'dd/MM/yyyy');
-      fechaEmision?.setValue(formattedDate);
-    } else {
-      return;
-    }
+    fechaEmision?.setValue(dateValue);
   }
 
   formatData() {
@@ -188,6 +183,8 @@ export class BillsPageComponent {
         severity: Severity.success,
       };
     }
+    console.log(bill);
+    
     this.billService.register(bill).subscribe({
       next: ({ mensaje }) => {
         this.myMessageService.toastBuilder(
@@ -201,6 +198,8 @@ export class BillsPageComponent {
         );
       },
       error: (err) => {
+        console.log(err);
+        
         const { error } = err;
         if (error.mensaje) {
           if (typeof error.mensaje === 'string') {

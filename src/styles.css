@@ -75,12 +75,12 @@ h5 {
   margin: 0;
 }
 body::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 9px;
   height: 0.5rem;
 }
 body::-webkit-scrollbar-thumb {
   background-color: var(--sidebar-color);
-  border-radius: 1rem;
+  border-radius: 3px;
   transition: background-color 0.8s ease-in-out;
 }
 body::-webkit-scrollbar-thumb:hover {

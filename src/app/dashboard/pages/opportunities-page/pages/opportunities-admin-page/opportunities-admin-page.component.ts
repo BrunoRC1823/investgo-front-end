@@ -95,11 +95,11 @@ export class OpportunitiesAdminPageComponent {
         'dd/MM/yyyy'
       );
       opportunity!.fechaCaducidad = fechaFormant!;
-      this.tableNoData = false;
-      this.configTable.loading = false;
-      this.configTable.data = content;
-      this.configTable.totalElements = totalElements;
     });
+    this.tableNoData = false;
+    this.configTable.loading = false;
+    this.configTable.data = content;
+    this.configTable.totalElements = totalElements;
   }
 
   getOpportunitiesEnable($event?: any) {

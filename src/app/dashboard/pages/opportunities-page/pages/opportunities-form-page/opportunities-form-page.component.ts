@@ -28,7 +28,6 @@ import { ValidatorService } from 'src/app/shared/services/validator.service';
 })
 export class OpportunitiesFormPageComponent {
   private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
   private myMessageService = inject(MyMessageService);
   private companiesService = inject(CompaniesService);
   private billService = inject(BillService);
@@ -208,8 +207,6 @@ export class OpportunitiesFormPageComponent {
       },
       error: (err) => {
         const { error } = err;
-        console.log(err);
-
         if (error.mensaje) {
           if (typeof error.mensaje === 'string') {
             this.myMessageService.toastBuilder(

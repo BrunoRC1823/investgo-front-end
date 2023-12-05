@@ -1,0 +1,44 @@
+.principal-color {
+  background-color: var(--sidebar-color);
+  left: calc(50% - 15px);
+  top: 69px;
+}
+.color {
+  color: var(--sidebar-color);
+}
+:host ::ng-deep .p-sidebar .p-sidebar-header {
+  background-color: #e5e2ff;
+  border-bottom: 4px solid var(--sidebar-color);
+}
+.days {
+  border-radius: 6px;
+  border: 2px solid #4a5bb1;
+  background-color: rgb(215, 219, 238);
+  color: #4a5bb1;
+  padding: 0.1rem;
+}
+
+.costos {
+  background-color: #dee2e6;
+  border-radius: 50%;
+  padding: 0.2rem;
+}
+:host ::ng-deep .p-sidebar .p-sidebar-footer {
+  padding: 0;
+}
+:host ::ng-deep .p-panel .p-panel-header .p-panel-title {
+  font-weight: 500;
+}
+
+:host ::ng-deep .scroller > :first-child {
+  width: 100%;
+  height: calc(100vh - 120px);
+}
+:host ::ng-deep .p-panel .p-panel-content{
+  padding: 0;
+}
+@media screen and (max-width: 768px) {
+  :host ::ng-deep .scroller > :first-child {
+    height: 50vh;
+  }
+}

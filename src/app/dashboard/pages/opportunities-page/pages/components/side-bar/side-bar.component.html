@@ -1,3 +1,198 @@
 <p-sidebar [(visible)]="sidebarVisible" position="right" class="side-bar" (onHide)="toggleSidebarEmitter()">
-    <h3>{{opportunity |json}}}</h3>
+    <ng-template pTemplate="header">
+        <div class="flex col-11 p-0 justify-content-between align-items-center">
+            <h3>Invertir</h3>
+            <div class="flex flex-column ">
+                <p class="text-sm text-color-secondary">Tu saldo disponible</p>
+                <span class="font-bold text-lg color">{{ balance().saldo | currency:'S/.':'symbol-narrow' }}</span>
+            </div>
+        </div>
+        <span class="absolute p-tag principal-color"><i class="pi pi-angle-down"></i></span>
+    </ng-template>
+    <div class="grid grid-nogutter pt-3">
+        <div class="col-12 md:col-7">
+            <p-scrollPanel class="scroller">
+                <div class="flex flex-column gap-2">
+                    <p class="text-xl">{{opportunity!.empresa.razonSocial}}</p>
+                    <div class="flex justify-content-between">
+                        <p class="font-semibold text-sm text-600">Riesgo: <p-tag
+                                [severity]="getSeverity(opportunity!.empresa!.riesgo.rango)"
+                                [value]="opportunity!.empresa.riesgo.rango"
+                                [pTooltip]="opportunity!.empresa.riesgo.descripcion"
+                                tooltipStyleClass="text-xs"></p-tag>
+                        </p>
+                    </div>
+                    <div class="flex pt-1">
+                        <p class="font-semibold text-sm text-600">Fecha pago: &nbsp;&nbsp;</p>
+                        <p class="font-bold text-sm">{{ opportunity!.fechaPago | date:'dd MMM yyyy'}} <span
+                                class="font-bold font-italic text-xs ml-1 days">{{
+                                getDays(opportunity!.fechaCaducidad,opportunity!.auditoria.fecha!) + ' días'}}</span>
+                        </p>
+                    </div>
+                    <div class="flex justify-content-between pt-2">
+                        <p class="text-sm">Financiado al <span class="text-base font-medium color">{{percentage |
+                                number:'1.2-2'}}%</span></p>
+                        <span class="text-sm font-semibold ">Costos
+                            <i class="pi pi-dollar costos text-sm font-medium"></i></span>
+                    </div>
+                    <p-progressBar [value]="percentage" class="p-bar-custom"
+                        [style]="{width: '100%', height: '12px'}"></p-progressBar>
+                    <div>
+                        <div class="flex justify-content-between">
+                            <span class="font-semibold color">{{opportunity?.montoRecaudado |
+                                currency:'S/.':'symbol-narrow'}}</span>
+                            <span class="font-semibold color">{{opportunity?.monto|
+                                currency:'S/.':'symbol-narrow'}}</span>
+                        </div>
+                        <div class="flex justify-content-between">
+                            <p class="font-medium text-sm text-600">Financiado</p>
+                            <p class="font-medium text-sm text-600">Solicitado</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-content-between pt-1">
+                        <p class="text-sm">La subasta cierra el <span class="font-bold font-italic">{{
+                                opportunity!.fechaCaducidad |
+                                date:'dd MMM yyyy' }}</span> a las <span class="font-bold font-italic"> {{
+                                opportunity!.fechaCaducidad | date:'HH:mm' }}</span></p>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <div class="flex flex-column mt-3">
+                    <p-panel header="Inversores" [toggleable]="true" [collapsed]="true"
+                        (collapsedChange)="collapsedInvestors($event)">
+                        <shared-table *ngIf="(configTable.data.length > 0);else noData" [config]="configTable"
+                            (lazyLoadEmitter)="getInvestmentsUser($event)"
+                            (currentPagePaginator)="getInvestmentsUser($event)"></shared-table>
+                        <ng-template #noData>
+                            <div>
+                                <p-card>
+                                    <p class="px-3">
+                                        Esta oportunidad no tiene inversores. Se el primero en invertir!
+                                    </p>
+                                </p-card>
+                            </div>
+                        </ng-template>
+                    </p-panel>
+                    <p-divider type="dashed"></p-divider>
+                    <p-panel header="Detalle del deudor" [toggleable]="true" [collapsed]="true">
+                        <div class="p-4">
+                            <div class="flex flex-column gap-4">
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm  text-600">Codigo</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.codigo }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Representante legal</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.nomRepLegal +'
+                                        '+ opportunity?.empresa?.apeRepLegal }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Nombre de empresa</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.nombre }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">RUC</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{ opportunity?.empresa?.ruc
+                                        }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Razon social</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.razonSocial }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Dirección</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.direccion }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Fecha de inicio de
+                                        actividades</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.fecIniActv }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Telefono</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.telefono }}</p>
+                                </div>
+                                <div class="col-12 p-0 flex justify-content-between">
+                                    <span class="col-6 p-0 font-semibold text-sm text-600">Correo</span>
+                                    <p class="col-6 p-0 font-semibold text-sm text-right">{{
+                                        opportunity?.empresa?.correo }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </p-panel>
+                    <p-divider type="dashed"></p-divider>
+                    <p-panel header="Facturas de la operación" [toggleable]="true" [collapsed]="true"
+                        (collapsedChange)="collapsedBillsOpportunity($event)">
+                        <shared-table *ngIf="(configTableBills.data.length > 0);else noData2"
+                            [config]="configTableBills" (lazyLoadEmitter)="getBillsOpportunity($event)"
+                            (currentPagePaginator)="getBillsOpportunity($event)"></shared-table>
+                        <ng-template #noData2>
+                            <div>
+                                <p-card>
+                                    <p class="px-3">
+                                        No se pudieron cargar las facturas de la oportunidad
+                                    </p>
+                                </p-card>
+                            </div>
+                        </ng-template>
+                    </p-panel>
+                </div>
+            </p-scrollPanel>
+        </div>
+        <div class="col">
+            <p-divider layout="vertical" styleClass="hidden md:flex"></p-divider>
+            <p-divider layout="horizontal" styleClass="flex md:hidden"></p-divider>
+        </div>
+        <div class="col-12 p-0 md:col-4">
+            <p-scrollPanel class="scroller">
+                <form [formGroup]="myForm" class="mt-1 grid grid-nogutter gap-3">
+                    <div class="col-12 p-0 p-0">
+                        <div class="flex justify-content-between">
+                            <label for="name" class="font-medium block mb-2 text-sm text-left"> Escribe el monto de tu
+                                inversion
+                                (PEN)
+                            </label>
+                            <p class="text-sm text-right">% de la factura </p>
+                        </div>
+                        <div class="flex flex-column">
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    S/.
+                                </span>
+                                <p-inputNumber formControlName="monto" [style]="{width : '100%'}" mode="decimal"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [max]="maxValueMonto"
+                                    placeholder="Monto" (onInput)="onInput($event)"
+                                    [ngClass]="{'ng-invalid ng-dirty': isValidField('monto')}">
+                                </p-inputNumber>
+                                <span class="p-inputgroup-addon">{{ (auctionPercentage | percentagePipe).slice(0, -1) |
+                                    number: '1.2-2' }}%</span>
+                            </div>
+                            <span class="text-sm mt-1 text-red-500" *ngIf="isValidField('monto')">{{
+                                getFieldError('monto')
+                                }}</span>
+                        </div>
+                    </div>
+                    <div class="col-12 p-0 flex justify-content-between">
+                        <div class="flex" pTooltip="Indica la rentabilidad de las inversiones"
+                            tooltipStyleClass="text-xs">
+                            <p class="text-sm">Tasa interna de retorno</p>
+                            <i class="pi pi-question costos text-xs font-medium ml-2"></i>
+                        </div>
+                        <span class="text-sm font-semibold">1.71%</span>
+                    </div>
+                    <div class="col-12 p-0 flex flex-column gap-1">
+                        <p class="text-sm">Ganancia final(PEN)</p>
+                        <span class="font-bold text-lg color">{{ revenue | currency:'S/.':'symbol-narrow' }}</span>
+                    </div>
+                </form>
+            </p-scrollPanel>
+        </div>
+    </div>
 </p-sidebar>

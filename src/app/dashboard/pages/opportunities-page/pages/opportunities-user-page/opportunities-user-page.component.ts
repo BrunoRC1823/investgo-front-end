@@ -17,6 +17,7 @@ export class OpportunitiesUserPageComponent {
   public loading: boolean = true;
   public row: number = 10;
   public totalElements: number | undefined;
+  
   ngOnInit(): void {
     this.getOpportunities();
   }

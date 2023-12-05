@@ -7,6 +7,7 @@ import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.inte
 import { EnableValue } from 'src/app/auth/enums/enable-value.enum';
 import { environments } from 'src/environments/environments';
 import { PaginatorRequest, ListResponse, Opportunity } from '../interfaces';
+import { OpportunityBillsResponse } from '../interfaces/opportunityBillsResponse.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,25 @@ export class OpportunityService {
   cleanListBills(): Observable<ConfirmResponse> {
     const url = `${this.baseUrl}/api/v1/clear-lista`;
     return this.http.delete<ConfirmResponse>(url);
+  }
+
+  getBillsOpportunity(
+    code: string,
+    paginator?: PaginatorRequest
+  ): Observable<OpportunityBillsResponse> {
+    let url;
+    if (paginator) {
+      const { pagina, elementosPagina, ordenadoPor, enOrden } = paginator;
+      url = `${this.baseUrl}/api/v1/oportunidades-inversion/buscar-facturas/${code}?pagina=${pagina}&elementosPagina=${elementosPagina}&ordenadoPor=${ordenadoPor}&enOrden=${enOrden}`;
+    } else {
+      url = `${this.baseUrl}/api/v1/oportunidades-inversion/buscar-facturas/${code}`;
+    }
+    return this.http.get<OpportunityBillsResponse>(url).pipe(
+      map((list) => {
+        return list;
+      }),
+      catchError((err) => throwError(() => err))
+    );
   }
 
   getOpportunitiesActive(

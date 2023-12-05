@@ -1,9 +1,15 @@
-.p-inputtext[pinputtext]{
-    width: 100%;
-  }
-.p-boolean{
+.p-inputtext[pinputtext] {
+  width: 100%;
+}
+.p-boolean {
   background-color: var(--sidebar-color);
   border-radius: 10px;
   color: white;
   padding: 0.3rem 0.7rem;
+}
+:host ::ng-deep .p-datatable .p-datatable-footer {
+  padding: 0.5rem 0;
+}
+:host ::ng-deep .p-paginator {
+  padding: 0.5rem 0;
 }

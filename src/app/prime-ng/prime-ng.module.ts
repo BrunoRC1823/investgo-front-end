@@ -29,7 +29,7 @@ import { TagModule } from 'primeng/tag';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 @NgModule({
   exports: [
     AutoCompleteModule,
@@ -61,6 +61,8 @@ import { TooltipModule } from 'primeng/tooltip';
     TieredMenuModule,
     ToastModule,
     TooltipModule,
+    ScrollPanelModule,
+
   ],
 })
 export class PrimeNgModule {}
