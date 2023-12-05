@@ -12,3 +12,5 @@ export * from './risk.interface';
 export * from './transaction.interface';
 export * from './type-transaction.interface';
 export * from './bill.interface';
+export * from './investmentUser.interface';
+export * from './investmentUserRequest.interface';
