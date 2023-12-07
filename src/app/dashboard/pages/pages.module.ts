@@ -9,19 +9,26 @@ import { HomeModule } from './home-page/modules/home.module';
 import { InvestmentsModule } from './investments-page/modules/investments.module';
 import { MovementsModule } from './movements-page/modules/movements.module';
 import { OpportunitiesModule } from './opportunities-page/modules/opportunities.module';
-
+import { UserAccountModule } from './account-user-page/module/account-user.module';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 @NgModule({
   imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
     BillsModule,
+    CommonModule,
     CompaniesModule,
     HomeModule,
+    HttpClientModule,
     InvestmentsModule,
     MovementsModule,
     OpportunitiesModule,
+    ReactiveFormsModule,
+    UserAccountModule,
+    PrimeNgModule,
   ],
-  exports: [BillsModule, CompaniesModule],
+  exports: [NotFoundPageComponent],
+  declarations: [
+    NotFoundPageComponent
+  ],
 })
 export class PagesModule {}

@@ -6,23 +6,31 @@ import {
   isNotAuthenticatedGuard,
   urlStorageGuard,
 } from './guards';
+import { NotFoundPageComponent } from './dashboard/pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   {
     path: 'auth',
     canActivate: [isNotAuthenticatedGuard],
-    loadChildren: () => import('./auth/modules/auth.module').then((m) => m.AuthModule),
+    loadChildren: () =>
+      import('./auth/modules/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'dashboard',
     canActivate: [isAuthenticatedGuard],
     canActivateChild: [urlStorageGuard],
     loadChildren: () =>
-      import('./dashboard/modules/dashboard.module').then((m) => m.DashboardModule),
+      import('./dashboard/modules/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  {
+    path: 'page-404',
+    component: NotFoundPageComponent,
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'page-404',
   },
 ];
 @NgModule({

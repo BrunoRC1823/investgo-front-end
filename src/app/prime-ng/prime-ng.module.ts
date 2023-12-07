@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
@@ -20,7 +21,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { PaginatorModule } from 'primeng/paginator';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { PanelModule } from 'primeng/panel';
+import { PasswordModule } from 'primeng/password';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { SidebarModule } from 'primeng/sidebar';
 import { StepsModule } from 'primeng/steps';
 import { TableModule } from 'primeng/table';
@@ -29,8 +32,7 @@ import { TagModule } from 'primeng/tag';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 @NgModule({
   exports: [
     AutoCompleteModule,
@@ -39,6 +41,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CalendarModule,
     CardModule,
     CarouselModule,
+    ConfirmDialogModule,
     ConfirmPopupModule,
     DialogModule,
     DividerModule,
@@ -53,7 +56,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     PaginatorModule,
     PanelMenuModule,
     PanelModule,
+    PasswordModule,
     ProgressBarModule,
+    ScrollPanelModule,
     SidebarModule,
     StepsModule,
     TableModule,
@@ -62,8 +67,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TieredMenuModule,
     ToastModule,
     TooltipModule,
-    ScrollPanelModule,
-    ConfirmDialogModule
   ],
 })
 export class PrimeNgModule {}

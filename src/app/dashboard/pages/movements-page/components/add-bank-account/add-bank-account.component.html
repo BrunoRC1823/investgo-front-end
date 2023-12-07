@@ -26,7 +26,7 @@
         <p class="text-center text-500 px-5 py-7">Arrastra aquí</p>
     </div>
     <div class="col">
-        <p-card class="custom-card-bank-account custom-p-card">
+        <p-card class="custom-card-bank-account custom-p-card " styleClass="bg-indigo-50">
             <movements-card-bank-account class="w-full " [banksAccounts]="banksAccounts"
                 (draggedAccountEmit)="dropAccount($event)" />
         </p-card>

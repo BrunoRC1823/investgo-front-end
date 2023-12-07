@@ -7,6 +7,7 @@ import { OpportunitiesUserPageComponent } from '../opportunities-user-page/oppor
 import { PrimeNgModule } from 'src/app/prime-ng/prime-ng.module';
 import { ComponentsModule } from '../components/module/components.module';
 import { OpportunitiesFormPageComponent } from '../opportunities-form-page/opportunities-form-page.component';
+import { DirectiveModule } from 'src/app/directive/directive.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,12 @@ import { OpportunitiesFormPageComponent } from '../opportunities-form-page/oppor
     OpportunitiesUserPageComponent,
     OpportunitiesFormPageComponent,
   ],
-  imports: [CommonModule, PrimeNgModule, ComponentsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    PrimeNgModule,
+    ComponentsModule,
+    ReactiveFormsModule,
+    DirectiveModule,
+  ],
 })
 export class PagesModule {}

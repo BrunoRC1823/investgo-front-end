@@ -5,7 +5,6 @@ import { AuthComponent } from '../layouts/auth.component';
 import { LoginComponent } from '../pages/login-page/login-page.component';
 import { RegisterComponent } from '../pages/register-page/register-page.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -14,7 +13,6 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       // { path: 'resetpassword', component: ForgotPasswordComponent },
       { path: 'register', component: RegisterComponent },
-      { path: '**', redirectTo: 'login' },
     ],
   },
 ];

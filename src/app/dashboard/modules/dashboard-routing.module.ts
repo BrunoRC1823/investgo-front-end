@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from '../layouts/dashboard.component';
+import { NotFoundPageComponent } from '../pages/not-found-page/not-found-page.component';
+import { hasRoleGuard } from 'src/app/guards/hasRole.guard';
 
 const routes: Routes = [
   {
@@ -36,6 +38,7 @@ const routes: Routes = [
           ),
       },
       {
+        canMatch: [hasRoleGuard],
         path: 'companies',
         loadChildren: () =>
           import('../pages/companies-page/modules/companies.module').then(
@@ -43,13 +46,24 @@ const routes: Routes = [
           ),
       },
       {
+        canMatch: [hasRoleGuard],
         path: 'bills',
         loadChildren: () =>
           import('../pages/bills-page/modules/bills.module').then(
             (m) => m.BillsModule
           ),
       },
-      { path: '**', redirectTo: 'home' },
+      {
+        path: 'account-user',
+        loadChildren: () =>
+          import('../pages/account-user-page/module/account-user.module').then(
+            (m) => m.UserAccountModule
+          ),
+      },
+      {
+        path: '**',
+        redirectTo: '/page-404',
+      },
     ],
   },
 ];

@@ -9,12 +9,12 @@
     </div>
     <div class="p-2">
         <div class="mb-2">
-            <p-card class="card">
+            <p-card class="card shadow-light">
                 <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" #steps></p-steps>
             </p-card>
         </div>
         <div class="mb-2">
-            <p-card>
+            <p-card class="shadow-light">
                 <form [formGroup]="myForm" (ngSubmit)="register()">
                     <div class="formgrid grid grid-nogutter row-gap-5 md:row-gap-4">
                         <div class="col-12">
@@ -187,7 +187,7 @@
                 </form>
             </p-card>
         </div>
-        <p-card class="custom-card-dashboard card-table" *ngIf="showBills">
+        <p-card class="custom-card-dashboard card-table shadow-light" *ngIf="showBills">
             <div class="flex flex-column  gap-2 align-items-center
             pt-4 px-4 lg:flex-row lg:justify-content-between">
                 <h5 class="font-bold text-xl text-center">

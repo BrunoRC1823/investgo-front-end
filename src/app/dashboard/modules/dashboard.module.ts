@@ -14,13 +14,13 @@ import { ComponentsModule } from '../components/modules/components.module';
   exports: [],
   imports: [
     CommonModule,
+    ComponentsModule,
     DashboardRoutingModule,
-    PrimeNgModule,
     HttpClientModule,
+    PagesModule,
+    PrimeNgModule,
     ReactiveFormsModule,
     SharedModule,
-    PagesModule,
-    ComponentsModule,
   ],
   providers: [DatePipe],
 })

@@ -1,41 +1,43 @@
 <section class="pt-2 pb-3 layout-content">
     <div class="p-2">
-        <div class="flex justify-content-between">
+        <div class="flex justify-content-between pb-4">
             <h1 class="text-2xl">Listado de empresas</h1>
             <p-button label="Agregar empresa" size="small" [rounded]="true" icon="pi pi-plus"
                 [style]="{'border-color': 'var(--sidebar-color)','background-color':'var(--sidebar-color)'}"
                 [routerLink]="['/dashboard/companies/add-company']">
             </p-button>
         </div>
-        <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
-            <p-tabPanel header="Activos">
-                <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"
-                    (lazyLoadEmitter)="getCompanies($event)"
-                    (currentPagePaginator)="getCompanies($event)"></shared-table>
-                <ng-template #noData>
-                    <div>
-                        <p-panel header="Oops...">
-                            <p>
-                                No se encontraron empresas.
-                            </p>
-                        </p-panel>
-                    </div>
-                </ng-template>
-            </p-tabPanel>
-            <p-tabPanel header="No activos">
-                <shared-table *ngIf="!(tableNoData);else noData2" [config]="configTable"
-                    (lazyLoadEmitter)="getCompanies($event)"
-                    (currentPagePaginator)="getCompanies($event)"></shared-table>
-                <ng-template #noData2>
-                    <div>
-                        <p-panel header="Oops...">
-                            <p>
-                                No se encontraron empresas inactivas.
-                            </p>
-                        </p-panel>
-                    </div>
-                </ng-template>
-            </p-tabPanel>
-        </p-tabView>
+        <p-card class="shadow-light">
+            <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
+                <p-tabPanel header="Activos">
+                    <shared-table *ngIf="!(tableNoData);else noData" [config]="configTable"
+                        (lazyLoadEmitter)="getCompanies($event)"
+                        (currentPagePaginator)="getCompanies($event)"></shared-table>
+                    <ng-template #noData>
+                        <div>
+                            <p-panel header="Oops...">
+                                <p>
+                                    No se encontraron empresas.
+                                </p>
+                            </p-panel>
+                        </div>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="No activos">
+                    <shared-table *ngIf="!(tableNoData);else noData2" [config]="configTable"
+                        (lazyLoadEmitter)="getCompanies($event)"
+                        (currentPagePaginator)="getCompanies($event)"></shared-table>
+                    <ng-template #noData2>
+                        <div>
+                            <p-panel header="Oops...">
+                                <p>
+                                    No se encontraron empresas inactivas.
+                                </p>
+                            </p-panel>
+                        </div>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </p-card>
     </div>
 </section>

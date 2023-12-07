@@ -1,5 +1,6 @@
 <div class="card">
   <p-table [value]="config.data" [columns]="config.columns" [loading]="config.loading"
+  class="my-table"
     [styleClass]="config.size === 'small' ? 'p-datatable-striped p-datatable-sm' : 'p-datatable-striped'"
     [tableStyle]="config.size === 'small' ? ({'min-width': '20rem'}) : ({ 'min-width': '50rem' })" [rowHover]="true"
     #dt>

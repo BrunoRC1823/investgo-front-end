@@ -1,6 +1,6 @@
 <section class="pt-2 pb-3 layout-content">
     <div class="p-2">
-        <div class="flex justify-content-between ">
+        <div class="flex justify-content-between pb-4">
             <div>
                 <h1 class="text-2xl">Lista de oportunidades de inversión.</h1>
             </div>
@@ -9,35 +9,37 @@
                 [routerLink]="['/dashboard/opportunities/add-opportunity']">
             </p-button>
         </div>
-        <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
-            <p-tabPanel header="En proceso">
-                <pages-table-opportunities-page *ngIf="!(tableNoData);else noData" [config]="configTable"
-                    (lazyLoadEmitter)="getOpportunitiesEnable($event)"
-                    (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
-                <ng-template #noData>
-                    <div>
-                        <p-panel header="Oops...">
-                            <p>
-                                No se encontraron oportunidades de inversion.
-                            </p>
-                        </p-panel>
-                    </div>
-                </ng-template>
-            </p-tabPanel>
-            <p-tabPanel header="Terminados">
-                <pages-table-opportunities-page *ngIf="!(tableNoData);else noData2" [config]="configTable"
-                    (lazyLoadEmitter)="getOpportunitiesEnable($event)"
-                    (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
-                <ng-template #noData2>
-                    <div>
-                        <p-panel header="Oops...">
-                            <p>
-                                No se encontraron oportunidades de inversion inactivas.
-                            </p>
-                        </p-panel>
-                    </div>
-                </ng-template>
-            </p-tabPanel>
-        </p-tabView>
+        <p-card class="shadow-light">
+            <p-tabView [activeIndex]="activeIndexTab" (onChange)="onTabChange($event)">
+                <p-tabPanel header="En proceso">
+                    <pages-table-opportunities-page *ngIf="!(tableNoData);else noData" [config]="configTable"
+                        (lazyLoadEmitter)="getOpportunitiesEnable($event)"
+                        (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
+                    <ng-template #noData>
+                        <div>
+                            <p-panel header="Oops...">
+                                <p>
+                                    No se encontraron oportunidades de inversion.
+                                </p>
+                            </p-panel>
+                        </div>
+                    </ng-template>
+                </p-tabPanel>
+                <p-tabPanel header="Terminados">
+                    <pages-table-opportunities-page *ngIf="!(tableNoData);else noData2" [config]="configTable"
+                        (lazyLoadEmitter)="getOpportunitiesEnable($event)"
+                        (currentPagePaginator)="getOpportunitiesEnable($event)"></pages-table-opportunities-page>
+                    <ng-template #noData2>
+                        <div>
+                            <p-panel header="Oops...">
+                                <p>
+                                    No se encontraron oportunidades de inversion inactivas.
+                                </p>
+                            </p-panel>
+                        </div>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </p-card>
     </div>
 </section>

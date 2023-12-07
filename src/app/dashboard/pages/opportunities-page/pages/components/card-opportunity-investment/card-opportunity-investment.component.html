@@ -1,9 +1,6 @@
 <div class="flex justify-content-center">
-    <p-card class="p-custom-card">
+    <p-card class="p-custom-card shadow-" id="custom">
         <div class="flex flex-column gap-1">
-            <div class="flex justify-content-end">
-                <span class="font-italic text-xs">PEN</span>
-            </div>
             <div class="flex justify-content-between">
                 <p class="font-bold">{{opportunity.empresa!.razonSocial| reduceTitlePipe}}</p>
                 <span class="font-bold text-lg principal-color"> {{opportunity.monto|currency:'S/.':'symbol-narrow'}}
@@ -23,7 +20,7 @@
             <div class="flex justify-content-between pt-1">
                 <p class="font-bold text-sm">{{ opportunity.fechaPago | date:'dd MMM yyyy'}} <span
                         class="font-bold font-italic text-xs ml-1 days">{{
-                        getDays(opportunity.fechaCaducidad!,opportunity.auditoria!.fecha!) + ' días'}}</span></p>
+                        getDays(opportunity.fechaCaducidad!,opportunity.auditoria!.fecha!) + ' d'}}</span></p>
                 <p class="font-bold text-sm ">{{opportunity.rendimiento!| percentagePipe}}/{{opportunity.tir!|
                     percentagePipe}} </p>
             </div>
@@ -37,7 +34,7 @@
             </div>
             <div class="flex justify-content-between pt-2">
                 <p-progressBar [value]="percentage" class="p-bar-custom"
-                    [style]="{width: '264px', height: '12px'}"></p-progressBar>
+                    [style]="{width: '100%', height: '12px'}"></p-progressBar>
             </div>
             <div class="flex justify-content-between pt-1">
                 <p class="text-xs">La subasta cierra el <span class="font-bold font-italic">{{

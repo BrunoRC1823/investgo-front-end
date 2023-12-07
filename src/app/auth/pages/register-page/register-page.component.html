@@ -89,9 +89,9 @@
             </div>
             <div class="col-12 p-0 md:col-6 md:pr-0 md:pl-2">
                 <div class="field mb-1 p-float-label">
-                    <input pInputText id="password" type="text"
-                        class="text-color p-1 border-none border-bottom-1 w-full"
-                        [ngClass]="{'ng-invalid ng-dirty': isValidField('password')}" formControlName="password">
+                    <p-password id="password" type="text" class="custom-password" formControlName="password"
+                        [ngClass]="{'ng-invalid ng-dirty': isValidField('password')}" [toggleMask]="true"
+                        [feedback]="false"></p-password>
                     <label htmlFor="password">Contraseña</label>
                 </div>
                 <small class="text-red-600" *ngIf="isValidField('password')" id="password-help">

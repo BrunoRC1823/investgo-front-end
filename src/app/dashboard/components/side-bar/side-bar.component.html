@@ -32,17 +32,17 @@
           </a>
           <ng-container>
             <ng-container>
-              <a [routerLink]="['/dashboard/companies']" routerLinkActive="active"
+              <a *showForRoles [routerLink]="['/dashboard/companies']" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Empresa">
                 <i class="pi pi-building text-xl"></i>
                 Empresa
               </a>
-              <a [routerLink]="['/dashboard/bills']" routerLinkActive="active"
+              <a *showForRoles [routerLink]="['/dashboard/bills']" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links" title="Registrar Facturas">
                 <i class="pi pi-file text-xl"></i>
                 Facturas
               </a>
-              <a [routerLink]="['/dashboard/opportunities']" routerLinkActive="active"
+              <a *showForRoles [routerLink]="['/dashboard/opportunities/list-opportunities']" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }" class="sidebar__links"
                 title="Registrar oportunidades de inversión">
                 <i class="pi pi-chart-line text-xl"></i>

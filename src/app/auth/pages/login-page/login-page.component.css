@@ -1,0 +1,18 @@
+:host ::ng-deep .custom-password > :first-child {
+  width: 100%;
+}
+:host ::ng-deep .p-input-icon-right > .p-inputtext {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: #ced4da;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  padding-top: 0.25rem;
+}
+:host ::ng-deep .p-inputtext:enabled:hover {
+  border-color: #3B82F6 !important;
+}
+:host ::ng-deep p-password.ng-invalid.ng-dirty > .p-password > .p-inputtext {
+  border-color: #e24c4c !important;
+}

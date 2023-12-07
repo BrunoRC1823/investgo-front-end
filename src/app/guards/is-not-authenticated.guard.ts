@@ -9,7 +9,7 @@ export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
   if (authService.authStatus() === AuthStatus.authenticated) {
     const lastUrl = localStorage.getItem('lastVisitedUrl');
     if (!lastUrl || lastUrl === '') {
-      router.navigateByUrl('/dashboard');
+      router.navigateByUrl('/dashboard/home');
       return false;
     }
     router.navigate([lastUrl]);

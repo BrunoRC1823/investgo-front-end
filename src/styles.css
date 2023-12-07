@@ -74,6 +74,7 @@ h4,
 h5 {
   margin: 0;
 }
+
 body::-webkit-scrollbar {
   width: 9px;
   height: 0.5rem;
@@ -170,6 +171,10 @@ p-card.custom-card-bank-account:has(> *[data-pc-name="card"])
 .p-tabview .p-tabview-panels {
   background: #ffffff00;
   padding: 1.25rem 0;
+}
+
+p-card.shadow-light:has(> *[data-pc-name="card"]) > .p-card {
+  box-shadow: 0px 4px 30px rgba(221, 224, 255, 0.54) !important;
 }
 
 @media screen and (min-width: 1504px) {

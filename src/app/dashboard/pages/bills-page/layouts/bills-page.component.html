@@ -9,7 +9,7 @@
                 [outlined]="true" icon="pi pi-eye"
                 [routerLink]="'/dashboard/companies/show-company/'+selectedCompany?.codigo" severity="info"></p-button>
         </div>
-        <p-card class="custom-p-card">
+        <p-card class="custom-p-card shadow-light">
             <form [formGroup]="myForm" (ngSubmit)="register()" class="formgrid grid grid-nogutter gap-2">
                 <div class="col-12">
                     <label for="empresa" class="font-medium block mb-2">Empresa</label>

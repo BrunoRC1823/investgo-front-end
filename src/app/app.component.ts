@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
       case AuthStatus.authenticated:
         const lastUrl = localStorage.getItem('lastVisitedUrl');
         if (!lastUrl || lastUrl === '') {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/dashboard/home');
           return;
         }
         return;

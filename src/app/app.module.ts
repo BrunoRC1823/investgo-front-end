@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
+import { ShowForRolesDirective } from './directive/show-for-roles.directive';
 
 registerLocaleData(localeEsPE);
 @NgModule({

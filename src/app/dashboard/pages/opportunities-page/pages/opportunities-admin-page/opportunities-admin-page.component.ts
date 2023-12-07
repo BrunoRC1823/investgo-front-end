@@ -29,6 +29,7 @@ export class OpportunitiesAdminPageComponent {
     data: [],
     loading: true,
     columns: [
+      { head: 'Empresa', name: 'empresa', value: 'razonSocial' },
       {
         head: 'Rendimiento',
         name: 'rendimiento',
@@ -39,7 +40,6 @@ export class OpportunitiesAdminPageComponent {
       { head: 'Estado', name: 'terminado', value: '', highligh: 'true' },
       { head: 'Monto', name: 'monto', value: '' },
       { head: 'Fecha caducidad', name: 'fechaCaducidad', value: '' },
-      { head: 'Empresa', name: 'empresa', value: 'razonSocial' },
       {
         head: 'Acciones',
         buttons: [

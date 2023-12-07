@@ -1,10 +1,10 @@
-<section class="p-2 h-full layout-content">
+<section class="p-2 layout-content">
     <div class="flex flex-column gap-2 pb-3">
         <h1>Oportunidades de Inversión</h1>
         <span class="text-sm mt-1 text-color-secondary">Escoge una subasta en la que invertir.</span>
     </div>
-    <div *ngIf="listOpportunities.length > 0;else emptyList">
-        <p-card>
+    <div *ngIf="listOpportunities.length > 0;else emptyList" class="pb-2">
+        <p-card class="shadow-light">
             <div class="grid grid-nogutter row-gap-3">
                 <div class="col-12 md:col-6 xl:col-4 card-layout-ordered" *ngFor="let opportunity of listOpportunities">
                     <pages-card-opportunity-investment [opportunity]="opportunity" />
@@ -26,7 +26,7 @@
                     <p class="font-bold">No hay oportunidades todavía.</p>
                     <span class="text-color-secondary text-sm">Esta sección contiene la lista de oportunidades.</span>
                 </div>
-                <div class="flex justify-content-center">
+                <div *showForRoles class="flex justify-content-center">
                     <p-button label="Agregar" [rounded]="true" [outlined]="true" icon="pi pi-plus" [style]="style"
                         [routerLink]="['/dashboard/opportunities']" size="small"></p-button>
                 </div>

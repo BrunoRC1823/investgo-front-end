@@ -1,18 +1,19 @@
 .message__button {
-    color: var(--sidebar-color);
-    transition: all 0.3s ease;
-    border: 1px solid var(--sidebar-color);
-  }
-  
-  .message__button:hover {
-    background-color: var(--sidebar-color);
-    color: var(--white-color);
-  }
-  :host ::ng-deep .p-card .p-card-body {
-    padding: 0;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-  }
-  :host ::ng-deep .p-card .p-card-content {
-    padding: 0;
-  }
+  color: var(--sidebar-color);
+  transition: all 0.3s ease;
+  border: 1px solid var(--sidebar-color);
+}
+
+.message__button:hover {
+  background-color: var(--sidebar-color);
+  color: var(--white-color);
+}
+:host ::ng-deep .p-card .p-card-body {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+:host ::ng-deep .p-card .p-card-content {
+  padding: 0;
+}

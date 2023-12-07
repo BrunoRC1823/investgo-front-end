@@ -1,7 +1,8 @@
 <div class="mb-6">
     <h2 class="text-xl sm:text-2xl">Bienvenido, Inicia sesión</h2>
 </div>
-<form autocomplete="off" class="formgrid grid gap-5 align-items-center justify-content-center" [formGroup]="myForm" (ngSubmit)="login()">
+<form autocomplete="off" class="formgrid grid gap-5 align-items-center justify-content-center" [formGroup]="myForm"
+    (ngSubmit)="login()">
     <div class="col-12">
         <div class="field p-float-label mb-1">
             <input pInputText id="username" type="text" class="text-color p-1 border-none border-bottom-1  w-full"
@@ -13,15 +14,18 @@
     </div>
     <div class="col-12">
         <div class="field p-float-label mb-1">
-            <input pInputText id="password" type="text" class="text-color p-1 border-none border-bottom-1 w-full"
-                formControlName="password" [ngClass]="{'ng-invalid ng-dirty': isValidField('password')}">
+            <p-password id="password" type="text" class="custom-password" formControlName="password" [toggleMask]="true"
+                [ngClass]="{'ng-invalid ng-dirty ' : isValidField('password')}" [feedback]="false"></p-password>
+
             <label htmlFor="password">Contraseña</label>
         </div>
-        <small class="text-red-600" *ngIf="isValidField('password')" id="password-help"> 
+        <small class="text-red-600" *ngIf="isValidField('password')" id="password-help">
             {{ getFieldError('password') }}</small>
     </div>
     <div>
-        <p-button type="submit" color="primary"  [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}">Iniciar sesión</p-button>
+        <p-button type="submit" color="primary"
+            [style]="{'background-color': 'var(--sidebar-color)','border-color':'var(--sidebar-color)'}">Iniciar
+            sesión</p-button>
     </div>
 </form>
 <p class="text-sm mt-3 text-center">
