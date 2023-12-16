@@ -14,3 +14,4 @@ export * from './type-transaction.interface';
 export * from './bill.interface';
 export * from './investmentUser.interface';
 export * from './investmentUserRequest.interface';
+export * from './change-password-request.interface';

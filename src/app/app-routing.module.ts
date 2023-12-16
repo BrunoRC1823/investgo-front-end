@@ -25,6 +25,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'config',
+    canActivate: [isAuthenticatedGuard],
+    canActivateChild: [urlStorageGuard],
+    loadChildren: () =>
+      import('./config/module/config.module').then((m) => m.ConfigModule),
+  },
+  {
     path: 'page-404',
     component: NotFoundPageComponent,
   },

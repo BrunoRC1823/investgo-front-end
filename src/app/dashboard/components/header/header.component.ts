@@ -44,7 +44,7 @@ export class HeaderComponent {
           {
             label: 'Ver perfil',
             icon: 'pi pi-fw pi-id-card',
-            routerLink: '/dashboard/account-user/show'
+            routerLink: '/dashboard/account-user/show',
           },
         ],
       },
@@ -55,12 +55,12 @@ export class HeaderComponent {
           {
             label: 'Editar Perfil',
             icon: 'pi pi-fw pi-pencil',
-            routerLink: '/dashboard/account-user/edit'
+            routerLink: '/dashboard/account-user/edit',
           },
           {
             label: 'Cambiar contraseña',
             icon: 'pi pi-fw pi-exclamation-triangle',
-            routerLink: '/dashboard/account-user/change-password'
+            routerLink: '/config/change-password',
           },
         ],
       },
