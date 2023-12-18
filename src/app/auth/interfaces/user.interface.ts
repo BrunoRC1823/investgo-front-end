@@ -1,6 +1,7 @@
-
+import { Audit } from 'src/app/dashboard/interfaces';
 
 export interface User {
+  id?: string;
   codigo: string;
   nombre: string;
   apellidoPa: string;
@@ -10,6 +11,7 @@ export interface User {
   username: string;
   dni: string;
   foto: string;
+  auditoria?: Audit;
   rol: Rol;
 }
 export interface Rol {

@@ -15,7 +15,6 @@ import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.inte
   providedIn: 'root',
 })
 export class AuthService {
-  // public loginStatusSubject = new Subject<boolean>();
   private readonly baseUrl: string = environments.baseUrl;
 
   private _currentUser = signal<User | null>(null);

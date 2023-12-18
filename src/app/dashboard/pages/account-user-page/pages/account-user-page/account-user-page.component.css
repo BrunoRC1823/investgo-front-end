@@ -1,0 +1,10 @@
+:host ::ng-deep .custom-avatar > :first-child {
+  width: 10rem;
+  height: 10rem;
+}
+.border-color {
+  border-color: var(--sidebar-color);
+}
+:host ::ng-deep .p-card .p-card-content {
+  padding: 0;
+}

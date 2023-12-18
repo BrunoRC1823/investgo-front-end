@@ -12,6 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
@@ -47,6 +48,7 @@ import { TooltipModule } from 'primeng/tooltip';
     DividerModule,
     DragDropModule,
     DropdownModule,
+    FileUploadModule,
     InputMaskModule,
     InputTextareaModule,
     InputTextModule,

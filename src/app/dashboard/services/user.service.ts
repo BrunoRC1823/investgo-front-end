@@ -7,6 +7,7 @@ import { environments } from 'src/environments/environments';
 import { Balance } from '../interfaces/balance.interface';
 import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 import { ChangePasswordRequest } from '../interfaces';
+import { User } from 'src/app/auth/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,10 @@ export class UserService {
   changePassword(req: ChangePasswordRequest): Observable<ConfirmResponse> {
     const url = `${this.baseUrl}/api/v1/usuarios-user/password`;
     return this.http.put<ConfirmResponse>(url, req);
+  }
+
+  update(user: User): Observable<ConfirmResponse> {
+    const url = `${this.baseUrl}/api/v1/usuarios-user`;
+    return this.http.put<ConfirmResponse>(url, user);
   }
 }

@@ -161,7 +161,6 @@ export class FormCompaniesPageComponent implements OnInit {
         this.getBillsByCompany();
         return;
       });
-
     this.setTabIndex();
   }
 
