@@ -39,7 +39,7 @@ export class ShowForRolesDirective implements OnInit, OnDestroy {
 
   isAdmin() {
     const role = this.authService.getUserRole();
-    if (!(role === 'ROLE_ADMIN')) {
+    if (role == null || (!(role.codigo! === 'ROLE_ADMIN'))) {
       return of(false);
     }
     return of(true);

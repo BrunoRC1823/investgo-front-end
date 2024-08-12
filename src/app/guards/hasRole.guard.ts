@@ -10,7 +10,7 @@ export const hasRoleGuard: CanMatchFn = (route, segments) => {
     authService.logout();
     return false;
   }
-  if (!(role === 'ROLE_ADMIN')) {
+  if (role == null || (!(role.codigo! === 'ROLE_ADMIN'))) {
     router.navigateByUrl('/page-404');
     return false;
   }

@@ -8,7 +8,7 @@ import { CheckTokenResponse } from '../interfaces/check-token-response.interface
 import { environments } from 'src/environments/environments';
 import { LoginRequest } from '../interfaces/login-request.interface';
 import { LoginResponse } from '../interfaces/login-response.interface';
-import { User } from '../interfaces/user.interface';
+import { Rol, User } from '../interfaces/user.interface';
 import { ConfirmResponse } from 'src/app/shared/interfaces/confirm-response.interface';
 
 @Injectable({
@@ -65,10 +65,10 @@ export class AuthService {
     const { username } = currentUser;
     return `${username}`;
   }
-  getUserRole(): string | null | undefined {
-    const user: User | null = this._currentUser();
+  getUserRole():  Rol | null{
+    const user = this._currentUser() ;
     if (user === null) return null;
-    return user.rol!.codigo;
+    return user.rol;
   }
   public getToken() {
     return localStorage.getItem('token');
